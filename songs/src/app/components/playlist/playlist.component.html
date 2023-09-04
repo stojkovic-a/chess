@@ -1,0 +1,9 @@
+<p>playlist works!</p>
+<h2>{{title}}</h2>
+<ul *ngFor="let song of song$ |async">
+    <!-- <li>{{song.artist}}--{{song.title}} ; {{song.viewsCount}}</li> -->
+    <app-song-thumb [song]="song" (onClick)="selectSong($event)"></app-song-thumb>
+</ul>
+
+
+
