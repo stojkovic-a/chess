@@ -15,6 +15,58 @@ import nodemailer from 'nodemailer';
 
 @Injectable()
 export class AuthService {
+    //     const roles: Role[] = [Role.User];
+    //     if (dto.isPlayer)
+    //         roles.push(Role.Player)
+    //     try {
+    //         const user = this.userRepo.create({
+    //             email: dto.email,
+    //             passwordHash: hash,
+    //             firstName: dto.firstName,
+    //             lastName: dto.lastName,
+    //             dateOfBirth: dto.dateOfBirth,
+    //             representingCountry: dto.representingCountry,
+    //             classicalELo: dto.classicalElo,
+    //             rapidElo: dto.rapidElo,
+    //             bltizElo: dto.blitzElo,
+    //             accountVerified: false,
+    //             verificationCode: verificatioCode,
+    //             registrationDateTime: new Date(Date.now()),
+    //             roles: roles,
+    //         })
+    //         await this.userRepo.save(user);
+    //         return HttpCode(200);
+    //     }
+    //     catch (e) {
+    //         throw new Error(e);
+    //     }
+    // }
+    // async signToken(
+    //     userId: number,
+    //     email: string,
+    //     roles: Role[],
+    // ): Promise<{ access_token: string }> {
+    //     const payload = {
+    //         sub: userId,
+    //         email,
+    //         roles,
+    //     }
+    //     const secret = this.config.get('JWT_SIGNIN_SECRET');
+    //     const token = await this.jwtService.signAsync(payload,
+    //         {
+    //             expiresIn: '15m',
+    //             secret: secret,
+    //         });
+    //     return {
+    //         access_token: token
+    //     }
+    // }
+    getCurrentUser() {
+        throw new Error("Method not implemented.");
+    }
+    login(email: string, password: string) {
+        throw new Error("Method not implemented.");
+    }
 
     constructor(
         @InjectRepository(User) private userRepo: Repository<User>,
