@@ -23,7 +23,10 @@ import { AuthEffects } from './store/auth/auth.effects';
 import { reducer } from './store/auth/auth.reducer';
 import { AuthInterceptor } from './auth.interceptor';
 import { AuthGuard } from './services/auth.guard';
-
+import { MatInputModule } from '@angular/material/input';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -37,6 +40,10 @@ import { AuthGuard } from './services/auth.guard';
   ],
   imports: [
     BrowserModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatCheckboxModule,
+    MatFormFieldModule,
     FormsModule,
     HttpClientModule,
     StoreModule.forRoot({ auth: reducer }),
@@ -53,7 +60,8 @@ import { AuthGuard } from './services/auth.guard';
       // { path: 'sign-up', component: SignUpComponent, canActivate: [AuthGuard] },
       { path: '', component: LandingComponent },
       { path: '**', redirectTo: '/' }
-    ])
+    ]),
+    BrowserAnimationsModule
   ],
   providers: [AuthService, {
     provide: HTTP_INTERCEPTORS,

@@ -21,4 +21,16 @@ export class AuthEffects {
             )
         )
     );
+
+    signUp$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(fromAuth.signUp), // Listen for the signUp action
+            switchMap(({ userDto }) =>
+                this.authService.signUp(userDto).pipe( // Call the signUp method from your AuthService
+                    map((user) => fromAuth.signUpSuccess({ user })), // Dispatch signUpSuccess on success
+                    catchError((error) => of(fromAuth.signUpFailure({ error }))) // Dispatch signUpFailure on error
+                )
+            )
+        )
+    );
 }

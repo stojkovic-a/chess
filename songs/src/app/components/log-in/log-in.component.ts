@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
 import { User } from 'src/app/models/user';
-import * as fromAuth from '../../store/auth/auth.action';
+import * as auth from '../../store/auth/auth.action';
 
 @Component({
   selector: 'app-log-in',
@@ -24,6 +24,6 @@ export class LogInComponent implements OnInit {
       password: this.user.password
     };
     //TODO: Sredi null check (izbaci cast as string)
-    this.store.dispatch(fromAuth.signIn({ username: payload.email as string, password: payload.password as string }));
+    this.store.dispatch(auth.signIn({ username: payload.email as string, password: payload.password as string }));
   }
 }

@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/app.state';
+import { SignUpDto } from 'src/app/models/signUpDto';
 import { User } from 'src/app/models/user';
+import * as auth from '../../store/auth/auth.action';
 
 @Component({
   selector: 'app-sign-up',
@@ -8,15 +12,17 @@ import { User } from 'src/app/models/user';
 })
 export class SignUpComponent implements OnInit {
 
-  user: User = new User();
+  user: SignUpDto = new SignUpDto();
 
-  constructor() { }
+  constructor(private store: Store<AppState>) { }
 
   ngOnInit() {
   }
 
   onSubmit(): void {
     console.log(this.user);
+    this.store.dispatch(auth.signUp({ userDto: this.user }));
+
   }
 
 }
