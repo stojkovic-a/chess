@@ -25,6 +25,9 @@
     "@ngrx/entity": "^16.2.0",
     "@ngrx/store": "^16.2.0",
     "@ngrx/store-devtools": "^16.2.0",
+    "dayjs": "^1.11.9",
+    "jwt-decode": "^3.1.2",
+    "ngx-cookie-service": "^16.0.1",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.13.0"
@@ -34,6 +37,7 @@
     "@angular/cli": "~16.2.0",
     "@angular/compiler-cli": "^16.2.0",
     "@types/jasmine": "~4.3.0",
+    "autoprefixer": "^10.4.15",
     "jasmine-core": "~4.6.0",
     "json-server": "^0.17.3",
     "karma": "~6.4.0",
@@ -41,6 +45,8 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
+    "postcss": "^8.4.29",
+    "tailwindcss": "^3.3.3",
     "typescript": "~5.1.3"
   }
 }

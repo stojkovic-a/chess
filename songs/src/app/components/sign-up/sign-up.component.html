@@ -1,0 +1,96 @@
+<!-- signup.component.html -->
+<div class="flex justify-center items-center h-screen m-20">
+    <div class="w-full max-w-md">
+        <h1 class="text-3xl font-semibold mb-4">Sign up</h1>
+        <form (ngSubmit)="onSubmit()" ngNativeValidate>
+            <!-- Email -->
+            <div class="mb-4">
+                <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                <input [(ngModel)]="user.email" name="email" type="email" required id="email" placeholder="Email"
+                    class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500">
+            </div>
+
+            <!-- Password -->
+            <div class="mb-4">
+                <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+                <input [(ngModel)]="user.password" name="password" type="password" required id="password"
+                    placeholder="Password"
+                    class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500">
+            </div>
+
+            <!-- First Name -->
+            <div class="mb-4">
+                <label for="firstName" class="block text-sm font-medium text-gray-700">First Name</label>
+                <input [(ngModel)]="user.firstName" name="firstName" type="text" required id="firstName"
+                    placeholder="First Name"
+                    class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500">
+            </div>
+
+            <!-- Last Name -->
+            <div class="mb-4">
+                <label for="lastName" class="block text-sm font-medium text-gray-700">Last Name</label>
+                <input [(ngModel)]="user.lastName" name="lastName" type="text" required id="lastName"
+                    placeholder="Last Name"
+                    class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500">
+            </div>
+
+            <!-- Date of Birth -->
+            <div class="mb-4">
+                <label for="dateOfBirth" class="block text-sm font-medium text-gray-700">Date of Birth</label>
+                <input [(ngModel)]="user.dateOfBirth" name="dateOfBirth" type="date" required id="dateOfBirth"
+                    class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500">
+            </div>
+
+            <!-- Representing Country -->
+            <div class="mb-4">
+                <label for="representingCountry" class="block text-sm font-medium text-gray-700">Representing
+                    Country</label>
+                <input [(ngModel)]="user.representingCountry" name="representingCountry" type="text"
+                    id="representingCountry" placeholder="Representing Country"
+                    class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500">
+            </div>
+
+            <!-- Classical Elo -->
+            <div class="mb-4">
+                <label for="classicalElo" class="block text-sm font-medium text-gray-700">Classical Elo</label>
+                <input [(ngModel)]="user.classicalElo" name="classicalElo" type="number" id="classicalElo"
+                    placeholder="Classical Elo"
+                    class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500">
+            </div>
+
+            <!-- Rapid Elo -->
+            <div class="mb-4">
+                <label for="rapidElo" class="block text-sm font-medium text-gray-700">Rapid Elo</label>
+                <input [(ngModel)]="user.rapidElo" name="rapidElo" type="number" id="rapidElo" placeholder="Rapid Elo"
+                    class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500">
+            </div>
+
+            <!-- Blitz Elo -->
+            <div class="mb-4">
+                <label for="blitzElo" class="block text-sm font-medium text-gray-700">Blitz Elo</label>
+                <input [(ngModel)]="user.blitzElo" name="blitzElo" type="number" id="blitzElo" placeholder="Blitz Elo"
+                    class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500">
+            </div>
+
+            <!-- Is Player -->
+            <div class="mb-4">
+                <label class="block text-sm font-medium text-gray-700">
+                    <input [(ngModel)]="user.isPlayer" name="isPlayer" type="checkbox" class="mr-2">
+                    Is Player
+                </label>
+            </div>
+
+            <div class="mb-4">
+                <button type="submit"
+                    class="w-full px-4 py-2 font-bold text-white bg-blue-500 rounded-lg hover:bg-blue-600 focus:outline-none focus:bg-blue-600">
+                    Sign Up
+                </button>
+            </div>
+
+            <p class="text-sm text-gray-600">
+                <span>Already have an account?&nbsp;</span>
+                <a [routerLink]="['/log-in']" class="text-blue-500">Log in!</a>
+            </p>
+        </form>
+    </div>
+</div>
