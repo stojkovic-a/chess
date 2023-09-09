@@ -1,0 +1,13 @@
+<div *ngIf="game">
+
+    <span >
+        <span (click)="whitePlayerClicked()">{{game.whitePlayer.firstName}} {{game.whitePlayer.lastName}}</span>
+        <span *ngIf="game.winnerId==0"> 1/2-1/2 </span>
+        <span *ngIf="game.winnerId==game.whitePlayer?.id"> 1-0 </span>
+        <span *ngIf="game.winnerId==game.blackPlayer?.id"> 0-1 </span>
+        <span (click)="blackPlayerClicked()">{{game.blackPlayer.firstName}} {{game.blackPlayer.lastName}}</span>
+        {{game.startingTime}}+{{game.increment}}
+        <!-- <span *ngIf="tournament">{{tournament.tournamentName}}</span> -->
+        {{gameDate}}
+    </span>
+</div>

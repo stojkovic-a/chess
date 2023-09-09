@@ -1,5 +1,7 @@
-import { SongsState } from "./store/song.reducer";
+import { GameState, PageState, PlayerState } from "./chess/store/chess.reducer";
 
 export interface AppState{
-    songs:SongsState;
+    pages:PageState;
+    players:PlayerState;
+    games:GameState;
 }
