@@ -3,12 +3,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools'
 
 import { AppComponent } from './app.component';
-import { PlaylistComponent } from './components/playlist/playlist.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { SongThumbComponent } from './components/song-thumb/song-thumb.component';
 import { StoreModule } from '@ngrx/store';
 import { AppState } from './app.state';
-import { SongsEffects } from './store/song.effects';
 import { EffectsModule } from '@ngrx/effects'
 // import { authReducer } from './store/auth/auth.reducer';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
@@ -28,19 +25,38 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavbarComponent } from './navbar/navbar.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
-
+import { ChessGamePreviewComponent } from './components/chess-game-preview/chess-game-preview.component';
+import { ChessGamesListComponent } from './components/chess-games-list/chess-games-list.component';
+import { PlayerInfoComponent } from './components/player-info/player-info.component';
+import { ChessEffects } from './store/chess.effects';
+import { pageReducer, playerReducer, gameReducer, filterReducer } from './store/chess.reducer';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatTableModule } from '@angular/material/table';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatSortModule } from '@angular/material/sort';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { ChessGamesFiltersComponent } from './components/chess-games-filters/chess-games-filters.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { ChessGameComponent } from './components/chess-game/chess-game.component';
+import { ChessGameViewComponent } from './components/chess-game-view/chess-game-view.component';
+import { NgxChessBoardModule } from "ngx-chess-board";
 @NgModule({
   declarations: [
     AppComponent,
-    SongThumbComponent,
     ChessGamesListComponent,
     ChessGamePreviewComponent,
-    PlayerInfoComponent
-    SongEditorComponent,
+    PlayerInfoComponent,
     SignUpComponent,
     LogInComponent,
     LandingComponent,
-    NavbarComponent
+    NavbarComponent,
+    ChessGamesFiltersComponent,
+    ChessGameComponent,
+    ChessGameViewComponent,
   ],
   imports: [
     BrowserModule,
@@ -50,19 +66,30 @@ import { MatButtonModule } from '@angular/material/button';
     MatFormFieldModule,
     MatToolbarModule,
     MatButtonModule,
+    MatSlideToggleModule,
+    MatTableModule,
+    MatDialogModule,
+    MatPaginatorModule,
+    MatProgressBarModule,
+    MatSortModule,
+    MatAutocompleteModule,
+    ReactiveFormsModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     FormsModule,
     HttpClientModule,
-    StoreModule.forRoot<AppState>({pages:pageReducer,players:playerReducer,games:gameReducer,auth:reducer}),
+    StoreModule.forRoot<AppState>({ pages: pageReducer, players: playerReducer, games: gameReducer, auth: reducer, filters: filterReducer }),
     StoreDevtoolsModule.instrument({
       maxAge: 25, // Retains last 25 states
       autoPause: true, // Pauses recording actions and state changes when the extension window is not open
     }),
-    EffectsModule.forRoot([ChessEffects]),
-    EffectsModule.forRoot([SongsEffects]),
-    EffectsModule.forRoot([AuthEffects]),
+    NgxChessBoardModule.forRoot(),
+    EffectsModule.forRoot([ChessEffects, AuthEffects]),
     RouterModule.forRoot([
       { path: 'log-in', component: LogInComponent },
       { path: 'sign-up', component: SignUpComponent },
+      { path: 'about', component: ChessGamesListComponent },
+      { path: 'contact', component: ChessGameComponent },
       //TODO: Protected page example, use where needed
       // { path: 'sign-up', component: SignUpComponent, canActivate: [AuthGuard] },
       { path: '', component: LandingComponent },

@@ -8,6 +8,7 @@ export interface Game {
     winnerId: number,
     startingTime: number,
     increment: number,
-    tournamentId: Tournament,
+    gamePgn:string[],
+    tournament: Tournament,
     positionToGame: PositionToGame[]
 }

@@ -1,0 +1,67 @@
+
+<div>
+    <app-chess-games-filters></app-chess-games-filters>
+    <table mat-table [dataSource]="dataSource" class="" matSort (matSortChange)="sortData($event)">
+        <ng-container matColumnDef="whitePlayer">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>White Player</th>
+            <td mat-cell *matCellDef="let game" (click)="playerClicked(game.whitePlayer)">
+                {{ game.whitePlayer.firstName }} {{ game.whitePlayer.lastName }}
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="blackPlayer">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Black Player</th>
+            <td mat-cell *matCellDef="let game" (click)="playerClicked(game.blackPlayer)">
+                {{ game.blackPlayer.firstName }} {{ game.blackPlayer.lastName }}
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="result">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Result</th>
+            <td mat-cell *matCellDef="let game">
+                {{ getResult(game) }}
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="timeControl">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Time Control</th>
+            <td mat-cell *matCellDef="let game">
+                {{game.startingTime}}+{{game.increment}}
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="date">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Date</th>
+            <td mat-cell *matCellDef="let game">
+                {{dateService.formatDate(game.gameDate)}}
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="tournament">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Tournament</th>
+            <td mat-cell *matCellDef="let game">
+                <ng-container *ngIf="game.tournament; else friendlyTournament">
+                    {{ game.tournament.tournamentName }}
+                </ng-container>
+                <ng-template #friendlyTournament>
+                    Friendly
+                </ng-template>
+            </td>
+        </ng-container>
+
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <div>
+    <div *ngIf="isLoading">
+        <mat-progress-bar mode="indeterminate" style="height: 10px;"></mat-progress-bar>
+    </div>
+</div>
+
+<mat-paginator #paginator [length]="totalData" [pageSizeOptions]="pageSizes" showFirstLastButtons
+    aria-label="Select page">
+</mat-paginator>
+</div>

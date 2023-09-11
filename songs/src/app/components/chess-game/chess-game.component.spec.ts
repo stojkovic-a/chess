@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SongThumbComponent } from './song-thumb.component';
+import { ChessGameComponent } from './chess-game.component';
 
-describe('SongThumbComponent', () => {
-  let component: SongThumbComponent;
-  let fixture: ComponentFixture<SongThumbComponent>;
+describe('ChessGameComponent', () => {
+  let component: ChessGameComponent;
+  let fixture: ComponentFixture<ChessGameComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [SongThumbComponent]
+      declarations: [ChessGameComponent]
     });
-    fixture = TestBed.createComponent(SongThumbComponent);
+    fixture = TestBed.createComponent(ChessGameComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
