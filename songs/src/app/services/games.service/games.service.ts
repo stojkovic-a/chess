@@ -23,11 +23,8 @@ export class GamesService {
     ).subscribe(
       num => skip = num - 1
     );
-    console.log("aaa", skip);
     const takeNum = pageSize;
     skip = pageSize * skip;
-    console.log(pageSize, 'pageSize');
-    console.log(skip, 'skip');
 
     let whitePlayerFilter: string = "";
     let blackPlayerFilter: string = "";
@@ -60,7 +57,6 @@ export class GamesService {
       .subscribe(
         filter => resultFilter = filter
       );
-    console.log(whitePlayerFilter);
     let startD = '';
     if (startDateFilter != null) {
       startD += startDateFilter;
@@ -73,13 +69,16 @@ export class GamesService {
       'endD': endDateFilter.toString(),
       'tour': tournamentFilter,
     }
-    console.log(params, 'PARAMS');
     return this.httpClient.post<Game[]>(environment.api + `game/pageFilter/${skip}/${takeNum}`, {
-    params
+      params
     });
   }
 
   getNumberOfGames() {
     return this.httpClient.get<number>(environment.api + 'game/number/count');
+  }
+
+  getGameWithPositions(id: number) {
+    return this.httpClient.get<Game>(environment.api + `game/positions/${id}`);
   }
 }

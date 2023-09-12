@@ -5,6 +5,7 @@ import { state } from "@angular/animations";
 import { Filter, Player } from "../models";
 import { Game } from "../models";
 import { Platform } from "@angular/cdk/platform";
+import { act } from "@ngrx/effects";
 
 
 export interface PageState extends EntityState<number> {
@@ -17,7 +18,8 @@ export interface PlayerState extends EntityState<Player> {
 }
 
 export interface GameState extends EntityState<Game> {
-    selectedGame: number
+    selectedGame: Game
+    gameWithPositions: Game
 }
 
 export interface FilterState extends EntityState<Filter> {
@@ -109,7 +111,8 @@ export const initialPlayerState: PlayerState = playerAdapter.getInitialState({
 
 const gameAdapter = createEntityAdapter<Game>();
 export const initialGameState: GameState = gameAdapter.getInitialState({
-    selectedGame: 0
+    selectedGame: null,
+    gameWithPositions: null
 });
 
 export const pageReducer = createReducer(
@@ -148,4 +151,16 @@ export const gameReducer = createReducer(
         gameAdapter.setAll(games, state),
 
     ),
+    on(Actions.selectGame, (state, { game }) =>
+    ({
+        ...state,
+        selectedGame: game
+    })
+    ),
+    on(Actions.loadGameWithPositionsSuccess, (state, { game }) =>
+    ({
+        ...state,
+        gameWithPositions: game
+    })
+    )
 )

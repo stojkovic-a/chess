@@ -41,43 +41,58 @@ export const loadNumberOfGameSuccess = createAction(
     props<{ numberOfGames: number }>()
 )
 
-export const changePage=createAction(
+export const changePage = createAction(
     "Change Page",
-    props<{newPage:number}>()
+    props<{ newPage: number }>()
 )
 
-export const loadFilters=createAction(
+export const loadFilters = createAction(
     "Load Filters",
 )
 
-export const loadFiltersSuccess=createAction(
+export const loadFiltersSuccess = createAction(
     "Load Filters Success",
-    props<{filters:Filter}>()
+    props<{ filters: Filter }>()
 )
 
-export const selectWhitePlayerFilter=createAction(
+export const selectWhitePlayerFilter = createAction(
     "Select White Player Filter",
-    props<{fullName:string}>()
+    props<{ fullName: string }>()
 )
-export const selectBlackPlayerFilter=createAction(
+export const selectBlackPlayerFilter = createAction(
     "Select Black Player Filter",
-    props<{fullName:string}>()
+    props<{ fullName: string }>()
 )
 
-export const selectResultFilter=createAction(
+export const selectResultFilter = createAction(
     "Select Result Filter",
-    props<{result:string}>()
+    props<{ result: string }>()
 )
 
-export const selectStartDateFilter=createAction(
+export const selectStartDateFilter = createAction(
     "Select Start Date Filter",
-    props<{startDate:Date}>()
+    props<{ startDate: Date }>()
 )
-export const selectEndDateFilter=createAction(
+export const selectEndDateFilter = createAction(
     "Select End Date Filter",
-    props<{endDate:Date}>()
+    props<{ endDate: Date }>()
 )
-export const selectTournamentFilter=createAction(
+export const selectTournamentFilter = createAction(
     "Select Tournament Filter",
-    props<{tournament:string}>()
+    props<{ tournament: string }>()
+)
+
+export const selectGame = createAction(
+    "Select Game",
+    props<{ game: Game }>()
+)
+
+export const loadGameWithPositions = createAction(
+    "Load Game With Positions",
+    props<{ id: number }>()
+)
+
+export const loadGameWithPositionsSuccess = createAction(
+    "Load Game With Positions Success",
+    props<{ game: Game }>()
 )

@@ -66,15 +66,31 @@ export class ChessEffects {
                 this.filterService.getFilters().pipe(
                     map((filter) => {
                         console.log('log fron effect', filter);
-                        const filters:Filter={
-                            playerNames:filter.names,
-                            tournamentNames:filter.tournaments
+                        const filters: Filter = {
+                            playerNames: filter.names,
+                            tournamentNames: filter.tournaments
                         }
-                        return ChessActions.loadFiltersSuccess({ filters})
+                        return ChessActions.loadFiltersSuccess({ filters })
                     }
                     ),
                     catchError((error) =>
                         of({ type: 'load error' }))
+                )
+            )
+        )
+    )
+
+    loadGameWithPosition$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(ChessActions.loadGameWithPositions),
+            mergeMap((action) =>
+                this.gamesService.getGameWithPositions(action.id).pipe(
+                    map((game) =>
+                        ChessActions.loadGameWithPositionsSuccess({ game })
+                    ),
+                    catchError((error) =>
+                        of({ type: 'load error' })
+                    )
                 )
             )
         )

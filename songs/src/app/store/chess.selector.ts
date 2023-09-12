@@ -65,6 +65,15 @@ export const selectGamesList = createSelector(
         .map((game) => <Game>game)
 )
 
+export const selectSelectedGame = createSelector(
+    selectGameFeature,
+    (games) => games.selectedGame
+)
+
+export const selectGameWithPositions = createSelector(
+    selectGameFeature,
+    (game) => game.gameWithPositions
+)
 export const selectFilterFeature = createSelector(
     (state: AppState) => state.filters,
     (filters) => filters

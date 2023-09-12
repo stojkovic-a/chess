@@ -91,7 +91,6 @@ export class ChessGamesListComponent implements OnInit {
       .pipe(
         startWith({}),
         tap(() => {
-          console.log("GOT CAUSED");
           this.isLoading = true;
           this.cd.detectChanges();
           this.store.dispatch(ChessActions.changePage({ newPage: this.paginator.pageIndex + 1 }))
@@ -112,7 +111,6 @@ export class ChessGamesListComponent implements OnInit {
         })
       )
       .subscribe((data) => {
-        console.log(data);
         this.gameData = data;
         this.dataSource = new MatTableDataSource(this.gameData);
       });
@@ -124,6 +122,8 @@ export class ChessGamesListComponent implements OnInit {
     this.store.select(selectNumberOfGames)
       .subscribe((num) => {
         this.totalData = num;
+        console.log(this.totalData);
+        this.cd.detectChanges();
       });
   }
 
@@ -160,22 +160,16 @@ export class ChessGamesListComponent implements OnInit {
       const isAsc = sort.direction === 'asc';
       switch (sort.active) {
         case 'whitePlayer':
-          console.log("white");
           return this.compare(a.whitePlayer.firstName + a.whitePlayer.lastName, b.whitePlayer.firstName + b.whitePlayer.lastName, isAsc);
         case 'blackPlayer':
-          console.log("black");
           return this.compare(a.blackPlayer.firstName + a.blackPlayer.lastName, b.blackPlayer.firstName + b.blackPlayer.lastName, isAsc);
         case 'result':
-          console.log('result');
           return this.compare(this.getResult(a), this.getResult(b), isAsc);
         case 'timeControl':
-          console.log('time');
           return this.compare(a.startingTime.toString() + a.increment.toString(), b.startingTime.toString() + b.increment.toString(), isAsc);
         case 'date':
-          console.log('date');
           return this.compare(a.gameDate.toString(), b.gameDate.toString(), isAsc);
         case 'tournament':
-          console.log('tour');
           return this.compare(a.tournament.tournamentName, b.tournament.tournamentName, isAsc);
         default:
           return 0;
@@ -186,5 +180,9 @@ export class ChessGamesListComponent implements OnInit {
 
   compare(a: number | string, b: number | string, isAsc: boolean) {
     return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
+  }
+
+  gameSelected(game: Game) {
+    this.store.dispatch(ChessActions.selectGame({ game }));
   }
 }

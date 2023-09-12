@@ -1,0 +1,127 @@
+.chessboard {
+    // display: grid;
+    // grid-template-columns: repeat(8, 1fr);
+    // grid-template-rows: repeat(8, 1fr);
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    /* Adjust the size as needed */
+    height: 400px;
+    background-color: #3e5c4a;
+}
+
+.chessboard-row {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+}
+
+.chessboard-square {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.light {
+    background-color: #f0d9b5;
+    /* Light color for light squares */
+}
+
+.chess-piece{
+    width: 100%;
+    height: 100%;
+}
+
+.p {
+    background-image: url('../../../assets/img/alternative/pb.png');
+    background-size: cover;
+}
+
+.r {
+    background-image: url('../../../assets/img/alternative/rb.png');
+    background-size: cover;
+}
+
+.n {
+    background-image: url('../../../assets/img/alternative/nb.png');
+    background-size: cover;
+}
+
+.b {
+    background-image: url('../../../assets/img/alternative/bb.png');
+    background-size: cover;
+}
+
+.k {
+    background-image: url('../../../assets/img/alternative/kb.png');
+    background-size: cover;
+}
+
+.q {
+    background-image: url('../../../assets/img/alternative/qb.png');
+    background-size: cover;
+}
+
+
+.P {
+    background-image: url('../../../assets/img/alternative/PW.png');
+    background-size: cover;
+}
+
+.R {
+    background-image: url('../../../assets/img/alternative/RW.png');
+    background-size: cover;
+}
+
+.N {
+    background-image: url('../../../assets/img/alternative/NW.png');
+    background-size: cover;
+}
+
+.B {
+    background-image: url('../../../assets/img/alternative/BW.png');
+    background-size: cover;
+}
+
+.K {
+    background-image: url('../../../assets/img/alternative/KW.png');
+    background-size: cover;
+}
+
+.Q {
+    background-image: url('../../../assets/img/alternative/QW.png');
+    background-size: cover;
+}
+
+
+
+.label {
+    display: table-cell;
+    font-size: 14px;
+    margin-left: 8px;
+    min-width: 120px;
+  }
+  
+  .button-row {
+    display: table-cell;
+    max-width: 600px;
+  }
+  
+  .button-row .mat-mdc-button-base {
+    margin: 8px 8px 8px 0;
+  }
+  
+  .flex-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  
+  .button-container {
+    display: flex;
+    justify-content: center;
+    width: 120px;
+  }

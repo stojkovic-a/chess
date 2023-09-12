@@ -43,7 +43,9 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { ChessGameComponent } from './components/chess-game/chess-game.component';
 import { ChessGameViewComponent } from './components/chess-game-view/chess-game-view.component';
-import { NgxChessBoardModule } from "ngx-chess-board";
+import {MatIconModule} from '@angular/material/icon';
+import { GamesWithPositionComponent } from './components/games-with-position/games-with-position.component'; 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -57,6 +59,7 @@ import { NgxChessBoardModule } from "ngx-chess-board";
     ChessGamesFiltersComponent,
     ChessGameComponent,
     ChessGameViewComponent,
+    GamesWithPositionComponent,
   ],
   imports: [
     BrowserModule,
@@ -76,6 +79,7 @@ import { NgxChessBoardModule } from "ngx-chess-board";
     ReactiveFormsModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatIconModule,
     FormsModule,
     HttpClientModule,
     StoreModule.forRoot<AppState>({ pages: pageReducer, players: playerReducer, games: gameReducer, auth: reducer, filters: filterReducer }),
@@ -83,7 +87,6 @@ import { NgxChessBoardModule } from "ngx-chess-board";
       maxAge: 25, // Retains last 25 states
       autoPause: true, // Pauses recording actions and state changes when the extension window is not open
     }),
-    NgxChessBoardModule.forRoot(),
     EffectsModule.forRoot([ChessEffects, AuthEffects]),
     RouterModule.forRoot([
       { path: 'log-in', component: LogInComponent },
