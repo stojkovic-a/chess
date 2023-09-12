@@ -130,3 +130,13 @@ export const selectAllFilters = createSelector(
             filter.selectedTournamentFilter
     }
 )
+
+export const selectGamesByPosition = createSelector(
+    selectGameFeature,
+    (game) => game.gamesByPositionWithMove
+)
+
+export const selectMoveNumber = createSelector(
+    selectGameFeature,
+    (game) => game.currentMoveNumber
+)

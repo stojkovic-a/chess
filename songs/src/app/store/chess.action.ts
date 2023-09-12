@@ -96,3 +96,19 @@ export const loadGameWithPositionsSuccess = createAction(
     "Load Game With Positions Success",
     props<{ game: Game }>()
 )
+
+
+export const loadGamesByPosition = createAction(
+    "Load Games By Position",
+    props<{ position: string }>()
+)
+
+export const loadGamesByPositionSuccess = createAction(
+    "Load Games By Position Success",
+    props<{ games: Game[],moveNums:number[] }>()
+)
+
+export const setCurrentGameMove = createAction(
+    "Set Current Game Move",
+    props<{ moveNum: number }>()
+)

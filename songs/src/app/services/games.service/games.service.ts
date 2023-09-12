@@ -81,4 +81,13 @@ export class GamesService {
   getGameWithPositions(id: number) {
     return this.httpClient.get<Game>(environment.api + `game/positions/${id}`);
   }
+
+  getGameByPosition(position: string) {
+    const params = {
+      'position': position
+    }
+    return this.httpClient.post<{games:Game[],moveNums:number[]}>(environment.api + `position-to-game/position`, {
+      params
+    });
+  }
 }

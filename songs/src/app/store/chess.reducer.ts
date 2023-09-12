@@ -20,6 +20,8 @@ export interface PlayerState extends EntityState<Player> {
 export interface GameState extends EntityState<Game> {
     selectedGame: Game
     gameWithPositions: Game
+    gamesByPositionWithMove: { games: Game[], moveNums: number[] }
+    currentMoveNumber: number
 }
 
 export interface FilterState extends EntityState<Filter> {
@@ -112,7 +114,9 @@ export const initialPlayerState: PlayerState = playerAdapter.getInitialState({
 const gameAdapter = createEntityAdapter<Game>();
 export const initialGameState: GameState = gameAdapter.getInitialState({
     selectedGame: null,
-    gameWithPositions: null
+    gameWithPositions: null,
+    gamesByPositionWithMove: { games: [], moveNums: [] },
+    currentMoveNumber: 0
 });
 
 export const pageReducer = createReducer(
@@ -161,6 +165,18 @@ export const gameReducer = createReducer(
     ({
         ...state,
         gameWithPositions: game
+    })
+    ),
+    on(Actions.loadGamesByPositionSuccess, (state, { games, moveNums }) =>
+    ({
+        ...state,
+        gamesByPositionWithMove: { games, moveNums }
+    })
+    ),
+    on(Actions.setCurrentGameMove, (state, { moveNum }) =>
+    ({
+        ...state,
+        currentMoveNumber: moveNum
     })
     )
 )

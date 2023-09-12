@@ -1,1 +1,6 @@
-<div>{{currentFen}}</div>
+<ul *ngFor="let game of games; let i = index" [attr.data-index]="i">
+    <li (click)="gameSelected(game,i)">
+        {{game.whitePlayer.firstName}} {{game.whitePlayer.lastName}} {{getResult(game)}} {{game.blackPlayer.firstName}}
+        {{game.blackPlayer.lastName}}
+    </li>
+</ul>

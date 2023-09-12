@@ -4,7 +4,7 @@ import { Observable, of } from 'rxjs';
 import { AppState } from 'src/app/app.state';
 import { Game, Position, PositionToGame } from 'src/app/models';
 import { loadGameWithPositions } from 'src/app/store/chess.action';
-import { selectGameWithPositions, selectSelectedGame } from 'src/app/store/chess.selector';
+import { selectGameWithPositions, selectMoveNumber, selectSelectedGame } from 'src/app/store/chess.selector';
 @Component({
   selector: 'app-chess-game-view',
   templateUrl: './chess-game-view.component.html',
@@ -36,7 +36,7 @@ export class ChessGameViewComponent implements OnInit {
   getPieceClass(row: number, col: number): string {
     let i = (row) * 8 + (col);
     if (this.inverted) {
-      return this.currentExpandedFen[(7 - row) * 8 + (7-col)];
+      return this.currentExpandedFen[(7 - row) * 8 + (7 - col)];
     }
     return this.currentExpandedFen[i];
     // while (j <= i) {
@@ -69,6 +69,11 @@ export class ChessGameViewComponent implements OnInit {
         this.positionsToGame = game.positionToGame;
         console.log('aaaaaaaaaaa', game);
       })
+
+    this.store.select(selectMoveNumber)
+      .subscribe((num) =>
+        this.currentMove = num
+      )
   }
 
   nextMove() {
@@ -115,4 +120,7 @@ export class ChessGameViewComponent implements OnInit {
     console.log(expandedFen);
     return expandedFen;
   }
+
+
+
 }

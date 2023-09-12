@@ -96,6 +96,22 @@ export class ChessEffects {
         )
     )
 
+    loadGamesByPosition$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(ChessActions.loadGamesByPosition),
+            mergeMap((action) =>
+                this.gamesService.getGameByPosition(action.position).pipe(
+                    map((games) =>
+                        ChessActions.loadGamesByPositionSuccess({ games: games.games, moveNums: games.moveNums })
+                    ),
+                    catchError((error) =>
+                        of({ type: 'load error' })
+                    )
+                )
+            )
+        )
+    )
+
 
 
 }
