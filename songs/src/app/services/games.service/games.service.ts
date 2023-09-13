@@ -6,6 +6,7 @@ import { AppState } from 'src/app/app.state';
 import { Store } from '@ngrx/store';
 import { Observable, from, of, take } from 'rxjs';
 import { selectBlackPlayerFilter, selectEndDateFilter, selectPagesNumber, selectResultFilter, selectStartDateFilter, selectTournamentFilter, selectWhitePlayerFilter } from '../../store/chess.selector';
+import { GamePosNum } from 'src/app/interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -82,11 +83,23 @@ export class GamesService {
     return this.httpClient.get<Game>(environment.api + `game/positions/${id}`);
   }
 
-  getGameByPosition(position: string) {
+  getGameByPosition(position: string, pageNum: number, pageSize: number) {
     const params = {
-      'position': position
+      'position': position,
+      'pageNum': pageNum,
+      'pageSize': pageSize,
     }
-    return this.httpClient.post<{games:Game[],moveNums:number[]}>(environment.api + `position-to-game/position`, {
+    return this.httpClient.post<GamePosNum[]>(environment.api + `position-to-game/position`, {
+      params
+    });
+  }
+
+  getNumberOfGamesByPosition(position: string) {
+    const params = {
+      'position': position,
+    }
+
+    return this.httpClient.post<number>(environment.api + 'position-to-game/positionNum', {
       params
     });
   }

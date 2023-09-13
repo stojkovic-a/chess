@@ -1,34 +1,31 @@
-<div class="flex">
+<div class="flex" [autofocus]="true" (keydown.ArrowLeft)="prevMove()" (keydown.ArrowRight)="nextMove()">
   <div>
-<div class="chessboard">
-  <div *ngFor="let row of [1, 2, 3, 4, 5, 6, 7, 8]; let i = index" class="chessboard-row">
-    <div *ngFor="let col of [1, 2, 3, 4, 5, 6, 7, 8]; let j = index" class="chessboard-square"
-      [class.light]="(i + j) % 2 === 0">
-      <div class="chess-piece" [ngClass]="getPieceClass(i, j)"></div>
+    <div class="chessboard">
+      <div *ngFor="let row of [1, 2, 3, 4, 5, 6, 7, 8]; let i = index" class="chessboard-row">
+        <div *ngFor="let col of [1, 2, 3, 4, 5, 6, 7, 8]; let j = index" class="chessboard-square"
+          [class.light]="(i + j) % 2 === 0">
+          <div class="chess-piece" [ngClass]="getPieceClass(i, j)"></div>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
 
-<section>
-  <div class="button-row">
-    <div class="flex-container">
-      <button mat-icon-button color="primary" 
-      aria-label="icon button with rotate icon" (click)="invert()">
-        <mat-icon>cached</mat-icon>
-      </button>
-      <button mat-icon-button color="primary" 
-      aria-label="icon button with right arrow icon " (click)="prevMove()">
-        <mat-icon>arrow_left</mat-icon>
-      </button>
-      <button mat-icon-button color="primary" 
-      aria-label="icon button with left arrow icon" (click)="nextMove()">
-        <mat-icon>arrow_right</mat-icon>
-      </button>
-    </div>
+    <section>
+      <div class="button-row">
+        <div class="flex-container">
+          <button mat-icon-button color="primary" aria-label="icon button with rotate icon" (click)="invert()">
+            <mat-icon>cached</mat-icon>
+          </button>
+          <button mat-icon-button color="primary" aria-label="icon button with right arrow icon " (click)="prevMove()">
+            <mat-icon>arrow_left</mat-icon>
+          </button>
+          <button mat-icon-button color="primary" aria-label="icon button with left arrow icon" (click)="nextMove()">
+            <mat-icon>arrow_right</mat-icon>
+          </button>
+        </div>
+      </div>
+    </section>
   </div>
-</section>
-</div>
-<div>
-  <app-games-with-position [currentFen]="currentFen"></app-games-with-position>
-</div>
+  <div>
+    <app-games-with-position [currentFen]="currentFen"></app-games-with-position>
+  </div>
 </div>

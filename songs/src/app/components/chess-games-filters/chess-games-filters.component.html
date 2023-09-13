@@ -1,9 +1,10 @@
 <div class="example-form flex flex-grow">
   <mat-form-field class="example-full-width flex-grow">
     <mat-label>White Player</mat-label>
-    <input #white type="text" placeholder="Pick a player" aria-label="whitePlayer" matInput [formControl]="myControl1"
-      [matAutocomplete]="auto1">
-    <mat-autocomplete autoActiveFirstOption #auto1="matAutocomplete" (optionSelected)="whitePlayerSelected(white.value)">
+    <input #white type="text" placeholder="Pick a player" aria-label="whitePlayer" matInput
+      [formControl]="whitePlayerControl" [matAutocomplete]="auto1">
+    <mat-autocomplete autoActiveFirstOption #auto1="matAutocomplete"
+      (optionSelected)="whitePlayerSelected(white.value)">
       <mat-option *ngFor="let option of filteredOptions1 | async" [value]="option">
         {{ option }}
       </mat-option>
@@ -12,9 +13,10 @@
 
   <mat-form-field class="example-full-width flex flex-grow">
     <mat-label>Black Player</mat-label>
-    <input #black type="text" placeholder="Pick a player" aria-label="blackPlayer" matInput [formControl]="myControl2"
-      [matAutocomplete]="auto2">
-    <mat-autocomplete autoActiveFirstOption #auto2="matAutocomplete" (optionSelected)="blackPlayerSelected(black.value)">
+    <input #black type="text" placeholder="Pick a player" aria-label="blackPlayer" matInput
+      [formControl]="blackPlayerControl" [matAutocomplete]="auto2">
+    <mat-autocomplete autoActiveFirstOption #auto2="matAutocomplete"
+      (optionSelected)="blackPlayerSelected(black.value)">
       <mat-option *ngFor="let option of filteredOptions2 | async" [value]="option">
         {{ option }}
       </mat-option>
@@ -23,7 +25,7 @@
 
   <mat-form-field class="example-full-width flex-grow">
     <mat-label>Result</mat-label>
-    <input #res type="text" placeholder="Pick the result" aria-label="result" matInput [formControl]="myControl3"
+    <input #res type="text" placeholder="Pick the result" aria-label="result" matInput [formControl]="resultControl"
       [matAutocomplete]="auto3">
     <mat-autocomplete autoActiveFirstOption #auto3="matAutocomplete" (optionSelected)="resultSelected(res.value)">
       <mat-option *ngFor="let option of filteredOptions3 | async" [value]="option">
@@ -32,29 +34,31 @@
     </mat-autocomplete>
   </mat-form-field>
 
-  
+
 
 
   <mat-form-field>
-  <mat-label>Enter a date range</mat-label>
-  <mat-date-range-input [formGroup]="range" [rangePicker]="picker" >
-    <input #start matStartDate formControlName="start" placeholder="Start date" (dateChange)="dateChangeStart(start.value)">
-    <input #end matEndDate formControlName="end" placeholder="End date" (dateChange)="dateChangeEnd(end.value)">
-  </mat-date-range-input>
-  <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
-  <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-  <mat-date-range-picker #picker></mat-date-range-picker>
+    <mat-label>Enter a date range</mat-label>
+    <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
+      <input #start matStartDate [formControl]="startFormControl" placeholder="Start date"
+        (dateChange)="dateChangeStart(start.value)">
+      <input #end matEndDate [formControl]="endFormControl" placeholder="End date"
+        (dateChange)="dateChangeEnd(end.value)">
+    </mat-date-range-input>
+    <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-date-range-picker #picker></mat-date-range-picker>
 
-  <mat-error *ngIf="range.controls.start.hasError('matStartDateInvalid')">Invalid start date</mat-error>
-  <mat-error *ngIf="range.controls.end.hasError('matEndDateInvalid')">Invalid end date</mat-error>
-</mat-form-field>
+    <mat-error *ngIf="range.controls.start.hasError('matStartDateInvalid')">Invalid start date</mat-error>
+    <mat-error *ngIf="range.controls.end.hasError('matEndDateInvalid')">Invalid end date</mat-error>
+  </mat-form-field>
 
- 
+
 
   <mat-form-field class="example-full-width flex-grow">
     <mat-label>Tournament</mat-label>
-    <input #tour type="text" placeholder="Pick a tournament" aria-label="tournament" matInput [formControl]="myControl6"
-      [matAutocomplete]="auto6">
+    <input #tour type="text" placeholder="Pick a tournament" aria-label="tournament" matInput
+      [formControl]="tournamentControl" [matAutocomplete]="auto6">
     <mat-autocomplete autoActiveFirstOption #auto6="matAutocomplete" (optionSelected)="tournamentSelected(tour.value)">
       <mat-option *ngFor="let option of filteredOptions6 | async" [value]="option">
         {{ option }}

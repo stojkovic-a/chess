@@ -43,6 +43,8 @@ export class ChessGamesListComponent implements OnInit {
 
   isLoading = true;
 
+  sorted: boolean = false;
+
   @ViewChild(MatSort) sort!: MatSort;
 
   constructor(
@@ -112,17 +114,18 @@ export class ChessGamesListComponent implements OnInit {
       )
       .subscribe((data) => {
         this.gameData = data;
+        this.paginator.length = this.totalData;
         this.dataSource = new MatTableDataSource(this.gameData);
       });
   }
 
 
   ngOnInit(): void {
+
     this.store.dispatch(ChessActions.loadNumberOfGames());
     this.store.select(selectNumberOfGames)
       .subscribe((num) => {
         this.totalData = num;
-        console.log(this.totalData);
         this.cd.detectChanges();
       });
   }
@@ -154,6 +157,7 @@ export class ChessGamesListComponent implements OnInit {
   sortData(sort: Sort) {
     const data = this.gameData;
     if (!sort.active || sort.direction === '') {
+      this.sorted = false;
       return;
     }
     this.gameData = data.sort((a, b) => {
@@ -184,5 +188,6 @@ export class ChessGamesListComponent implements OnInit {
 
   gameSelected(game: Game) {
     this.store.dispatch(ChessActions.selectGame({ game }));
+    this.store.dispatch(ChessActions.setCurrentGameMove({ moveNum: -1 }));
   }
 }

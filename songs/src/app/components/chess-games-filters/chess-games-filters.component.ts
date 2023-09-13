@@ -5,7 +5,16 @@ import { Store } from '@ngrx/store';
 import { Observable, map, startWith } from 'rxjs';
 import { AppState } from 'src/app/app.state';
 import { loadFilters, selectBlackPlayerFilter, selectEndDateFilter, selectTournamentFilter, selectResultFilter, selectStartDateFilter, selectWhitePlayerFilter } from 'src/app/store/chess.action';
-import { selectPlayerFilters, selectTournamentFilters } from 'src/app/store/chess.selector';
+import {
+  selectWhitePlayerFilter as SelectWhite,
+  selectBlackPlayerFilter as SelectBlack,
+  selectTournamentFilter as SelectTournament,
+  selectStartDateFilter as SelectStart,
+  selectEndDateFilter as SelectEnd,
+  selectResultFilter as SelectResult,
+  selectPlayerFilters,
+  selectTournamentFilters
+} from 'src/app/store/chess.selector';
 
 @Component({
   selector: 'app-chess-games-filters',
@@ -15,35 +24,57 @@ import { selectPlayerFilters, selectTournamentFilters } from 'src/app/store/ches
 export class ChessGamesFiltersComponent {
 
   @Output() dateChange: EventEmitter<MatDatepickerInputEvent<Date>> = new EventEmitter<MatDatepickerInputEvent<Date>>();
-  myControl1 = new FormControl('');
-  myControl2 = new FormControl('');
-  myControl3 = new FormControl('');
-  myControl6 = new FormControl('');
+  whitePlayerControl = new FormControl('');
+  blackPlayerControl = new FormControl('');
+  resultControl = new FormControl('');
+  tournamentControl = new FormControl('');
+  startFormControl = new FormControl();
+  endFormControl = new FormControl();
+
+
+  whiteFilter: string = "";
+  blackFilter: string = "";
+  resultFilter: string = "";
 
   dateChangeStart(value: string) {
     this.store.dispatch(selectStartDateFilter({ startDate: new Date(value) }))
+    this.store.select(SelectStart)
+      .subscribe((filter) => this.startFormControl.setValue(filter));
   }
 
   dateChangeEnd(value: string) {
     this.store.dispatch(selectEndDateFilter({ endDate: new Date(value) }))
+    this.store.select(SelectEnd)
+      .subscribe((filter) => this.endFormControl.setValue(filter));
   }
 
   whitePlayerSelected(value: string) {
     this.store.dispatch(selectWhitePlayerFilter({ fullName: value }));
+    this.store.select(SelectWhite)
+      .subscribe((filter) => this.whitePlayerControl.setValue(filter));
   }
 
   blackPlayerSelected(value: string) {
     this.store.dispatch(selectBlackPlayerFilter({ fullName: value }));
+    this.store.select(SelectBlack)
+      .subscribe((filter) => this.blackPlayerControl.setValue(filter));
   }
 
   resultSelected(value: string) {
     this.store.dispatch(selectResultFilter({ result: value }));
+    this.store.select(SelectResult)
+      .subscribe((filter) => {
+        this.resultControl.setValue(filter);
+        this.resultFilter = filter;
+      });
   }
 
   tournamentSelected(value: string) {
     this.store.dispatch(selectTournamentFilter({ tournament: value }));
+    this.store.select(SelectTournament)
+      .subscribe((filter) => this.tournamentControl.setValue(filter));
   }
-  
+
   resultOptions: string[] = ['1-0', '1/2-1/2', '0-1'];
   playerOptions1: string[] = [];
   playerOptions2: string[] = [];
@@ -73,11 +104,11 @@ export class ChessGamesFiltersComponent {
       .subscribe((filters) => {
         this.playerOptions1 = filters
         this.playerOptions2 = filters
-        this.filteredOptions1 = this.myControl1.valueChanges.pipe(
+        this.filteredOptions1 = this.whitePlayerControl.valueChanges.pipe(
           startWith(''),
           map(value => this._filter(value || '', this.playerOptions1)),
         );
-        this.filteredOptions2 = this.myControl2.valueChanges.pipe(
+        this.filteredOptions2 = this.blackPlayerControl.valueChanges.pipe(
           startWith(''),
           map(value => this._filter(value || '', this.playerOptions2)),
         );
@@ -92,17 +123,17 @@ export class ChessGamesFiltersComponent {
         } else {
           this.tournamentOptions.push("Friendly");
         }
-        this.filteredOptions6 = this.myControl6.valueChanges.pipe(
+        this.filteredOptions6 = this.tournamentControl.valueChanges.pipe(
           startWith(''),
           map(value => this._filter(value || '', this.tournamentOptions)),
         );
       });
 
-    this.filteredOptions2 = this.myControl2.valueChanges.pipe(
+    this.filteredOptions2 = this.blackPlayerControl.valueChanges.pipe(
       startWith(''),
       map(value => this._filter(value || '', this.playerOptions2)),
     );
-    this.filteredOptions3 = this.myControl3.valueChanges.pipe(
+    this.filteredOptions3 = this.resultControl.valueChanges.pipe(
       startWith(''),
       map(value => this._filter(value || '', this.resultOptions)),
     );

@@ -1,5 +1,6 @@
 import { createAction, props } from "@ngrx/store";
 import { Filter, Game, Player, Tournament } from "../models";
+import { GamePosNum } from "../interfaces";
 
 export const loadGames = createAction(
     "Load Games",
@@ -100,15 +101,25 @@ export const loadGameWithPositionsSuccess = createAction(
 
 export const loadGamesByPosition = createAction(
     "Load Games By Position",
-    props<{ position: string }>()
+    props<{ position: string, pageNum: number, pageSize: number }>()
 )
 
 export const loadGamesByPositionSuccess = createAction(
     "Load Games By Position Success",
-    props<{ games: Game[],moveNums:number[] }>()
+    props<{ combination: GamePosNum[] }>()
 )
 
 export const setCurrentGameMove = createAction(
     "Set Current Game Move",
     props<{ moveNum: number }>()
+)
+
+export const loadNumberOfGamesWithPos = createAction(
+    "Load Number Of Games With Pos",
+    props<{ position: string }>()
+)
+
+export const loadNumberOfGamesWithPosSuccess = createAction(
+    "Load Number Of Games With Pos",
+    props<{ numberOfGamesWithPos: number }>()
 )

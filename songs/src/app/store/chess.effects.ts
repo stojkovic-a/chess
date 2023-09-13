@@ -100,9 +100,25 @@ export class ChessEffects {
         this.actions$.pipe(
             ofType(ChessActions.loadGamesByPosition),
             mergeMap((action) =>
-                this.gamesService.getGameByPosition(action.position).pipe(
+                this.gamesService.getGameByPosition(action.position, action.pageNum, action.pageSize).pipe(
                     map((games) =>
-                        ChessActions.loadGamesByPositionSuccess({ games: games.games, moveNums: games.moveNums })
+                        ChessActions.loadGamesByPositionSuccess({ combination: games })
+                    ),
+                    catchError((error) =>
+                        of({ type: 'load error' })
+                    )
+                )
+            )
+        )
+    )
+
+    loadNumberOfGamesByPosition$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(ChessActions.loadNumberOfGamesWithPos),
+            mergeMap((action) =>
+                this.gamesService.getNumberOfGamesByPosition(action.position).pipe(
+                    map((number) =>
+                        ChessActions.loadNumberOfGamesWithPosSuccess({ numberOfGamesWithPos: number })
                     ),
                     catchError((error) =>
                         of({ type: 'load error' })

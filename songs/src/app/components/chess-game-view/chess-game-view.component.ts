@@ -77,6 +77,7 @@ export class ChessGameViewComponent implements OnInit {
   }
 
   nextMove() {
+    console.log(this.currentMove);
     if (this.currentMove + 1 < this.positionsToGame.length) {
       this.currentMove++;
       this.currentFen = this.positionsToGame[this.currentMove].position.position;
@@ -87,6 +88,8 @@ export class ChessGameViewComponent implements OnInit {
   }
 
   prevMove() {
+
+    console.log(this.currentMove);
     if (this.currentMove >= 0) {
       this.currentMove--;
       if (this.currentMove == -1) {

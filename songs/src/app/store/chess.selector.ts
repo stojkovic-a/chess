@@ -140,3 +140,8 @@ export const selectMoveNumber = createSelector(
     selectGameFeature,
     (game) => game.currentMoveNumber
 )
+
+export const selectNumberOfGamesWithPos = createSelector(
+    selectGameFeature,
+    (game) => game.gameWithPosNumber
+)

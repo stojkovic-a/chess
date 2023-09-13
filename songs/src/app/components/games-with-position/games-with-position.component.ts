@@ -1,10 +1,16 @@
-import { Component, Input, OnInit, SimpleChange, SimpleChanges } from '@angular/core';
+import { Component, Input, OnInit, SimpleChange, SimpleChanges, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
 import { Game } from 'src/app/models';
 import { loadGamesByPosition } from 'src/app/store/chess.action';
-import { selectGamesByPosition } from 'src/app/store/chess.selector';
+import { selectGamesByPosition, selectNumberOfGamesWithPos } from 'src/app/store/chess.selector';
 import * as ChessActions from '../../store/chess.action';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
+import { catchError, map, of, startWith, switchMap, tap } from 'rxjs';
+import { GamePosNum } from 'src/app/interfaces';
+
+
 
 
 @Component({
@@ -13,28 +19,117 @@ import * as ChessActions from '../../store/chess.action';
   styleUrls: ['./games-with-position.component.scss']
 })
 export class GamesWithPositionComponent implements OnInit {
+
+
   @Input() currentFen: string;
+
+
+  @ViewChild('paginator') paginator!: MatPaginator;
 
   games: Game[] = [];
   moveNums: number[] = [];
+  totalData = 0;
+  currentPage = 0;
+  dataSource = new MatTableDataSource<GamePosNum>();
+  data: GamePosNum[];
+  isLoading = true;
+
+  displayedColumns: string[] = [
+    'whitePlayer',
+    'result',
+    'blackPlayer',
+  ];
+  pageSizes = [5];
+
   constructor(private store: Store<AppState>) {
 
   }
 
-  ngOnInit(): void {
-    this.store.dispatch(loadGamesByPosition({ position: this.currentFen }));
-    this.store.select(selectGamesByPosition)
-      .subscribe((combination) => {
-        console.log(combination);
-        this.games = combination.games;
-        this.moveNums = combination.moveNums;
-      }
+
+
+
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+
+    this.paginator.page
+      .pipe(
+        startWith({}),
+        tap(() => {
+          this.isLoading = true;
+          this.currentPage++;
+        }),
+        switchMap(() => {
+          return this.getTableData$(
+            this.paginator.pageIndex + 1,
+            this.paginator.pageSize
+          ).pipe(catchError(() => of(null)))
+        }),
+        map((data) => {
+          if (data == null) return [];
+          this.totalData = this.totalData;
+          this.isLoading = false;
+          return data;
+        })
       )
+      .subscribe((data) => {
+        this.data = data;
+        this.paginator.length = this.totalData;
+        this.dataSource = new MatTableDataSource(this.data);
+      });
   }
 
+  getTableData$(pageNumber: number, pageSize: number) {
+    this.store.dispatch(loadGamesByPosition
+      ({
+        position: this.currentFen,
+        pageNum: pageNumber,
+        pageSize: pageSize
+      }));
+    return this.store.select(selectGamesByPosition)
+    // .subscribe((combination) => {
+    //   if (combination.games == null || combination.moveNums == null) {
+    //     this.games = [];
+    //     this.moveNums = [];
+    //   } else {
+    //     console.log(combination);
+    //     this.games = combination.games;
+    //     this.moveNums = combination.moveNums;
+    //   }
+    //   if (this.games) {
+    //     this.dataSource = this.games.map((game, index) => {
+    //       return { game: game, index: index }
+    //     });
+    //     this.totalData = this.games.length;
+    //   }
+
+    // }
+    // )
+  }
+
+  ngOnInit(): void {
+
+    this.getAndSetNumberOfGames();
+    this.store.select(selectNumberOfGamesWithPos)
+      .subscribe((num) => {
+        this.totalData = num;
+      });
+  }
+
+  getAndSetNumberOfGames() {
+    this.store.dispatch(ChessActions.loadNumberOfGamesWithPos({ position: this.currentFen }));
+  }
   ngOnChanges(changes: SimpleChanges) {
     if (changes['currentFen']) {
-      this.store.dispatch(loadGamesByPosition({ position: this.currentFen }));
+      this.currentPage = 0;
+      this.paginator.pageIndex = 0;
+      this.store.dispatch(ChessActions.loadNumberOfGamesWithPos({ position: this.currentFen }));
+      this.getAndSetNumberOfGames();
+      this.store.dispatch(loadGamesByPosition
+        ({
+          position: this.currentFen,
+          pageNum: this.paginator.pageIndex + 1,
+          pageSize: this.paginator.pageSize
+        }));
 
     }
   }
@@ -51,7 +146,19 @@ export class GamesWithPositionComponent implements OnInit {
 
   gameSelected(game: Game, index: number) {
     this.store.dispatch(ChessActions.selectGame({ game }));
-    this.store.dispatch(ChessActions.setCurrentGameMove({ moveNum: this.moveNums[index]-1 }));
+    this.store.dispatch(
+      ChessActions.setCurrentGameMove(
+        { moveNum: this.moveNums[index] - 1 }
+      ));
     console.log('sve hoce');
+  }
+
+  clickedRow(row) {
+    this.store.dispatch(ChessActions.selectGame({ game: row.game }));
+    this.store.dispatch(
+      ChessActions.setCurrentGameMove(
+        { moveNum: this.moveNums[row.index] - 1 }
+      ));
+    console.log("CLICKED ROW", this.moveNums[row.index]);
   }
 }

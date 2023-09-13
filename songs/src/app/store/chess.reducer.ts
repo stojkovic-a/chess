@@ -6,6 +6,7 @@ import { Filter, Player } from "../models";
 import { Game } from "../models";
 import { Platform } from "@angular/cdk/platform";
 import { act } from "@ngrx/effects";
+import { GamePosNum } from "../interfaces";
 
 
 export interface PageState extends EntityState<number> {
@@ -20,8 +21,9 @@ export interface PlayerState extends EntityState<Player> {
 export interface GameState extends EntityState<Game> {
     selectedGame: Game
     gameWithPositions: Game
-    gamesByPositionWithMove: { games: Game[], moveNums: number[] }
+    gamesByPositionWithMove: GamePosNum[]
     currentMoveNumber: number
+    gameWithPosNumber: number
 }
 
 export interface FilterState extends EntityState<Filter> {
@@ -115,8 +117,9 @@ const gameAdapter = createEntityAdapter<Game>();
 export const initialGameState: GameState = gameAdapter.getInitialState({
     selectedGame: null,
     gameWithPositions: null,
-    gamesByPositionWithMove: { games: [], moveNums: [] },
-    currentMoveNumber: 0
+    gamesByPositionWithMove: [],
+    currentMoveNumber: -1,
+    gameWithPosNumber: 0
 });
 
 export const pageReducer = createReducer(
@@ -167,16 +170,22 @@ export const gameReducer = createReducer(
         gameWithPositions: game
     })
     ),
-    on(Actions.loadGamesByPositionSuccess, (state, { games, moveNums }) =>
+    on(Actions.loadGamesByPositionSuccess, (state, combination) =>
     ({
         ...state,
-        gamesByPositionWithMove: { games, moveNums }
+        gamesByPositionWithMove: combination.combination
     })
     ),
     on(Actions.setCurrentGameMove, (state, { moveNum }) =>
     ({
         ...state,
         currentMoveNumber: moveNum
+    })
+    ),
+    on(Actions.loadNumberOfGamesWithPosSuccess, (state, { numberOfGamesWithPos }) =>
+    ({
+        ...state,
+        gameWithPosNumber: numberOfGamesWithPos
     })
     )
 )
