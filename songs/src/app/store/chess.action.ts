@@ -120,6 +120,6 @@ export const loadNumberOfGamesWithPos = createAction(
 )
 
 export const loadNumberOfGamesWithPosSuccess = createAction(
-    "Load Number Of Games With Pos",
+    "Load Number Of Games With Pos Success",
     props<{ numberOfGamesWithPos: number }>()
 )

@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools'
 
 import { AppComponent } from './app.component';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule, HttpClientXsrfModule } from '@angular/common/http';
 import { StoreModule } from '@ngrx/store';
 import { AppState } from './app.state';
 import { EffectsModule } from '@ngrx/effects'
@@ -43,8 +43,10 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { ChessGameComponent } from './components/chess-game/chess-game.component';
 import { ChessGameViewComponent } from './components/chess-game-view/chess-game-view.component';
-import {MatIconModule} from '@angular/material/icon';
-import { GamesWithPositionComponent } from './components/games-with-position/games-with-position.component'; 
+import { MatIconModule } from '@angular/material/icon';
+import { GamesWithPositionComponent } from './components/games-with-position/games-with-position.component';
+import { AdministrationPageComponent } from './components/administration-page/administration-page.component';
+import { AdministrationGameAddComponent } from './components/administration-game-add/administration-game-add.component';
 
 @NgModule({
   declarations: [
@@ -60,6 +62,8 @@ import { GamesWithPositionComponent } from './components/games-with-position/gam
     ChessGameComponent,
     ChessGameViewComponent,
     GamesWithPositionComponent,
+    AdministrationPageComponent,
+    AdministrationGameAddComponent,
   ],
   imports: [
     BrowserModule,
@@ -82,6 +86,7 @@ import { GamesWithPositionComponent } from './components/games-with-position/gam
     MatIconModule,
     FormsModule,
     HttpClientModule,
+    // HttpClientXsrfModule.withOptions({ cookieName: 'accessToken', headerName: 'Authorization', }),
     StoreModule.forRoot<AppState>({ pages: pageReducer, players: playerReducer, games: gameReducer, auth: reducer, filters: filterReducer }),
     StoreDevtoolsModule.instrument({
       maxAge: 25, // Retains last 25 states
@@ -92,7 +97,7 @@ import { GamesWithPositionComponent } from './components/games-with-position/gam
       { path: 'log-in', component: LogInComponent },
       { path: 'sign-up', component: SignUpComponent },
       { path: 'about', component: ChessGamesListComponent },
-      { path: 'contact', component: ChessGameComponent },
+      { path: 'contact', component: AdministrationPageComponent },
       //TODO: Protected page example, use where needed
       // { path: 'sign-up', component: SignUpComponent, canActivate: [AuthGuard] },
       { path: '', component: LandingComponent },

@@ -19,13 +19,13 @@ export class AuthInterceptor implements HttpInterceptor {
         next: HttpHandler
     ): Observable<HttpEvent<any>> {
         // Get the authentication token from the cookie
-        const token = this.cookieService.getAuthenticationToken();
+        const accessToken = this.cookieService.getAccessToken();
 
         // Clone the request and add the Bearer token to the headers if the token is present
-        if (token) {
+        if (accessToken) {
             request = request.clone({
                 setHeaders: {
-                    Authorization: `Bearer ${token}`,
+                    Authorization: `Bearer ${accessToken}`,
                 },
             });
         }

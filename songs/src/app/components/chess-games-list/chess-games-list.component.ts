@@ -26,7 +26,8 @@ export class ChessGamesListComponent implements OnInit {
     'blackPlayer',
     'timeControl',
     'date',
-    'tournament'
+    'tournament',
+    'selectGame'
   ];
 
   whitePlayerFilter$: Observable<string> = of("");

@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { User } from '../models/user';
 import { AppState } from '../app.state';
 import { Store } from '@ngrx/store';
-import { selectUserData } from '../store/auth/auth.selector';
+import { selectFirstName } from '../store/auth/auth.selector';
 
 @Component({
   selector: 'app-navbar',
@@ -11,9 +11,9 @@ import { selectUserData } from '../store/auth/auth.selector';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
-  user$: Observable<User | null>;
+  userName$: Observable<string>;
   constructor(private store: Store<AppState>) {
-    this.user$ = this.store.select(selectUserData);
+    this.userName$ = this.store.select(selectFirstName);
   }
   ngOnInit(): void {
   }

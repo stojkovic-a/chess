@@ -60,13 +60,12 @@ export class GamesWithPositionComponent implements OnInit {
         }),
         switchMap(() => {
           return this.getTableData$(
-            this.paginator.pageIndex + 1,
+            this.paginator.pageIndex,
             this.paginator.pageSize
           ).pipe(catchError(() => of(null)))
         }),
         map((data) => {
           if (data == null) return [];
-          this.totalData = this.totalData;
           this.isLoading = false;
           return data;
         })
@@ -86,48 +85,33 @@ export class GamesWithPositionComponent implements OnInit {
         pageSize: pageSize
       }));
     return this.store.select(selectGamesByPosition)
-    // .subscribe((combination) => {
-    //   if (combination.games == null || combination.moveNums == null) {
-    //     this.games = [];
-    //     this.moveNums = [];
-    //   } else {
-    //     console.log(combination);
-    //     this.games = combination.games;
-    //     this.moveNums = combination.moveNums;
-    //   }
-    //   if (this.games) {
-    //     this.dataSource = this.games.map((game, index) => {
-    //       return { game: game, index: index }
-    //     });
-    //     this.totalData = this.games.length;
-    //   }
 
-    // }
-    // )
   }
 
   ngOnInit(): void {
-
     this.getAndSetNumberOfGames();
     this.store.select(selectNumberOfGamesWithPos)
       .subscribe((num) => {
         this.totalData = num;
+        this.paginator.length = num;
+        console.log(num);
       });
   }
 
   getAndSetNumberOfGames() {
+    console.log("neko stalno poziva ovu fju");
     this.store.dispatch(ChessActions.loadNumberOfGamesWithPos({ position: this.currentFen }));
   }
   ngOnChanges(changes: SimpleChanges) {
-    if (changes['currentFen']) {
+    console.log("PROBLEM IS HERE");
+    if (changes['currentFen'] && changes['currentFen'].currentValue !== changes['currentFen'].previousValue) {
       this.currentPage = 0;
       this.paginator.pageIndex = 0;
-      this.store.dispatch(ChessActions.loadNumberOfGamesWithPos({ position: this.currentFen }));
       this.getAndSetNumberOfGames();
       this.store.dispatch(loadGamesByPosition
         ({
           position: this.currentFen,
-          pageNum: this.paginator.pageIndex + 1,
+          pageNum: this.paginator.pageIndex,
           pageSize: this.paginator.pageSize
         }));
 
@@ -144,21 +128,22 @@ export class GamesWithPositionComponent implements OnInit {
     }
   }
 
-  gameSelected(game: Game, index: number) {
-    this.store.dispatch(ChessActions.selectGame({ game }));
-    this.store.dispatch(
-      ChessActions.setCurrentGameMove(
-        { moveNum: this.moveNums[index] - 1 }
-      ));
-    console.log('sve hoce');
-  }
+  // gameSelected(game: Game, index: number) {
+  //   this.store.dispatch(ChessActions.selectGame({ game }));
+  //   this.store.dispatch(
+  //     ChessActions.setCurrentGameMove(
+  //       { moveNum: this.moveNums[index] - 1 }
+  //     ));
+  //   console.log('sve hoce');
+  // }
 
   clickedRow(row) {
-    this.store.dispatch(ChessActions.selectGame({ game: row.game }));
+    console.log(row);
+    this.store.dispatch(ChessActions.selectGame({ game: row.games }));
     this.store.dispatch(
       ChessActions.setCurrentGameMove(
-        { moveNum: this.moveNums[row.index] - 1 }
+        { moveNum: row.moveNums - 1 }
       ));
-    console.log("CLICKED ROW", this.moveNums[row.index]);
+    console.log("CLICKED ROW", row.moveNums);
   }
 }

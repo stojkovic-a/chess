@@ -11,21 +11,21 @@
         <ng-container matColumnDef="whitePlayer">
             <th mat-header-cell *matHeaderCellDef>White Player</th>
             <td mat-cell *matCellDef="let data">
-                {{ data.game.whitePlayer.firstName }} {{ data.game.whitePlayer.lastName }}
+                {{ data.games.whitePlayer.firstName }} {{ data.games.whitePlayer.lastName }}
             </td>
         </ng-container>
 
         <ng-container matColumnDef="blackPlayer">
             <th mat-header-cell *matHeaderCellDef>Black Player</th>
             <td mat-cell *matCellDef="let data">
-                {{ data.game.blackPlayer.firstName }} {{ data.game.blackPlayer.lastName }}
+                {{ data.games.blackPlayer.firstName }} {{ data.games.blackPlayer.lastName }}
             </td>
         </ng-container>
 
         <ng-container matColumnDef="result">
             <th mat-header-cell *matHeaderCellDef>Result</th>
             <td mat-cell *matCellDef="let data">
-                {{ getResult(data.game) }}
+                {{ getResult(data.games) }}
             </td>
         </ng-container>
 

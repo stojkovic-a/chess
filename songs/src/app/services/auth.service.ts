@@ -6,21 +6,26 @@ import { User } from '../models/user';
 import { environment } from 'src/environments/environment.development';
 import { SignUpDto } from '../models/signUpDto';
 import { CookieService } from './cookie-service.service';
+import { Tokens } from '../interfaces';
+import { Token } from '@angular/compiler';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private baseUrl = `${environment.api}/local`;
+  private baseUrl = `${environment.api}auth/local`;
 
   constructor(private http: HttpClient, private cookieService: CookieService) { }
 
-  signIn(email: string, password: string): Observable<User> {
+  signIn(email: string, password: string): Observable<Tokens> {
     const body = { email, password };
-    return this.http.post<User>(`${this.baseUrl}/signin`, body).pipe(
+    return this.http.post<Tokens>(`${this.baseUrl}/signin`, body).pipe(
       map((response) => {
-        const token = response.token;
-        if (token) this.cookieService.setAuthenticationToken(token);
+        const tokens: Tokens = response;
+        if (tokens) {
+          this.cookieService.setTokens(tokens);
+          console.log(this.cookieService.getAccessToken());
+        }
         else {
           //TODO: THROW EXCEP HERE
         }
@@ -35,7 +40,7 @@ export class AuthService {
   }
 
   isLoggedIn(): boolean {
-    const token = this.cookieService.getAuthenticationToken();
+    const token = this.cookieService.getRefreshToken();
 
     return !!token;
   }

@@ -2,6 +2,7 @@
 import { Injectable } from '@angular/core';
 import * as dayjs from 'dayjs';
 import { CookieService as NgxCookieService } from 'ngx-cookie-service';
+import { Tokens } from '../interfaces';
 
 @Injectable({
   providedIn: 'root',
@@ -9,20 +10,30 @@ import { CookieService as NgxCookieService } from 'ngx-cookie-service';
 export class CookieService {
   constructor(private ngxCookieService: NgxCookieService) { }
 
-  setAuthenticationToken(token: string): void {
+  setTokens(tokens: Tokens): void {
     // Set the token as an HTTP cookie with HttpOnly and Secure flags
     // Calculate the expiration date (7 days from now)
-    const expirationDate = dayjs();
-    expirationDate.add(7, 'days')
+    let expirationDate = dayjs();
+    expirationDate.add(20, 'minutes')
 
-    this.ngxCookieService.set('authenticationToken', token, expirationDate.toDate(), '/', "localhost", true, 'Strict');
+
+    this.ngxCookieService.set('accessToken', tokens.access_token,0.01042 , '/', 'localhost', false, 'Lax');
+    expirationDate = dayjs();
+    expirationDate.add(15, "days");
+    this.ngxCookieService.set('refreshToken', tokens.refresh_token,15, '/', 'localhost', false, 'Lax');
+
   }
 
-  getAuthenticationToken(): string | undefined {
-    return this.ngxCookieService.get('authenticationToken');
+  getAccessToken(): string | undefined {
+    return this.ngxCookieService.get('accessToken');
   }
 
-  removeAuthenticationToken(): void {
-    this.ngxCookieService.delete('authenticationToken', '/', "localhost", true);
+  getRefreshToken(): string | undefined {
+    return this.ngxCookieService.get('refreshToken');
+  }
+
+  removeTokens(): void {
+    this.ngxCookieService.delete('accessToken', '/', "localhost:4200", true);
+    this.ngxCookieService.delete('refreshToken', '/', "localhost:4200", true);
   }
 }

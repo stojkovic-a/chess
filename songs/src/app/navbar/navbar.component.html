@@ -9,8 +9,8 @@
             <a mat-button routerLink="/about" class="text-lg">About</a>
             <a mat-button routerLink="/contact" class="text-lg">Contact</a>
         </div>
-        <ng-container *ngIf="(user$ | async) as user; else loginButton">
-            <span class="text-white">Welcome, {{ user.email }}</span>
+        <ng-container *ngIf="(userName$ | async); else loginButton">
+            <span class="text-white">Welcome, {{ userName$ }}</span>
         </ng-container>
         <ng-template #loginButton>
             <a [routerLink]="['/log-in']" class="text-white bg-gradient-to-r

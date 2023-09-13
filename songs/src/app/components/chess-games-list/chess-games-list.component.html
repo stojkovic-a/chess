@@ -1,4 +1,3 @@
-
 <div>
     <app-chess-games-filters></app-chess-games-filters>
     <table mat-table [dataSource]="dataSource" class="" matSort (matSortChange)="sortData($event)">
@@ -18,7 +17,7 @@
 
         <ng-container matColumnDef="result">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Result</th>
-            <td mat-cell *matCellDef="let game" (click)="gameSelected(game)">
+            <td mat-cell *matCellDef="let game">
                 {{ getResult(game) }}
             </td>
         </ng-container>
@@ -49,6 +48,15 @@
             </td>
         </ng-container>
 
+        <ng-container matColumnDef="selectGame">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let game">
+                <button mat-icon-button color="accent" aria-label="icon button select game"
+                    (click)="gameSelected(game)">
+                    <mat-icon>visibility</mat-icon>
+                </button>
+            </td>
+        </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
 
@@ -56,12 +64,12 @@
     </table>
 
     <div>
-    <div *ngIf="isLoading">
-        <mat-progress-bar mode="indeterminate" style="height: 10px;"></mat-progress-bar>
+        <div *ngIf="isLoading">
+            <mat-progress-bar mode="indeterminate" style="height: 10px;"></mat-progress-bar>
+        </div>
     </div>
-</div>
 
-<mat-paginator #paginator [length]="totalData" [pageSizeOptions]="pageSizes" showFirstLastButtons
-    aria-label="Select page">
-</mat-paginator>
+    <mat-paginator #paginator [length]="totalData" [pageSizeOptions]="pageSizes" showFirstLastButtons
+        aria-label="Select page">
+    </mat-paginator>
 </div>
