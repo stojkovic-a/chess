@@ -11,11 +11,13 @@ import { selectFirstName } from '../store/auth/auth.selector';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
-  userName$: Observable<string>;
+  name$: Observable<string>;
   constructor(private store: Store<AppState>) {
-    this.userName$ = this.store.select(selectFirstName);
+
   }
   ngOnInit(): void {
+    this.name$ = this.store.select(selectFirstName);
+    this.name$.subscribe(x => console.log(x));
   }
 
 }

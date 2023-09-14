@@ -1,0 +1,104 @@
+<form (ngSubmit)="onSubmit()" ngNativeValidate>
+    <div>
+        <table mat-table [dataSource]="dataSource" class="">
+
+            <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef>ID</th>
+                <td mat-cell *matCellDef="let users">
+                    {{users.id}}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="firstName">
+                <th mat-header-cell *matHeaderCellDef>First Name</th>
+                <td mat-cell *matCellDef="let users">
+                    {{ users.firstName }}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="lastName">
+                <th mat-header-cell *matHeaderCellDef>Last Name</th>
+                <td mat-cell *matCellDef="let users">
+                    {{ users.lastName}}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="email">
+                <th mat-header-cell *matHeaderCellDef>Email</th>
+                <td mat-cell *matCellDef="let users">
+                    {{ users.email}}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="date">
+                <th mat-header-cell *matHeaderCellDef>Date of birth</th>
+                <td mat-cell *matCellDef="let users">
+                    {{ users.dateOfBirth}}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="representingCountry">
+                <th mat-header-cell *matHeaderCellDef>Country</th>
+                <td mat-cell *matCellDef="let users">
+                    {{ users.representingCountry}}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="isPlayer">
+                <th mat-header-cell *matHeaderCellDef>Is a player</th>
+                <td mat-cell *matCellDef="let users">
+                    {{users.isPlayer}}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="classicalElo">
+                <th mat-header-cell *matHeaderCellDef>Classical Elo</th>
+                <td mat-cell *matCellDef="let users">
+                    {{ users.classicalElo}}
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="rapidElo">
+                <th mat-header-cell *matHeaderCellDef>Rapid Elo</th>
+                <td mat-cell *matCellDef="let users">
+                    {{ users.rapidElo}}
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="blitzElo">
+                <th mat-header-cell *matHeaderCellDef>Blitz Elo</th>
+                <td mat-cell *matCellDef="let users">
+                    {{ users.blitzElo}}
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns;"></tr>
+
+            <tr mat-row (click)="clickedRow(users)" *matRowDef="let users; columns: displayedColumns;"></tr>
+        </table>
+
+        <!-- <div>
+        <div *ngIf="isLoading">
+            <mat-progress-bar mode="indeterminate" style="height: 10px;"></mat-progress-bar>
+        </div>
+    </div> -->
+
+        <mat-paginator #paginator [length]="totalData" [pageSizeOptions]="pageSizes" showFirstLastButtons
+            aria-label="Select page">
+        </mat-paginator>
+
+
+
+        <div class="mb-4">
+            <label for="selectedUserId" class="block text-sm font-medium text-gray-700">Selected Player</label>
+            <input [(ngModel)]="selectedUserId" name="selectedUserId" type="number" required id="selectedUserId"
+                placeholder="User ID"
+                class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500">
+        </div>
+
+        <div class="mb-4">
+            <button type="submit"
+                class="w-full px-4 py-2 font-bold text-white bg-blue-500 rounded-lg hover:bg-blue-600 focus:outline-none focus:bg-blue-600">
+                Delete User
+            </button>
+        </div>
+    </div>
+</form>

@@ -2,17 +2,55 @@ import { createAction, createReducer, on } from "@ngrx/store";
 import * as Actions from './chess.action';
 import { EntityState, createEntityAdapter } from "@ngrx/entity";
 import { state } from "@angular/animations";
-import { Filter, Player } from "../models";
+import { Filter, Player, userDto } from "../models";
 import { Game } from "../models";
 import { Platform } from "@angular/cdk/platform";
 import { act } from "@ngrx/effects";
 import { GamePosNum } from "../interfaces";
+import { Action } from "rxjs/internal/scheduler/Action";
 
 
 export interface PageState extends EntityState<number> {
     pageNumber: number;
     numberOfGames: number
 }
+
+export interface UserState extends EntityState<userDto> {
+    numberOfUsers: number
+    selectedUserId: number
+    deletedUserId: number
+}
+
+const userAdapter = createEntityAdapter<userDto>();
+export const initialUserState: UserState = userAdapter.getInitialState({
+    numberOfUsers: 0,
+    selectedUserId: 0,
+    deletedUserId: 0,
+});
+
+export const userReducer = createReducer(
+    initialUserState,
+    on(Actions.loadNumberOfUsersSuccess, (state, { numberOfUsers }) =>
+    ({
+        ...state,
+        numberOfUsers: numberOfUsers
+    })
+    ),
+    on(Actions.loadUsersPaginationSuccess, (state, { users }) =>
+        userAdapter.setAll(users, state)
+    ),
+    on(Actions.selectUserToDelete, (state, { userId }) =>
+    ({
+        ...state,
+        selectedUserId: userId
+    })
+    ),
+    on(Actions.deleteSelectedUserSuccess, (state, { deletedId }) => 
+    {
+        const updatedState = { ...state, deletedUserId: deletedId };
+        return userAdapter.removeOne(deletedId, updatedState);
+    })
+)
 
 export interface PlayerState extends EntityState<Player> {
     selectedPlayer: Player | null
@@ -24,6 +62,7 @@ export interface GameState extends EntityState<Game> {
     gamesByPositionWithMove: GamePosNum[]
     currentMoveNumber: number
     gameWithPosNumber: number
+    createdGameId: number
 }
 
 export interface FilterState extends EntityState<Filter> {
@@ -119,7 +158,8 @@ export const initialGameState: GameState = gameAdapter.getInitialState({
     gameWithPositions: null,
     gamesByPositionWithMove: [],
     currentMoveNumber: -1,
-    gameWithPosNumber: 0
+    gameWithPosNumber: 0,
+    createdGameId: null
 });
 
 export const pageReducer = createReducer(
@@ -186,6 +226,15 @@ export const gameReducer = createReducer(
     ({
         ...state,
         gameWithPosNumber: numberOfGamesWithPos
+    })
+    ),
+    on(Actions.deleteGameSuccess, (state, { id }) =>
+        gameAdapter.removeOne(id, state)
+    ),
+    on(Actions.createGameSuccess, (state, { id }) =>
+    ({
+        ...state,
+        createdGameId: id
     })
     )
 )

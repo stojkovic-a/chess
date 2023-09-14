@@ -29,7 +29,7 @@ import { ChessGamePreviewComponent } from './components/chess-game-preview/chess
 import { ChessGamesListComponent } from './components/chess-games-list/chess-games-list.component';
 import { PlayerInfoComponent } from './components/player-info/player-info.component';
 import { ChessEffects } from './store/chess.effects';
-import { pageReducer, playerReducer, gameReducer, filterReducer } from './store/chess.reducer';
+import { pageReducer, playerReducer, gameReducer, filterReducer, userReducer } from './store/chess.reducer';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatTableModule } from '@angular/material/table';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -47,6 +47,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { GamesWithPositionComponent } from './components/games-with-position/games-with-position.component';
 import { AdministrationPageComponent } from './components/administration-page/administration-page.component';
 import { AdministrationGameAddComponent } from './components/administration-game-add/administration-game-add.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { AdministrationUserDeleteComponent } from './components/administration-user-delete/administration-user-delete.component';
 
 @NgModule({
   declarations: [
@@ -64,6 +66,7 @@ import { AdministrationGameAddComponent } from './components/administration-game
     GamesWithPositionComponent,
     AdministrationPageComponent,
     AdministrationGameAddComponent,
+    AdministrationUserDeleteComponent,
   ],
   imports: [
     BrowserModule,
@@ -86,8 +89,16 @@ import { AdministrationGameAddComponent } from './components/administration-game
     MatIconModule,
     FormsModule,
     HttpClientModule,
+    MatSnackBarModule,
     // HttpClientXsrfModule.withOptions({ cookieName: 'accessToken', headerName: 'Authorization', }),
-    StoreModule.forRoot<AppState>({ pages: pageReducer, players: playerReducer, games: gameReducer, auth: reducer, filters: filterReducer }),
+    StoreModule.forRoot<AppState>({
+      pages: pageReducer,
+      players: playerReducer,
+      games: gameReducer,
+      auth: reducer,
+      filters: filterReducer,
+      users: userReducer,
+    }),
     StoreDevtoolsModule.instrument({
       maxAge: 25, // Retains last 25 states
       autoPause: true, // Pauses recording actions and state changes when the extension window is not open

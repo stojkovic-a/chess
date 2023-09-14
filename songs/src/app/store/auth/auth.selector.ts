@@ -14,6 +14,11 @@ export const selectFirstName = createSelector(
     authFeature,
     (state) => state.firstName
 )
+
+export const selectRoles = createSelector(
+    authFeature,
+    (state) => state.roles
+)
 // export const selectIsAuth = createSelector(
 //     authFeature,
 //     (state) => !!state?.user?.token,

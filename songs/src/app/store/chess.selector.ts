@@ -1,7 +1,7 @@
 import { createSelector } from "@ngrx/store";
 import { AppState } from "../app.state";
 import { Song } from "../models/song";
-import { Filter, Game, Player } from "../models";
+import { Filter, Game, Player, userDto } from "../models";
 import { PlayerState } from "./chess.reducer";
 import { filter } from "rxjs";
 import { BlockParameter } from "@angular/compiler";
@@ -144,4 +144,38 @@ export const selectMoveNumber = createSelector(
 export const selectNumberOfGamesWithPos = createSelector(
     selectGameFeature,
     (game) => game.gameWithPosNumber
+)
+
+export const selectCreatedGameId = createSelector(
+    selectGameFeature,
+    (game) => game.createdGameId
+)
+
+export const selectUserFeature = createSelector(
+    (state: AppState) => state.users,
+    (users) => users
+)
+
+export const selectUsersPagination = createSelector(
+    selectUserFeature,
+    (users) => users.ids
+        .map(id =>
+            users.entities[id]
+        )
+        .filter(user =>
+            user != null
+        )
+        .map(user =>
+            <userDto>user
+        )
+)
+
+export const selectNumberOfUsers = createSelector(
+    selectUserFeature,
+    (users) => users.numberOfUsers
+)
+
+export const selectDeletedUser = createSelector(
+    selectUserFeature,
+    (users) => users.deletedUserId
 )

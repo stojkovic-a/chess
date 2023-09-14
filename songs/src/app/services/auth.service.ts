@@ -8,6 +8,7 @@ import { SignUpDto } from '../models/signUpDto';
 import { CookieService } from './cookie-service.service';
 import { Tokens } from '../interfaces';
 import { Token } from '@angular/compiler';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -15,7 +16,11 @@ import { Token } from '@angular/compiler';
 export class AuthService {
   private baseUrl = `${environment.api}auth/local`;
 
-  constructor(private http: HttpClient, private cookieService: CookieService) { }
+  constructor(
+    private http: HttpClient,
+    private cookieService: CookieService,
+    private router: Router,
+  ) { }
 
   signIn(email: string, password: string): Observable<Tokens> {
     const body = { email, password };
@@ -24,10 +29,10 @@ export class AuthService {
         const tokens: Tokens = response;
         if (tokens) {
           this.cookieService.setTokens(tokens);
-          console.log(this.cookieService.getAccessToken());
+          this.router.navigateByUrl('/');
         }
         else {
-          //TODO: THROW EXCEP HERE
+          //TODO: THROW EXCEP HERE SNACKBAR
         }
         return response;
       })

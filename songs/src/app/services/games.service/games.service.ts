@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Game } from '../../models';
+import { Game, GameCreationDto } from '../../models';
 import { environment } from 'src/environments/environment.development';
 import { AppState } from 'src/app/app.state';
 import { Store } from '@ngrx/store';
@@ -102,5 +102,13 @@ export class GamesService {
     return this.httpClient.post<number>(environment.api + 'position-to-game/positionNum', {
       params
     });
+  }
+
+  deleteGame(id: number) {
+    return this.httpClient.delete(environment.api + `game/${id}`);
+  }
+
+  createGame(dto: GameCreationDto) {
+    return this.httpClient.post<number>(environment.api + `game`, dto);
   }
 }

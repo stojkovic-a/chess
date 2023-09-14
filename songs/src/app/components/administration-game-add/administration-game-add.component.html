@@ -1,0 +1,54 @@
+<form (ngSubmit)="onSubmit()" ngNativeValidate>
+    <div class="mb-4">
+        <label for="whitePlayerId" class="block text-sm font-medium text-gray-700">White Player ID</label>
+        <input [(ngModel)]="game.whitePlayerId" name="whitePlayerId" type="number" required id="whitePlayerId"
+            placeholder="Player ID" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500">
+    </div>
+    <div class="mb-4">
+        <label for="blackPlayerId" class="block text-sm font-medium text-gray-700">Black Plyer ID</label>
+        <input [(ngModel)]="game.blackPlayerId" name="blackPlayerId" type="number" required id="blackPlayerId"
+            placeholder="Player ID" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500">
+    </div>
+    <div class="mb-4">
+        <label for="winnerId" class="block text-sm font-medium text-gray-700">Winner ID (0 for draw) </label>
+        <input [(ngModel)]="game.winnerId" name="winnerId" type="number" required id="winnerId" placeholder="Winned ID"
+            class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500">
+    </div>
+    <div class="mb-4">
+        <label for="startingTime" class="block text-sm font-medium text-gray-700">Starting Time</label>
+        <input [(ngModel)]="game.startingTime" name="startingTime" type="number" required id="startingTime"
+            placeholder="Starting Time"
+            class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500">
+    </div>
+    <div class="mb-4">
+        <label for="increment" class="block text-sm font-medium text-gray-700">Increment</label>
+        <input [(ngModel)]="game.increment" name="increment" type="number" required id="increment"
+            placeholder="Increment" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500">
+    </div>
+    <div class="mb-4">
+        <label for="tournamentId" class="block text-sm font-medium text-gray-700">Tournamnt ID</label>
+        <input [(ngModel)]="game.tournamentId" name="tournamentId" type="number" required id="tournamentId"
+            placeholder="Tournament ID"
+            class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500">
+    </div>
+    <div class="mb-4">
+        <label for="date" class="block text-sm font-medium text-gray-700">Date</label>
+        <input [(ngModel)]="game.gameDate" name="date" type="date" required id="date" placeholder="Date"
+            class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500">
+    </div>
+    <div class="mb-4">
+        <label for="gamePGN" class="block text-sm font-medium text-gray-700">Portable Game Notation</label>
+        <textarea [(ngModel)]="gamePgnAsString" matInput placeholder="Ex. It makes me feel..." name="gamePGN" required
+            id="gamePGN" placeholder="PGN"
+            class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500"></textarea>
+        <!-- <input [(ngModel)]="user.email" name="email" type="email" required id="email" placeholder="Email" -->
+    </div>
+
+    <div class="mb-4">
+        <button type="submit"
+            class="w-full px-4 py-2 font-bold text-white bg-blue-500 rounded-lg hover:bg-blue-600 focus:outline-none focus:bg-blue-600">
+            Add Game
+        </button>
+    </div>
+
+</form>

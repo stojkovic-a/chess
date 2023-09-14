@@ -8,6 +8,7 @@ import { AppState } from "src/app/app.state";
 import { PlayerService } from "../services/player.service/player.service";
 import { FilterService } from "../services/filter.service/filter.service";
 import { Filter } from "../models";
+import { UserService } from "../services/user.service/user.service";
 
 @Injectable()
 export class ChessEffects {
@@ -16,7 +17,7 @@ export class ChessEffects {
         private gamesService: GamesService,
         private playerService: PlayerService,
         private filterService: FilterService,
-
+        private userService: UserService,
     ) { }
 
     loadGames$ = createEffect(() =>
@@ -128,6 +129,88 @@ export class ChessEffects {
         )
     )
 
+    deleteGame$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(ChessActions.deleteGame),
+            mergeMap((action) =>
+                this.gamesService.deleteGame(action.id).pipe(
+                    map((result) => {
+                        console.log(result);
+                        return ChessActions.deleteGameSuccess({ id: action.id })
+                    }
+                    ),
+                    catchError((error) =>
+                        of({ type: 'delete error' })
+                    )
+                )
+            )
+        )
+    )
 
+    createGame$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(ChessActions.createGame),
+            mergeMap((action) =>
+                this.gamesService.createGame(action.gameCreationDto).pipe(
+                    map((result) => {
+                        if (result)
+                            return ChessActions.createGameSuccess({ id: result })
+                        throw new Error("create erro");
+                    }
+                    ),
+                    catchError((error) =>
+                        of({ type: 'create error' })
+                    )
+                )
+            )
+        )
+    )
 
+    loadNumberOfUser$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(ChessActions.loadNumberOfUsers),
+            mergeMap(() =>
+                this.userService.getNumberOfUsers().pipe(
+                    map((result) => {
+                        return ChessActions.loadNumberOfUsersSuccess({ numberOfUsers: result })
+                    }),
+                    catchError((error) =>
+                        of({ type: 'load error' })
+                    )
+                )
+            )
+        )
+    )
+
+    loadUsersPagination$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(ChessActions.loadUsersPagination),
+            mergeMap((action) =>
+                this.userService.getUsersPaging(action.pageSize, action.pageIndex).pipe(
+                    map((result) => {
+                        return ChessActions.loadUsersPaginationSuccess({ users: result })
+                    }),
+                    catchError((error) =>
+                        of({ type: 'load error' })
+                    )
+                )
+            )
+        )
+    )
+
+    deleteUser$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(ChessActions.deleteSelectedUser),
+            mergeMap((action) =>
+                this.userService.deleteUser(action.userId).pipe(
+                    map((result) => {
+                        return ChessActions.deleteSelectedUserSuccess({ deletedId: result })
+                    }),
+                    catchError((error) =>
+                        of({ type: 'delete erro' })
+                    )
+                )
+            )
+        )
+    )
 }

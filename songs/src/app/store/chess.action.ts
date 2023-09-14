@@ -1,5 +1,5 @@
 import { createAction, props } from "@ngrx/store";
-import { Filter, Game, Player, Tournament } from "../models";
+import { Filter, Game, GameCreationDto, Player, Tournament, userDto } from "../models";
 import { GamePosNum } from "../interfaces";
 
 export const loadGames = createAction(
@@ -122,4 +122,58 @@ export const loadNumberOfGamesWithPos = createAction(
 export const loadNumberOfGamesWithPosSuccess = createAction(
     "Load Number Of Games With Pos Success",
     props<{ numberOfGamesWithPos: number }>()
+)
+
+export const deleteGame = createAction(
+    "Delete Game",
+    props<{ id: number }>()
+)
+
+export const deleteGameSuccess = createAction(
+    "Delete Game Success",
+    props<{ id: number }>()
+)
+
+export const createGame = createAction(
+    "Create Game",
+    props<{ gameCreationDto: GameCreationDto }>()
+)
+
+export const createGameSuccess = createAction(
+    "Create Game Success",
+    props<{ id: number }>()
+)
+
+export const loadNumberOfUsers = createAction(
+    "Load Number Of Users",
+)
+
+export const loadNumberOfUsersSuccess = createAction(
+    "Load Number Of Users Success",
+    props<{ numberOfUsers: number }>()
+)
+
+export const loadUsersPagination = createAction(
+    "Load Users Pagination",
+    props<{ pageSize: number, pageIndex: number }>()
+)
+
+export const loadUsersPaginationSuccess = createAction(
+    "Load Users Pagination Success",
+    props<{ users: userDto[] }>()
+)
+
+export const selectUserToDelete = createAction(
+    "Select User To Delete",
+    props<{ userId: number }>()
+)
+
+export const deleteSelectedUser = createAction(
+    "Delete Selected User",
+    props<{ userId: number }>()
+)
+
+export const deleteSelectedUserSuccess = createAction(
+    "Delete Selected User Success",
+    props<{ deletedId: number }>()
 )

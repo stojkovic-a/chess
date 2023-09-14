@@ -13,6 +13,8 @@ import { DateService } from 'src/app/services/date.service/date.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { MatSort, Sort } from '@angular/material/sort';
+import { Role } from 'src/app/enums';
+import { selectRoles } from 'src/app/store/auth/auth.selector';
 
 @Component({
   selector: 'app-chess-games-list',
@@ -27,8 +29,10 @@ export class ChessGamesListComponent implements OnInit {
     'timeControl',
     'date',
     'tournament',
-    'selectGame'
+    'selectGame',
+    'deleteGame'
   ];
+  isAdmin: boolean = false;
 
   whitePlayerFilter$: Observable<string> = of("");
   blackPlayerFilter$: Observable<string> = of("");
@@ -122,7 +126,11 @@ export class ChessGamesListComponent implements OnInit {
 
 
   ngOnInit(): void {
-
+    this.store.select(selectRoles)
+      .subscribe((roles) => {
+        this.isAdmin = roles.includes(Role.Admin);
+        console.log(this.isAdmin);
+      })
     this.store.dispatch(ChessActions.loadNumberOfGames());
     this.store.select(selectNumberOfGames)
       .subscribe((num) => {
@@ -190,5 +198,11 @@ export class ChessGamesListComponent implements OnInit {
   gameSelected(game: Game) {
     this.store.dispatch(ChessActions.selectGame({ game }));
     this.store.dispatch(ChessActions.setCurrentGameMove({ moveNum: -1 }));
+  }
+
+  deleteGame(game: Game) {
+    this.store.dispatch(ChessActions.deleteGame({ id: game.id }));
+    this.ngAfterViewInit();
+    this.totalData--;
   }
 }
