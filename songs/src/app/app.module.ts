@@ -49,6 +49,7 @@ import { AdministrationPageComponent } from './components/administration-page/ad
 import { AdministrationGameAddComponent } from './components/administration-game-add/administration-game-add.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { AdministrationUserDeleteComponent } from './components/administration-user-delete/administration-user-delete.component';
+import { UserTableComponent } from './components/user-table/user-table.component';
 
 @NgModule({
   declarations: [
@@ -67,6 +68,7 @@ import { AdministrationUserDeleteComponent } from './components/administration-u
     AdministrationPageComponent,
     AdministrationGameAddComponent,
     AdministrationUserDeleteComponent,
+    UserTableComponent,
   ],
   imports: [
     BrowserModule,

@@ -37,7 +37,27 @@ const authReducer = createReducer(
     error: null,
     roles: jwtDecode<{ roles: Role[] }>(tokens.access_token).roles,
   })),
-  on(fromAuth.signInFailure, (state, { error }) => ({ ...state, loading: false, error }))
+  on(fromAuth.signInFailure, (state, { error }) => ({ ...state, loading: false, error })),
+  on(fromAuth.loadUserFromCookie, (state, { tokens, firstName, roles }) =>
+  ({
+    ...state,
+    tokens: tokens,
+    firstName: firstName,
+    roles: roles,
+  })
+  ),
+  on(fromAuth.refreshTokensSuccess, (state, { tokens }) =>
+  ({
+    ...state,
+    tokens: tokens
+  })
+  ),
+  on(fromAuth.signOut, (state) =>
+  ({
+    ...state,
+    initialState
+  })
+  )
 );
 
 export function reducer(state: AuthState | undefined, action: any) {

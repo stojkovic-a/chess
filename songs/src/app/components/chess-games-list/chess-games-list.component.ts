@@ -30,7 +30,6 @@ export class ChessGamesListComponent implements OnInit {
     'date',
     'tournament',
     'selectGame',
-    'deleteGame'
   ];
   isAdmin: boolean = false;
 
@@ -137,6 +136,10 @@ export class ChessGamesListComponent implements OnInit {
         this.totalData = num;
         this.cd.detectChanges();
       });
+
+      if(this.isAdmin){
+        this.displayedColumns.push('deleteGame');
+      }
   }
 
   getResult(game: Game): string {

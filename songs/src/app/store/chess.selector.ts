@@ -179,3 +179,8 @@ export const selectDeletedUser = createSelector(
     selectUserFeature,
     (users) => users.deletedUserId
 )
+
+export const selectSelectedUserdId = createSelector(
+    selectUserFeature,
+    (users) => users.selectedUserId
+)

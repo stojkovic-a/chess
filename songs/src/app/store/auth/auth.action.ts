@@ -2,6 +2,7 @@ import { createAction, props } from '@ngrx/store';
 import { User } from '../../models/user'; // Define your User model
 import { SignUpDto } from 'src/app/models/signUpDto';
 import { Tokens } from 'src/app/interfaces';
+import { Role } from 'src/app/enums';
 
 // Action for signing in
 export const signIn = createAction(
@@ -11,7 +12,7 @@ export const signIn = createAction(
 
 export const signInSuccess = createAction(
     '[Auth] Sign In Success',
-    props<{ tokens:Tokens }>()
+    props<{ tokens: Tokens }>()
 );
 
 export const signInFailure = createAction(
@@ -34,3 +35,22 @@ export const signUpFailure = createAction(
     '[Auth] Sign Up Failure',
     props<{ error: string }>()
 );
+
+export const loadUserFromCookie = createAction(
+    '[Auth] Load User From Cookie',
+    props<{ tokens: Tokens, firstName: string, roles: Role[] }>()
+)
+
+export const refreshTokens = createAction(
+    '[Auth] Refresh Tokens',
+    props<{ refreshToken: string }>()
+)
+
+export const refreshTokensSuccess = createAction(
+    '[Auth] Refresh Tokens Success',
+    props<{ tokens: Tokens }>()
+)
+
+export const signOut=createAction(
+    '[Auth] SignOut'
+)

@@ -13,13 +13,10 @@ export class CookieService {
   setTokens(tokens: Tokens): void {
     // Set the token as an HTTP cookie with HttpOnly and Secure flags
     // Calculate the expiration date (7 days from now)
-    let expirationDate = dayjs();
-    expirationDate.add(20, 'minutes')
+   
 
 
     this.ngxCookieService.set('accessToken', tokens.access_token,0.01042 , '/', 'localhost', false, 'Lax');
-    expirationDate = dayjs();
-    expirationDate.add(15, "days");
     this.ngxCookieService.set('refreshToken', tokens.refresh_token,15, '/', 'localhost', false, 'Lax');
 
   }
