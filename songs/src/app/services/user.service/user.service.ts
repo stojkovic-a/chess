@@ -23,4 +23,8 @@ export class UserService {
   deleteUser(id: number) {
     return this.httpClient.delete<number>(environment.api + `user/${id}`);
   }
+
+  updateUser(user: userDto) {
+    return this.httpClient.put<number>(environment.api + `user/${user.id}`, user);
+  }
 }

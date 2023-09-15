@@ -6,7 +6,7 @@ import { Store } from '@ngrx/store';
 import { Observable, catchError, map, of, startWith, switchMap, tap } from 'rxjs';
 import { AppState } from 'src/app/app.state';
 import { userDto } from 'src/app/models';
-import { deleteSelectedUser, loadNumberOfUsers, loadUsersPagination, selectUserToDelete } from 'src/app/store/chess.action';
+import { deleteSelectedUser, loadNumberOfUsers, loadUsersPagination, selectUser } from 'src/app/store/chess.action';
 import { selectDeletedUser, selectNumberOfUsers, selectSelectedUserdId, selectUsersPagination } from 'src/app/store/chess.selector';
 
 @Component({
@@ -23,7 +23,7 @@ export class AdministrationUserDeleteComponent implements OnInit {
   ) {
   }
   onSubmit() {
-    this.store.dispatch(selectUserToDelete({ userId: this.selectedUserId }));
+    // this.store.dispatch(selectUserToDelete({ userId: this.selectedUserId }));
     this.store.dispatch(deleteSelectedUser({ userId: this.selectedUserId }));
     this.store.select(selectDeletedUser)
       .subscribe(userId => {

@@ -3,11 +3,11 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTableDataSource } from '@angular/material/table';
 import { Store } from '@ngrx/store';
-import { Observable, catchError, map, of, startWith, switchMap, tap } from 'rxjs';
+import { Observable, catchError, map, merge, of, startWith, switchMap, tap } from 'rxjs';
 import { AppState } from 'src/app/app.state';
 import { userDto } from 'src/app/models';
-import { loadNumberOfUsers, loadUsersPagination, selectUserToDelete } from 'src/app/store/chess.action';
-import { selectNumberOfUsers, selectUsersPagination } from 'src/app/store/chess.selector';
+import { loadNumberOfUsers, loadUsersPagination, selectUser } from 'src/app/store/chess.action';
+import { selectDeletedUser, selectNumberOfUsers, selectUsersPagination } from 'src/app/store/chess.selector';
 
 @Component({
   selector: 'app-user-table',
@@ -26,7 +26,6 @@ export class UserTableComponent implements OnInit {
 
   selectedUserId: number;
 
-  pageSizes = [10];
   displayedColumns: string[] = [
     "id",
     "firstName",
@@ -73,6 +72,14 @@ export class UserTableComponent implements OnInit {
         this.paginator.length = this.totalData;
         this.dataSource = new MatTableDataSource(this.users);
       });
+
+    merge(
+      this.store.select(selectDeletedUser),
+      this.store.select(selectDeletedUser)
+    ).subscribe(() => {
+      this.store.dispatch(loadNumberOfUsers());
+      this.getTableData$(this.paginator.pageIndex, this.paginator.pageSize);
+    })
   }
 
   getTableData$(pageNumber: number, pageSize: number): Observable<userDto[]> {
@@ -98,7 +105,7 @@ export class UserTableComponent implements OnInit {
   }
 
   clickedRow(user) {
-    this.store.dispatch(selectUserToDelete({ userId: user.id }));
+    this.store.dispatch(selectUser({ userId: user.id }));
     this.selectedUserId = user.id;
   }
 }

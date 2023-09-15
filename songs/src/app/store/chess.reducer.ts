@@ -2,13 +2,98 @@ import { createAction, createReducer, on } from "@ngrx/store";
 import * as Actions from './chess.action';
 import { EntityState, createEntityAdapter } from "@ngrx/entity";
 import { state } from "@angular/animations";
-import { Filter, Player, userDto } from "../models";
+import { Filter, Player, Tournament, userDto } from "../models";
 import { Game } from "../models";
 import { Platform } from "@angular/cdk/platform";
 import { act } from "@ngrx/effects";
 import { GamePosNum } from "../interfaces";
 import { Action } from "rxjs/internal/scheduler/Action";
 
+
+export interface TournamentState extends EntityState<Tournament> {
+    numberOfTournaments: number
+    selectedTournamentId: number
+    createdTournamentId: number
+    deletedTournamentId: number
+    updatedTournamentId: number
+    addedPlayerTournament: { playerId: number, tournamentId: number }
+    removedPlayerTournament: { playerId: number, tournamentId: number }
+    addedGameTournament: { gameId: number, tournamentId: number }
+    removedGameTournament: { gameId: number, tournamentId: number }
+}
+const tournamentAdapter = createEntityAdapter<Tournament>();
+
+export const initialTournamentState: TournamentState = tournamentAdapter.getInitialState({
+    numberOfTournaments: 0,
+    selectedTournamentId: 0,
+    createdTournamentId: 0,
+    deletedTournamentId: 0,
+    updatedTournamentId: 0,
+    addedPlayerTournament: { playerId: 0, tournamentId: 0 },
+    removedPlayerTournament: { playerId: 0, tournamentId: 0 },
+    addedGameTournament: { gameId: 0, tournamentId: 0 },
+    removedGameTournament: { gameId: 0, tournamentId: 0 },
+})
+
+export const tournamentReducer = createReducer(
+    initialTournamentState,
+    on(Actions.loadNumberOfTournamentsSuccess, (state, { numberOfTournaments }) =>
+    ({
+        ...state,
+        numberOfTournaments: numberOfTournaments
+    })
+    ),
+    on(Actions.loadTournamentsPaginationSuccess, (state, { tournamets }) =>
+        tournamentAdapter.setAll(tournamets, state)
+    ),
+    on(Actions.selectTournament, (state, { tournamentId }) =>
+    ({
+        ...state,
+        selectedTournamentId: tournamentId
+    })
+    ),
+    on(Actions.CreateTournamentSuccess, (state, { id }) =>
+    ({
+        ...state,
+        createdTournamentId: id
+    })
+    ),
+    on(Actions.deleteSelectedTournamentSuccess, (state, { deletedId }) => {
+        const updatedState = { ...state, deletedTournamentId: deletedId };
+        return tournamentAdapter.removeOne(deletedId, updatedState);
+    }),
+    on(Actions.updateTournamentSuccess, (state, { tournamentId }) =>
+    ({
+        ...state,
+        updatedTournamentId: tournamentId
+    })
+    ),
+    on(Actions.addPlayerToTournamentSuccess, (state, { playerId, tournamentId }) =>
+    ({
+        ...state,
+        addedPlayerTournament: { playerId: playerId, tournamentId: tournamentId }
+    })
+    ),
+    on(Actions.removePlayerFromTournamentSuccess, (state, { playerId, tournamentId }) =>
+    ({
+        ...state,
+        removedParticipation: { playerId: playerId, tournamentId: tournamentId }
+    })
+    ),
+    on(Actions.addGameToTournamentSuccess, (state, { tournamentId, gameId }) =>
+    ({
+        ...state,
+        addedGameTournament: { gameId: gameId, tournamentId: tournamentId }
+    })
+    ),
+    on(Actions.removeGameFromTournamentSuccess, (state, { tournamentId, gameId }) =>
+    ({
+        ...state,
+        removedGameTournament: { gameId: gameId, tournamentId: tournamentId }
+    })
+    ),
+
+)
 
 export interface PageState extends EntityState<number> {
     pageNumber: number;
@@ -19,13 +104,16 @@ export interface UserState extends EntityState<userDto> {
     numberOfUsers: number
     selectedUserId: number
     deletedUserId: number
+    updatedUserId: number
 }
+
 
 const userAdapter = createEntityAdapter<userDto>();
 export const initialUserState: UserState = userAdapter.getInitialState({
     numberOfUsers: 0,
     selectedUserId: 0,
     deletedUserId: 0,
+    updatedUserId: 0,
 });
 
 export const userReducer = createReducer(
@@ -39,17 +127,22 @@ export const userReducer = createReducer(
     on(Actions.loadUsersPaginationSuccess, (state, { users }) =>
         userAdapter.setAll(users, state)
     ),
-    on(Actions.selectUserToDelete, (state, { userId }) =>
+    on(Actions.selectUser, (state, { userId }) =>
     ({
         ...state,
         selectedUserId: userId
     })
     ),
-    on(Actions.deleteSelectedUserSuccess, (state, { deletedId }) => 
-    {
+    on(Actions.deleteSelectedUserSuccess, (state, { deletedId }) => {
         const updatedState = { ...state, deletedUserId: deletedId };
         return userAdapter.removeOne(deletedId, updatedState);
+    }),
+    on(Actions.updateUserSuccess, (state, { userId }) =>
+    ({
+        ...state,
+        updatedUserId: userId
     })
+    )
 )
 
 export interface PlayerState extends EntityState<Player> {

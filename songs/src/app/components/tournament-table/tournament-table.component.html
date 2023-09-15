@@ -1,0 +1,60 @@
+<div>
+    <table mat-table [dataSource]="dataSource" class="">
+
+        <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef>ID</th>
+            <td mat-cell *matCellDef="let tournament">
+                {{tournament.id}}
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="tournamentName">
+            <th mat-header-cell *matHeaderCellDef>Tournament Name</th>
+            <td mat-cell *matCellDef="let tournament">
+                {{ tournament.tournamentName }}
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="startingDate">
+            <th mat-header-cell *matHeaderCellDef>Starting Date</th>
+            <td mat-cell *matCellDef="let tournament">
+                {{ tournament.startingDate}}
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="endingDate">
+            <th mat-header-cell *matHeaderCellDef>Ending Date</th>
+            <td mat-cell *matCellDef="let tournament">
+                {{ tournament.endingDate}}
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="gamesType">
+            <th mat-header-cell *matHeaderCellDef>Games Type</th>
+            <td mat-cell *matCellDef="let tournament">
+                {{ tournament.gamesType}}
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="minElo">
+            <th mat-header-cell *matHeaderCellDef>Min Elo</th>
+            <td mat-cell *matCellDef="let tournament">
+                {{ tournament.minElo}}
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns;"></tr>
+
+        <tr mat-row (click)="clickedRow(users)" *matRowDef="let users; columns: displayedColumns;"></tr>
+    </table>
+
+    <!-- <div>
+    <div *ngIf="isLoading">
+        <mat-progress-bar mode="indeterminate" style="height: 10px;"></mat-progress-bar>
+    </div>
+</div> -->
+
+    <mat-paginator #paginator [length]="totalData" [pageSizeOptions]="pageSize" showFirstLastButtons
+        aria-label="Select page">
+    </mat-paginator>
+</div>

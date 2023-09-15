@@ -28,7 +28,7 @@ export class AdministrationGameAddComponent implements OnInit {
   }
 
   onSubmit() {
-
+    console.log(this.game.gameDate);
     this.game.addPgn(this.gamePgnAsString);
     this.store.dispatch(createGame({ gameCreationDto: this.game }));
     this.store.select(selectCreatedGameId)

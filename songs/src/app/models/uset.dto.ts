@@ -9,4 +9,5 @@ export interface userDto {
     classicalElo: number,
     rapidElo: number,
     blitzElo: number,
+    isAdmin: boolean,
 }

@@ -1,0 +1,134 @@
+<div>
+    <form (ngSubmit)="updateTournament()" ngNativeValidate>
+        <div class="mb-4">
+            <label for="tournamentUpdateId" class="block text-sm font-medium text-gray-700">Tournament ID</label>
+            <input [(ngModel)]="tournament.id" name="tournamentUpdateId" type="number" required id="tournamentUpdateId"
+                placeholder="ID" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500">
+        </div>
+        <div class="mb-4">
+            <label for="tournamentName" class="block text-sm font-medium text-gray-700">Tournament Name</label>
+            <input [(ngModel)]="tournament.tournamentName" name="tournamentName" type="text" required
+                id="tournamentName" placeholder="Tournament Name"
+                class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500">
+        </div>
+        <div class="mb-4">
+            <label for="startingDate" class="block text-sm font-medium text-gray-700">Starting Date</label>
+            <input [(ngModel)]="startDateFormat" name="startingDate" type="date" required id="startingDate"
+                placeholder="Starting Date"
+                class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500">
+        </div>
+        <div class="mb-4">
+            <label for="endingDate" class="block text-sm font-medium text-gray-700">Ending Date</label>
+            <input [(ngModel)]="endDateFormat" name="endingDate" type="date" id="endingDate" placeholder="Ending Date"
+                class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500">
+        </div>
+        <div class="mb-4">
+            <label for="gamesType" class="block text-sm font-medium text-gray-700">Games Type</label>
+            <input [(ngModel)]="gamesType" name="gamesType" type="text" required id="gamesType" placeholder="Type"
+                class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500">
+        </div>
+        <div class="mb-4">
+            <label for="minElo" class="block text-sm font-medium text-gray-700">Min Elo</label>
+            <input [(ngModel)]="tournament.minElo" name="minElo" type="number" required id="minElo" placeholder="minElo"
+                class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500">
+        </div>
+
+        <div class="mb-4">
+            <button type="submit"
+                class="w-full px-4 py-2 font-bold text-white bg-blue-500 rounded-lg hover:bg-blue-600 focus:outline-none focus:bg-blue-600">
+                Update Tournament
+            </button>
+        </div>
+
+    </form>
+
+    <form (ngSubmit)="addPlayer()" ngNativeValidate>
+
+        <div class="mb-4">
+            <label for="tournamentAddPlayerId" class="block text-sm font-medium text-gray-700">Tournament ID</label>
+            <input [(ngModel)]="tournament.id" name="tournamentAddPlayerId" type="number" required
+                id="tournamentAddPlayerId" placeholder="ID"
+                class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500">
+        </div>
+
+        <div class="mb-4">
+            <label for="playerAddId" class="block text-sm font-medium text-gray-700">Player ID</label>
+            <input [(ngModel)]="playerAddId" name="playerAddId" type="number" required id="playerAddId" placeholder="ID"
+                class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500">
+        </div>
+
+        <div class="mb-4">
+            <button type="submit"
+                class="w-full px-4 py-2 font-bold text-white bg-blue-500 rounded-lg hover:bg-blue-600 focus:outline-none focus:bg-blue-600">
+                Add Player To Tournament
+            </button>
+        </div>
+    </form>
+
+    <form (ngSubmit)="removePlayer()" ngNativeValidate>
+
+        <div class="mb-4">
+            <label for="tournamentRemovePlayerId" class="block text-sm font-medium text-gray-700">Tournament ID</label>
+            <input [(ngModel)]="tournament.id" name="tournamentRemovePlayerId" type="number" required
+                id="tournamentRemovePlayerId" placeholder="ID"
+                class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500">
+        </div>
+
+        <div class="mb-4">
+            <label for="playerRemoveId" class="block text-sm font-medium text-gray-700">Player ID</label>
+            <input [(ngModel)]="playerRemoveId" name="playerRemoveId" type="number" required id="playerRemoveId"
+                placeholder="ID" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500">
+        </div>
+
+        <div class="mb-4">
+            <button type="submit"
+                class="w-full px-4 py-2 font-bold text-white bg-blue-500 rounded-lg hover:bg-blue-600 focus:outline-none focus:bg-blue-600">
+                Remove Player From Tournament
+            </button>
+        </div>
+    </form>
+
+    <form (ngSubmit)="addGame()" ngNativeValidate>
+        <div class="mb-4">
+            <label for="tournamentAddGameId" class="block text-sm font-medium text-gray-700">Tournament ID</label>
+            <input [(ngModel)]="tournament.id" name="tournamentAddGameId" type="number" required
+                id="tournamentAddGameId" placeholder="ID"
+                class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500">
+        </div>
+
+        <div class="mb-4">
+            <label for="gameAddId" class="block text-sm font-medium text-gray-700">Game ID</label>
+            <input [(ngModel)]="gameAddId" name="gameAddId" type="number" required id="gameAddId" placeholder="ID"
+                class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500">
+        </div>
+
+        <div class="mb-4">
+            <button type="submit"
+                class="w-full px-4 py-2 font-bold text-white bg-blue-500 rounded-lg hover:bg-blue-600 focus:outline-none focus:bg-blue-600">
+                Add Game To Tournament
+            </button>
+        </div>
+    </form>
+
+    <form (ngSubmit)="removeGame()" ngNativeValidate>
+        <div class="mb-4">
+            <label for="tournamentRemoveGameId" class="block text-sm font-medium text-gray-700">Tournament ID</label>
+            <input [(ngModel)]="tournament.id" name="tournamentRemoveGameId" type="number" required
+                id="tournamentRemoveGameId" placeholder="ID"
+                class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500">
+        </div>
+
+        <div class="mb-4">
+            <label for="gameRemoveId" class="block text-sm font-medium text-gray-700">Game ID</label>
+            <input [(ngModel)]="gameRemoveId" name="gameRemoveId" type="number" required id="gameRemoveId"
+                placeholder="ID" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500">
+        </div>
+
+        <div class="mb-4">
+            <button type="submit"
+                class="w-full px-4 py-2 font-bold text-white bg-blue-500 rounded-lg hover:bg-blue-600 focus:outline-none focus:bg-blue-600">
+                Remove Game From Tournament
+            </button>
+        </div>
+    </form>
+</div>

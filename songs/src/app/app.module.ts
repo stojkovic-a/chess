@@ -29,7 +29,7 @@ import { ChessGamePreviewComponent } from './components/chess-game-preview/chess
 import { ChessGamesListComponent } from './components/chess-games-list/chess-games-list.component';
 import { PlayerInfoComponent } from './components/player-info/player-info.component';
 import { ChessEffects } from './store/chess.effects';
-import { pageReducer, playerReducer, gameReducer, filterReducer, userReducer } from './store/chess.reducer';
+import { pageReducer, playerReducer, gameReducer, filterReducer, userReducer, tournamentReducer } from './store/chess.reducer';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatTableModule } from '@angular/material/table';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -50,6 +50,11 @@ import { AdministrationGameAddComponent } from './components/administration-game
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { AdministrationUserDeleteComponent } from './components/administration-user-delete/administration-user-delete.component';
 import { UserTableComponent } from './components/user-table/user-table.component';
+import { AdministrationUserUpdateComponent } from './components/administration-user-update/administration-user-update.component';
+import { TournamentTableComponent } from './components/tournament-table/tournament-table.component';
+import { AdministrationTournamentAddComponent } from './components/administration-tournament-add/administration-tournament-add.component';
+import { AdministrationTournamentDeleteComponent } from './components/administration-tournament-delete/administration-tournament-delete.component';
+import { AdministrationTournamentUpdateComponent } from './components/administration-tournament-update/administration-tournament-update.component';
 
 @NgModule({
   declarations: [
@@ -69,6 +74,11 @@ import { UserTableComponent } from './components/user-table/user-table.component
     AdministrationGameAddComponent,
     AdministrationUserDeleteComponent,
     UserTableComponent,
+    AdministrationUserUpdateComponent,
+    TournamentTableComponent,
+    AdministrationTournamentAddComponent,
+    AdministrationTournamentDeleteComponent,
+    AdministrationTournamentUpdateComponent,
   ],
   imports: [
     BrowserModule,
@@ -100,6 +110,7 @@ import { UserTableComponent } from './components/user-table/user-table.component
       auth: reducer,
       filters: filterReducer,
       users: userReducer,
+      tournament: tournamentReducer,
     }),
     StoreDevtoolsModule.instrument({
       maxAge: 25, // Retains last 25 states

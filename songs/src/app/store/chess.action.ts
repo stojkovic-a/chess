@@ -163,7 +163,7 @@ export const loadUsersPaginationSuccess = createAction(
     props<{ users: userDto[] }>()
 )
 
-export const selectUserToDelete = createAction(
+export const selectUser = createAction(
     "Select User To Delete",
     props<{ userId: number }>()
 )
@@ -176,4 +176,108 @@ export const deleteSelectedUser = createAction(
 export const deleteSelectedUserSuccess = createAction(
     "Delete Selected User Success",
     props<{ deletedId: number }>()
+)
+
+export const updateUser = createAction(
+    "Update User",
+    props<{ user: userDto }>()
+)
+
+export const updateUserSuccess = createAction(
+    "Update User Success",
+    props<{ userId: number }>()
+)
+
+export const loadNumberOfTournaments = createAction(
+    "Load Number Of Tournaments",
+)
+
+export const loadNumberOfTournamentsSuccess = createAction(
+    "Load Number Of Tournaments Success",
+    props<{ numberOfTournaments: number }>()
+)
+
+export const loadTournamentsPagination = createAction(
+    "Load Tournaments Pagination",
+    props<{ skip: number, take: number }>()
+)
+
+export const loadTournamentsPaginationSuccess = createAction(
+    "Load Tournaments Pagination Success",
+    props<{ tournamets: Tournament[] }>()
+)
+
+export const selectTournament = createAction(
+    "Select Tournament To Delete",
+    props<{ tournamentId: number }>()
+)
+
+export const CreateTournament = createAction(
+    "Create Tournament",
+    props<{ tournament: Tournament }>()
+)
+
+export const CreateTournamentSuccess = createAction(
+    "Create Tournament Success",
+    props<{ id: number }>()
+)
+
+export const deleteSelectedTournament = createAction(
+    "Delete Selected Tournament",
+    props<{ tournamentId: number }>()
+)
+
+export const deleteSelectedTournamentSuccess = createAction(
+    "Delete Selected Tournament Success",
+    props<{ deletedId: number }>()
+)
+
+export const updateTournament = createAction(
+    "Update Tournament",
+    props<{ tournament: Tournament }>()
+)
+
+export const updateTournamentSuccess = createAction(
+    "Update Tournament Success",
+    props<{ tournamentId: number }>()
+)
+
+export const addPlayerToTournament = createAction(
+    "Add Player To Tournament",
+    props<{ tournamentId: number, playerId: number }>()
+)
+
+export const addPlayerToTournamentSuccess = createAction(
+    "Add Player To Tournament Success",
+    props<{ tournamentId: number, playerId: number }>()
+)
+
+export const addGameToTournament = createAction(
+    "Add Game To Tournament",
+    props<{ tournamentId: number, gameId: number }>()
+)
+
+export const addGameToTournamentSuccess = createAction(
+    "Add Game To Tournament Success",
+    props<{ tournamentId: number, gameId: number }>()
+)
+
+export const removePlayerFromTournament = createAction(
+    "Remove Player To Tournament",
+    props<{ tournamentId: number, playerId: number }>()
+)
+
+export const removePlayerFromTournamentSuccess = createAction(
+    "Remove Player To Tournament Success",
+    props<{ tournamentId: number, playerId: number }>()
+)
+
+export const removeGameFromTournament = createAction(
+    "Remove Game To Tournament",
+    props<{ tournamentId: number, gameId: number }>()
+)
+
+export const removeGameFromTournamentSuccess = createAction(
+    "Remove Game To Tournament Success",
+    props<{ tournamentId: number, gameId: number }>()
 )
