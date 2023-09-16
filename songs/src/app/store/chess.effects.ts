@@ -310,4 +310,130 @@ export class ChessEffects {
             )
         )
     )
+
+
+    addGameToTournament$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(ChessActions.addGameToTournament),
+            mergeMap((actions) =>
+                this.tournamentService.addGame(actions.gameId, actions.tournamentId).pipe(
+                    map((result) => {
+                        return ChessActions.addGameToTournamentSuccess({ tournamentId: actions.tournamentId, gameId: actions.gameId })
+                    }),
+                    catchError((error) =>
+                        of({ type: 'update error' })
+                    )
+                )
+            )
+        )
+    )
+
+    removeGameFromTournament$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(ChessActions.removeGameFromTournament),
+            mergeMap((actions) =>
+                this.tournamentService.removeGame(actions.gameId, actions.tournamentId).pipe(
+                    map((reuslt) => {
+                        return ChessActions.removeGameFromTournamentSuccess({ tournamentId: actions.tournamentId, gameId: actions.gameId })
+                    }),
+                    catchError((error) =>
+                        of({ type: 'update error' })
+                    )
+                )
+            )
+        )
+    )
+
+    addPlayerToTournament$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(ChessActions.addPlayerToTournament),
+            mergeMap((actions) =>
+                this.tournamentService.addPlayer(actions.playerId, actions.tournamentId).pipe(
+                    map((result) => {
+                        return ChessActions.addPlayerToTournamentSuccess({ tournamentId: actions.tournamentId, playerId: actions.playerId })
+                    }),
+                    catchError((error) =>
+                        of({ type: 'update error' })
+                    )
+                )
+            )
+        )
+    )
+
+    removePlayerFromTournament$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(ChessActions.removePlayerFromTournament),
+            mergeMap((actions) =>
+                this.tournamentService.removePlayer(actions.playerId, actions.tournamentId).pipe(
+                    map((result) => {
+                        return ChessActions.removePlayerFromTournamentSuccess({ tournamentId: actions.tournamentId, playerId: actions.playerId })
+                    }),
+                    catchError((error) =>
+                        of({ type: 'update error' }))
+                )
+            )
+        )
+    )
+
+    loadNumberOfParticipation$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(ChessActions.loadNumberOfParticipations),
+            mergeMap((actions) =>
+                this.userService.getNumberOfParticipations().pipe(
+                    map((result) => {
+                        return ChessActions.loadNumberOfParticipationsSuccess({ num: result })
+                    }),
+                    catchError((error) =>
+                        of({ type: 'load error' })
+                    )
+                )
+            )
+        )
+    )
+
+    loadNumberOfGameTurnament$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(ChessActions.loadNumberOfGameTournaments),
+            mergeMap((actions) =>
+                this.gamesService.getNumberOfTournamentGames().pipe(
+                    map((result) => {
+                        return ChessActions.loadNumberOfGameTournamentsSuccess({ num: result })
+                    }),
+                    catchError((error) =>
+                        of({ type: 'load error' })
+                    )
+                )
+            )
+        )
+    )
+
+    loadParticipationsPagination$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(ChessActions.loadParticipationsPagination),
+            mergeMap((actions) =>
+                this.userService.getParticipationsPagination(actions.skip, actions.take).pipe(
+                    map((result) => {
+                        return ChessActions.loadParticipationsPaginationSuccess({ participation: result })
+                    }),
+                    catchError((error) =>
+                        of({ type: 'load error' }))
+                )
+            )
+        )
+    )
+
+    loadGameTournamentPagination$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(ChessActions.loadTournamentGamePagination),
+            mergeMap((actions) =>
+                this.gamesService.getTournamentGamesIdsPagination(actions.skip, actions.take).pipe(
+                    map((result) => {
+                        return ChessActions.loadTournamentGamePaginationSuccess({ tournamentGameIds: result })
+                    }),
+                    catchError((error) =>
+                        of({ type: 'load error' }))
+                )
+            )
+        )
+    )
 }

@@ -16,6 +16,7 @@ import { selectDeletedUser, selectNumberOfUsers, selectUsersPagination } from 's
 })
 export class UserTableComponent implements OnInit {
   @ViewChild('paginator') paginator: MatPaginator;
+  selectedUserId: number | null = null;
 
   users: userDto[];
 
@@ -24,7 +25,7 @@ export class UserTableComponent implements OnInit {
   dataSource = new MatTableDataSource<userDto>();
   isLoading = true;
 
-  selectedUserId: number;
+  // selectedUserId: number;
 
   displayedColumns: string[] = [
     "id",
@@ -107,5 +108,9 @@ export class UserTableComponent implements OnInit {
   clickedRow(user) {
     this.store.dispatch(selectUser({ userId: user.id }));
     this.selectedUserId = user.id;
+  }
+
+  isSelectedUser(user: userDto) {
+    return user.id === this.selectedUserId;
   }
 }

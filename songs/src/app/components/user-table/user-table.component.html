@@ -71,7 +71,7 @@
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns;"></tr>
 
-        <tr mat-row (click)="clickedRow(users)" *matRowDef="let users; columns: displayedColumns;"></tr>
+        <tr mat-row  [class.clicked]="isSelectedUser(users)" (click)="clickedRow(users)" *matRowDef="let users; columns: displayedColumns;"></tr>
     </table>
 
     <!-- <div>

@@ -6,3 +6,5 @@ export * from './tournaments';
 export * from './filter';
 export * from './game-creation.dto';
 export * from './uset.dto'
+export * from './playerTournamentIds';
+export * from './gameTournamentIds';

@@ -10,7 +10,11 @@
             <a mat-button routerLink="/contact" class="text-lg">Contact</a>
         </div>
         <ng-container *ngIf="(name$ | async); else loginButton">
-            <span class="text-white">Welcome, {{ name$|async }}</span>
+            <span class="text-white">Welcome, <button mat-button [matMenuTriggerFor]="menu">{{name$|async}}</button>
+                <mat-menu #menu="matMenu">
+                    <button mat-menu-item (click)="logOut()">Log Out</button>
+                </mat-menu>
+            </span>
         </ng-container>
         <ng-template #loginButton>
             <a [routerLink]="['/log-in']" class="text-white bg-gradient-to-r

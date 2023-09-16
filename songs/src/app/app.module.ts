@@ -29,7 +29,7 @@ import { ChessGamePreviewComponent } from './components/chess-game-preview/chess
 import { ChessGamesListComponent } from './components/chess-games-list/chess-games-list.component';
 import { PlayerInfoComponent } from './components/player-info/player-info.component';
 import { ChessEffects } from './store/chess.effects';
-import { pageReducer, playerReducer, gameReducer, filterReducer, userReducer, tournamentReducer } from './store/chess.reducer';
+import { pageReducer, playerReducer, gameReducer, filterReducer, userReducer, tournamentReducer, participationReducer, gameTournamentReducer } from './store/chess.reducer';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatTableModule } from '@angular/material/table';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -55,6 +55,10 @@ import { TournamentTableComponent } from './components/tournament-table/tourname
 import { AdministrationTournamentAddComponent } from './components/administration-tournament-add/administration-tournament-add.component';
 import { AdministrationTournamentDeleteComponent } from './components/administration-tournament-delete/administration-tournament-delete.component';
 import { AdministrationTournamentUpdateComponent } from './components/administration-tournament-update/administration-tournament-update.component';
+import { AdministrationTournamentParticipationTableComponent } from './components/administration-tournament-participation-table/administration-tournament-participation-table.component';
+import { AdministrationTournamentGameTableComponent } from './components/administration-tournament-game-table/administration-tournament-game-table.component';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatDividerModule } from '@angular/material/divider';
 
 @NgModule({
   declarations: [
@@ -79,6 +83,8 @@ import { AdministrationTournamentUpdateComponent } from './components/administra
     AdministrationTournamentAddComponent,
     AdministrationTournamentDeleteComponent,
     AdministrationTournamentUpdateComponent,
+    AdministrationTournamentParticipationTableComponent,
+    AdministrationTournamentGameTableComponent,
   ],
   imports: [
     BrowserModule,
@@ -102,6 +108,8 @@ import { AdministrationTournamentUpdateComponent } from './components/administra
     FormsModule,
     HttpClientModule,
     MatSnackBarModule,
+    MatMenuModule,
+    MatDividerModule,
     // HttpClientXsrfModule.withOptions({ cookieName: 'accessToken', headerName: 'Authorization', }),
     StoreModule.forRoot<AppState>({
       pages: pageReducer,
@@ -111,6 +119,8 @@ import { AdministrationTournamentUpdateComponent } from './components/administra
       filters: filterReducer,
       users: userReducer,
       tournament: tournamentReducer,
+      participation: participationReducer,
+      gameTournament: gameTournamentReducer
     }),
     StoreDevtoolsModule.instrument({
       maxAge: 25, // Retains last 25 states
@@ -122,6 +132,7 @@ import { AdministrationTournamentUpdateComponent } from './components/administra
       { path: 'sign-up', component: SignUpComponent },
       { path: 'about', component: ChessGamesListComponent },
       { path: 'contact', component: AdministrationPageComponent },
+      { path: 'gameView/:gameId', component: ChessGameComponent },
       //TODO: Protected page example, use where needed
       // { path: 'sign-up', component: SignUpComponent, canActivate: [AuthGuard] },
       { path: '', component: LandingComponent },

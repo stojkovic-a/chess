@@ -19,5 +19,7 @@ export class NavbarComponent implements OnInit {
     this.name$ = this.store.select(selectFirstName);
     this.name$.subscribe(x => console.log(x));
   }
+  logOut() {
 
+  }
 }

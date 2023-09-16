@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, ElementRef } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
 import { AppState } from 'src/app/app.state';
@@ -11,7 +11,8 @@ import { selectGameWithPositions, selectMoveNumber, selectSelectedGame } from 's
   styleUrls: ['./chess-game-view.component.scss']
 })
 export class ChessGameViewComponent implements OnInit {
-
+  @Input() id;
+  @ViewChild('focused') divToFocus: ElementRef;
   selectedGame$: Observable<Game> = of();
   positionsToGame: PositionToGame[] = [];
   startingPosition: string = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
@@ -19,16 +20,7 @@ export class ChessGameViewComponent implements OnInit {
   currentExpandedFen: string;
   inverted: boolean = false;
   currentMove: number = -1;
-  chessboard: string[][] = [
-    ['R', 'N', 'B', 'Q', 'K', 'B', 'N', 'R'],
-    ['P', 'P', 'P', 'P', 'P', 'P', 'P', 'P'],
-    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-    ['p', 'p', 'p', 'p', 'p', 'p', 'p', 'p'],
-    ['r', 'n', 'b', 'q', 'k', 'b', 'n', 'r']
-  ];
+
 
   constructor(private store: Store<AppState>) {
     this.currentExpandedFen = this.expandFen(this.currentFen);
@@ -61,19 +53,30 @@ export class ChessGameViewComponent implements OnInit {
     this.selectedGame$ = this.store.select(selectSelectedGame);
     this.selectedGame$
       .subscribe((game) => {
-        console.log(game);
-        this.store.dispatch(loadGameWithPositions({ id: game.id }));
+        if (game) {
+          this.store.dispatch(loadGameWithPositions({ id: game.id }));
+        } else {
+          if (this.id) {
+            this.store.dispatch(loadGameWithPositions({ id: this.id }))
+          }
+        }
       })
     this.store.select(selectGameWithPositions)
       .subscribe((game) => {
-        this.positionsToGame = game.positionToGame;
-        console.log('aaaaaaaaaaa', game);
+        if (game) {
+          this.positionsToGame = game.positionToGame;
+        }
       })
 
     this.store.select(selectMoveNumber)
       .subscribe((num) =>
         this.currentMove = num
       )
+
+  }
+
+  ngAfterViewInit() {
+    this.divToFocus.nativeElement.focus();
   }
 
   nextMove() {

@@ -1,62 +1,62 @@
 <form (ngSubmit)="onSubmit()" ngNativeValidate>
     <div class="mb-4">
-        <label for="userId" class="block text-sm font-medium text-gray-700">User ID</label>
+        <label for="userId" class="block text-sm font-medium text-gray-200">User ID</label>
         <input [(ngModel)]="user.id" name="userId" type="number" required id="userId" placeholder="ID"
             class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500">
     </div>
     <div class="mb-4">
-        <label for="firstName" class="block text-sm font-medium text-gray-700">First Name</label>
+        <label for="firstName" class="block text-sm font-medium text-gray-200">First Name</label>
         <input [(ngModel)]="user.firstName" name="userFirstName" type="text" required id="firstName"
             placeholder="First Name"
             class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500">
     </div>
     <div class="mb-4">
-        <label for="lastName" class="block text-sm font-medium text-gray-700">Last Name</label>
+        <label for="lastName" class="block text-sm font-medium text-gray-200">Last Name</label>
         <input [(ngModel)]="user.lastName" name="userLastName" type="text" required id="lastName"
             placeholder="Last Name" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500">
     </div>
     <div class="mb-4">
-        <label for="dateOfBirth" class="block text-sm font-medium text-gray-700">Date of Birth</label>
+        <label for="dateOfBirth" class="block text-sm font-medium text-gray-200">Date of Birth</label>
         <input [(ngModel)]="dateFormat" name="userDateOfBirth" type="date" required id="dateOfBirth" placeholder="Date"
             class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500">
     </div>
     <div class="mb-4">
-        <label for="country" class="block text-sm font-medium text-gray-700">Country</label>
+        <label for="country" class="block text-sm font-medium text-gray-200">Country</label>
         <input [(ngModel)]="user.representingCountry" name="userCountry" type="text" required id="country"
             placeholder="Country" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500">
     </div>
     <div class="mb-4">
-        <label for="isPlayer" class="block text-sm font-medium text-gray-700">Is a Player</label>
+        <label for="isPlayer" class="block text-sm font-medium text-gray-200">Is a Player</label>
         <input [(ngModel)]="user.isPlayer" name="userIsPlayer" type="text" required id="isPlayer"
             placeholder="Is Player" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500">
     </div>
     <div class="mb-4">
-        <label for="classicalElo" class="block text-sm font-medium text-gray-700">Classical Elo</label>
+        <label for="classicalElo" class="block text-sm font-medium text-gray-200">Classical Elo</label>
         <input [(ngModel)]="user.classicalElo" name="userClassicalElo" type="number" required id="classicalElo"
             placeholder="Classical Elo"
             class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500">
     </div>
 
     <div class="mb-4">
-        <label for="rapidElo" class="block text-sm font-medium text-gray-700">Rapid Elo</label>
+        <label for="rapidElo" class="block text-sm font-medium text-gray-200">Rapid Elo</label>
         <input [(ngModel)]="user.rapidElo" name="userRapidElo" type="number" required id="rapidElo"
             placeholder="Rapid Elo" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500">
     </div>
 
     <div class="mb-4">
-        <label for="blitzElo" class="block text-sm font-medium text-gray-700">Blitz Elo</label>
+        <label for="blitzElo" class="block text-sm font-medium text-gray-200">Blitz Elo</label>
         <input [(ngModel)]="user.blitzElo" name="userBlitzElo" type="number" required id="blitzElo"
             placeholder="Blitz Elo" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500">
     </div>
     <div class="mb-4">
-        <label for="isAdmin" class="block text-sm font-medium text-gray-700">Is an Admin</label>
-        <input [(ngModel)]="user.isAdmin" name="userIsAdmin" type="text" required id="isAdmin"
-            placeholder="Is Admin" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500">
+        <label for="isAdmin" class="block text-sm font-medium text-gray-200">Is an Admin</label>
+        <input [(ngModel)]="user.isAdmin" name="userIsAdmin" type="text" required id="isAdmin" placeholder="Is Admin"
+            class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500">
     </div>
 
-    <div class="mb-4">
+    <div class="mb-4 w-2/3 mx-auto">
         <button type="submit"
-            class="w-full px-4 py-2 font-bold text-white bg-blue-500 rounded-lg hover:bg-blue-600 focus:outline-none focus:bg-blue-600">
+            class="w-full px-4 py-2 font-bold text-white  bg-[#c2185b] rounded-lg hover:bg-[#e1377a] focus:outline-none focus:bg-[#e1377a]">
             Update User
         </button>
     </div>

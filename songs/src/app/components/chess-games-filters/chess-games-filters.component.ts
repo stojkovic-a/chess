@@ -118,11 +118,7 @@ export class ChessGamesFiltersComponent {
       .subscribe((filters) => {
         this.tournamentOptions = filters;
         console.log(this.tournamentOptions, 'aaaajcigadag');
-        if (this.tournamentOptions[0] === null || this.tournamentOptions.length === 0) {
-          this.tournamentOptions = ['Friendly'];
-        } else {
-          this.tournamentOptions.push("Friendly");
-        }
+
         this.filteredOptions6 = this.tournamentControl.valueChanges.pipe(
           startWith(''),
           map(value => this._filter(value || '', this.tournamentOptions)),

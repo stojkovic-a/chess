@@ -23,7 +23,7 @@ export class TournamentTableComponent implements OnInit {
   dataSource = new MatTableDataSource<Tournament>();
   isLoading = true;
 
-  selectedTournamentId: number;
+  selectedTournamentId: number | null = null;
 
   displayedColumns: string[] = [
     'id',
@@ -105,5 +105,9 @@ export class TournamentTableComponent implements OnInit {
   clickedRow(tournament) {
     this.store.dispatch(selectTournament({ tournamentId: tournament.id }));
     this.selectedTournamentId = tournament.id;
+  }
+
+  isSelectedTournament(tournament) {
+    return tournament.id === this.selectedTournamentId;
   }
 }

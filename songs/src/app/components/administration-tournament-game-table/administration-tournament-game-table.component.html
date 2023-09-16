@@ -1,0 +1,32 @@
+<div>
+    <table mat-table [dataSource]="dataSource" class="">
+
+        <ng-container matColumnDef="tournamentId">
+            <th mat-header-cell *matHeaderCellDef>Tournament ID</th>
+            <td mat-cell *matCellDef="let gameTournament">
+                {{gameTournament.tournamentId}}
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="gameId">
+            <th mat-header-cell *matHeaderCellDef>Game ID</th>
+            <td mat-cell *matCellDef="let gameTournament">
+                {{ gameTournament.gameId}}
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns;"></tr>
+
+        <tr mat-row *matRowDef="let users; columns: displayedColumns;"></tr>
+    </table>
+
+    <!-- <div>
+    <div *ngIf="isLoading">
+        <mat-progress-bar mode="indeterminate" style="height: 10px;"></mat-progress-bar>
+    </div>
+</div> -->
+
+    <mat-paginator #paginator [length]="totalData" [pageSizeOptions]="pageSize" showFirstLastButtons
+        aria-label="Select page">
+    </mat-paginator>
+</div>

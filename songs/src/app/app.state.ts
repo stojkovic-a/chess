@@ -1,5 +1,5 @@
 import { AuthState } from "./store/auth/auth.reducer";
-import { FilterState, GameState, PageState, PlayerState, TournamentState, UserState } from "./store/chess.reducer";
+import { FilterState, GameState, GameTournamentState, PageState, ParticipationState, PlayerState, TournamentState, UserState } from "./store/chess.reducer";
 
 export interface AppState {
     pages: PageState;
@@ -8,7 +8,9 @@ export interface AppState {
     auth: AuthState;
     filters: FilterState;
     users: UserState;
-    tournament: TournamentState
+    tournament: TournamentState;
+    participation: ParticipationState;
+    gameTournament: GameTournamentState;
 }
 // export const initialAppState: AppState = {
 //     auth: initialAuthState,

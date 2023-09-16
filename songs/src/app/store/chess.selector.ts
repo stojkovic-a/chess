@@ -1,7 +1,7 @@
 import { createSelector } from "@ngrx/store";
 import { AppState } from "../app.state";
 import { Song } from "../models/song";
-import { Filter, Game, Player, Tournament, userDto } from "../models";
+import { Filter, Game, GameTournamentIds, Player, PlayerTournamentIds, Tournament, userDto } from "../models";
 import { PlayerState } from "./chess.reducer";
 import { filter } from "rxjs";
 import { BlockParameter } from "@angular/compiler";
@@ -287,4 +287,34 @@ export const selectAddedGame = createSelector(
 export const selectRemovedGame = createSelector(
     selectTournamentFeature,
     (tournaments) => tournaments.removedGameTournament
+)
+
+export const selectParticipationFeature = createSelector(
+    (state: AppState) => state.participation,
+    (paricipation) => paricipation
+)
+
+export const selectNumberOfParticipation = createSelector(
+    selectParticipationFeature,
+    (participation) => participation.numberOfParticipations
+)
+
+export const selectParticipations = createSelector(
+    selectParticipationFeature,
+    (participation) => participation.participations
+)
+
+export const selectGamesTournamentFeature = createSelector(
+    (state: AppState) => state.gameTournament,
+    (gameTournament) => gameTournament
+)
+
+export const selectNumberOfGameTournaments = createSelector(
+    selectGamesTournamentFeature,
+    (gameTournament) => gameTournament.numberOfGameTournaments
+)
+
+export const selectGamesTournaments = createSelector(
+    selectGamesTournamentFeature,
+    (gameTournament) => gameTournament.gameTournamentIds
 )

@@ -1,5 +1,5 @@
 import { createAction, props } from "@ngrx/store";
-import { Filter, Game, GameCreationDto, Player, Tournament, userDto } from "../models";
+import { Filter, Game, GameCreationDto, GameTournamentIds, Player, PlayerTournamentIds, Tournament, userDto } from "../models";
 import { GamePosNum } from "../interfaces";
 
 export const loadGames = createAction(
@@ -280,4 +280,43 @@ export const removeGameFromTournament = createAction(
 export const removeGameFromTournamentSuccess = createAction(
     "Remove Game To Tournament Success",
     props<{ tournamentId: number, gameId: number }>()
+)
+
+export const loadNumberOfParticipations = createAction(
+    "Load Number Of Participations",
+)
+
+export const loadNumberOfParticipationsSuccess = createAction(
+    "Load Number Of Participations Success",
+    props<{ num: number }>()
+)
+
+
+export const loadNumberOfGameTournaments = createAction(
+    "Load Number Of Game Tournaments",
+)
+
+export const loadNumberOfGameTournamentsSuccess = createAction(
+    "Load Number Of Game Tournaments Success",
+    props<{ num: number }>()
+)
+
+export const loadParticipationsPagination = createAction(
+    "Load Participations Pagination",
+    props<{ skip: number, take: number }>()
+)
+
+export const loadParticipationsPaginationSuccess = createAction(
+    "Load Participations Pagination Success",
+    props<{ participation: PlayerTournamentIds[] }>()
+)
+
+export const loadTournamentGamePagination = createAction(
+    "Load Tournament Game Pagination",
+    props<{ skip: number, take: number }>()
+)
+
+export const loadTournamentGamePaginationSuccess = createAction(
+    "Load Tournament Game Pagination Success",
+    props<{ tournamentGameIds: GameTournamentIds[] }>()
 )

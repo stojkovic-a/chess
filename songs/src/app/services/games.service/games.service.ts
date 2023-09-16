@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Game, GameCreationDto } from '../../models';
+import { Game, GameCreationDto, GameTournamentIds } from '../../models';
 import { environment } from 'src/environments/environment.development';
 import { AppState } from 'src/app/app.state';
 import { Store } from '@ngrx/store';
@@ -110,5 +110,14 @@ export class GamesService {
 
   createGame(dto: GameCreationDto) {
     return this.httpClient.post<number>(environment.api + `game`, dto);
+  }
+
+
+  getNumberOfTournamentGames() {
+    return this.httpClient.get<number>(environment.api + 'game/number/count');
+  }
+
+  getTournamentGamesIdsPagination(skip: number, take: number) {
+    return this.httpClient.get<GameTournamentIds[]>(environment.api + `game/tournamentJoin/${skip}/${take}`);
   }
 }

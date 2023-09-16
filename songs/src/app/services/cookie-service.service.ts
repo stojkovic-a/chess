@@ -17,7 +17,7 @@ export class CookieService {
 
 
     this.ngxCookieService.set('accessToken', tokens.access_token,0.01042 , '/', 'localhost', false, 'Lax');
-    this.ngxCookieService.set('refreshToken', tokens.refresh_token,15, '/', 'localhost', false, 'Lax');
+    this.ngxCookieService.set('refreshToken', tokens.refresh_token,7, '/', 'localhost', false, 'Lax');
 
   }
 

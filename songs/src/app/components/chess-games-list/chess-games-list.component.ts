@@ -15,6 +15,7 @@ import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { MatSort, Sort } from '@angular/material/sort';
 import { Role } from 'src/app/enums';
 import { selectRoles } from 'src/app/store/auth/auth.selector';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-chess-games-list',
@@ -56,6 +57,7 @@ export class ChessGamesListComponent implements OnInit {
     public dialog: MatDialog,
     public dateService: DateService,
     private cd: ChangeDetectorRef,
+    private router: Router,
   ) {
   }
 
@@ -137,9 +139,9 @@ export class ChessGamesListComponent implements OnInit {
         this.cd.detectChanges();
       });
 
-      if(this.isAdmin){
-        this.displayedColumns.push('deleteGame');
-      }
+    if (this.isAdmin) {
+      this.displayedColumns.push('deleteGame');
+    }
   }
 
   getResult(game: Game): string {
@@ -201,6 +203,7 @@ export class ChessGamesListComponent implements OnInit {
   gameSelected(game: Game) {
     this.store.dispatch(ChessActions.selectGame({ game }));
     this.store.dispatch(ChessActions.setCurrentGameMove({ moveNum: -1 }));
+    this.router.navigateByUrl(`/gameView/${game.id}`);
   }
 
   deleteGame(game: Game) {

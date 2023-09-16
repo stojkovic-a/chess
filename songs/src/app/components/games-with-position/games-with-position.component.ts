@@ -9,6 +9,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { catchError, map, of, startWith, switchMap, tap } from 'rxjs';
 import { GamePosNum } from 'src/app/interfaces';
+import { Router } from '@angular/router';
 
 
 
@@ -41,7 +42,10 @@ export class GamesWithPositionComponent implements OnInit {
   ];
   pageSizes = [5];
 
-  constructor(private store: Store<AppState>) {
+  constructor(
+    private store: Store<AppState>,
+    private router: Router
+  ) {
 
   }
 
@@ -144,6 +148,7 @@ export class GamesWithPositionComponent implements OnInit {
       ChessActions.setCurrentGameMove(
         { moveNum: row.moveNums - 1 }
       ));
-    console.log("CLICKED ROW", row.moveNums);
+    this.router.navigateByUrl(`/gameView/${row.games.id}`);
+
   }
 }

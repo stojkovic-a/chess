@@ -1,6 +1,6 @@
 import { HttpClient, HttpContext } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { userDto } from 'src/app/models';
+import { PlayerTournamentIds, userDto } from 'src/app/models';
 import { environment } from 'src/environments/environment.development';
 
 @Injectable({
@@ -27,4 +27,13 @@ export class UserService {
   updateUser(user: userDto) {
     return this.httpClient.put<number>(environment.api + `user/${user.id}`, user);
   }
+
+  getNumberOfParticipations() {
+    return this.httpClient.get<number>(environment.api + `user/participation/count`);
+  }
+
+  getParticipationsPagination(skip: number, take: number) {
+    return this.httpClient.get<PlayerTournamentIds[]>(environment.api + `user/participation/users/tournaments/${skip}/${take}`);
+  }
+
 }

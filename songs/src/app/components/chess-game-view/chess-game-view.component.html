@@ -1,4 +1,4 @@
-<div class="flex" [autofocus]="true" (keydown.ArrowLeft)="prevMove()" (keydown.ArrowRight)="nextMove()">
+<div class="flex ">
   <div>
     <div class="chessboard">
       <div *ngFor="let row of [1, 2, 3, 4, 5, 6, 7, 8]; let i = index" class="chessboard-row">
@@ -10,7 +10,8 @@
     </div>
 
     <section>
-      <div class="button-row">
+      <div class="button-row" [autofocus]="true" #focused (keydown.ArrowLeft)="prevMove()"
+        (keydown.ArrowRight)="nextMove()">
         <div class="flex-container">
           <button mat-icon-button color="primary" aria-label="icon button with rotate icon" (click)="invert()">
             <mat-icon>cached</mat-icon>

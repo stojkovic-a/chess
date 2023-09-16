@@ -6,8 +6,8 @@ import { AppState } from 'src/app/app.state';
 import { GameType } from 'src/app/enums';
 import { Tournament } from 'src/app/models';
 import { DateService } from 'src/app/services/date.service/date.service';
-import { updateTournament } from 'src/app/store/chess.action';
-import { selectSelectedTournament, selectTournamentUpdateId } from 'src/app/store/chess.selector';
+import { addGameToTournament, addPlayerToTournament, removeGameFromTournament, removePlayerFromTournament, updateTournament } from 'src/app/store/chess.action';
+import { selectAddedGame, selectAddedPlayer, selectRemovedGame, selectRemovedPlayer, selectSelectedTournament, selectTournamentUpdateId } from 'src/app/store/chess.selector';
 
 @Component({
   selector: 'app-administration-tournament-update',
@@ -81,18 +81,58 @@ export class AdministrationTournamentUpdateComponent implements OnInit {
   }
 
   addGame() {
-
+    this.store.dispatch(addGameToTournament({ tournamentId: this.tournament.id, gameId: this.gameAddId }));
+    this.store.select(selectAddedGame)
+      .subscribe((ids) => {
+        if (ids) {
+          this.snackBar.open(`Successfully added game: ${ids.gameId} to tournament: ${ids.tournamentId}`, `OK`, {
+            horizontalPosition: 'right',
+            verticalPosition: 'bottom',
+            politeness: 'polite',
+          })
+        }
+      })
   }
 
   removeGame() {
-
+    this.store.dispatch(removeGameFromTournament({ tournamentId: this.tournament.id, gameId: this.gameRemoveId }));
+    this.store.select(selectRemovedGame)
+      .subscribe((ids) => {
+        if (ids) {
+          this.snackBar.open(`Successfully removed game: ${ids.gameId} from tournament: ${ids.tournamentId}`, `OK`, {
+            horizontalPosition: 'right',
+            verticalPosition: 'bottom',
+            politeness: 'polite',
+          })
+        }
+      })
   }
 
   addPlayer() {
-
+    this.store.dispatch(addPlayerToTournament({ tournamentId: this.tournament.id, playerId: this.playerAddId }));
+    this.store.select(selectAddedPlayer)
+      .subscribe((ids) => {
+        if (ids) {
+          this.snackBar.open(`Successfully add player: ${ids.playerId} to tournament: ${ids.tournamentId}`, `OK`, {
+            horizontalPosition: 'right',
+            verticalPosition: 'bottom',
+            politeness: 'polite',
+          })
+        }
+      })
   }
 
   removePlayer() {
-
+    this.store.dispatch(removePlayerFromTournament({ tournamentId: this.tournament.id, playerId: this.playerRemoveId }));
+    this.store.select(selectRemovedPlayer)
+      .subscribe((ids) => {
+        if (ids) {
+          this.snackBar.open(`Successfully removed player: ${ids.playerId} from a tournament: ${ids.tournamentId}`, `OK`, {
+            horizontalPosition: 'right',
+            verticalPosition: 'bottom',
+            politeness: 'polite',
+          })
+        }
+      })
   }
 }

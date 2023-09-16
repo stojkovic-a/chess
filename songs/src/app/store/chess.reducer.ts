@@ -2,13 +2,68 @@ import { createAction, createReducer, on } from "@ngrx/store";
 import * as Actions from './chess.action';
 import { EntityState, createEntityAdapter } from "@ngrx/entity";
 import { state } from "@angular/animations";
-import { Filter, Player, Tournament, userDto } from "../models";
+import { Filter, GameTournamentIds, Player, PlayerTournamentIds, Tournament, userDto } from "../models";
 import { Game } from "../models";
 import { Platform } from "@angular/cdk/platform";
 import { act } from "@ngrx/effects";
 import { GamePosNum } from "../interfaces";
 import { Action } from "rxjs/internal/scheduler/Action";
 
+
+export interface ParticipationState extends EntityState<number> {
+    numberOfParticipations: number
+    participations: PlayerTournamentIds[]
+}
+
+const participationAdapter = createEntityAdapter<number>();
+
+export const initialParticipationState: ParticipationState = participationAdapter.getInitialState({
+    numberOfParticipations: 0,
+    participations: []
+})
+
+export const participationReducer = createReducer(
+    initialParticipationState,
+    on(Actions.loadNumberOfParticipationsSuccess, (state, { num }) =>
+    ({
+        ...state,
+        numberOfParticipations: num
+    })
+    ),
+    on(Actions.loadParticipationsPaginationSuccess, (state, { participation }) =>
+    ({
+        ...state,
+        participations: participation
+    })
+    )
+)
+export interface GameTournamentState extends EntityState<number> {
+    numberOfGameTournaments: number
+    gameTournamentIds: GameTournamentIds[]
+}
+
+const gameTournamentAdapter = createEntityAdapter<number>();
+
+export const initialGameTournamentState: GameTournamentState = gameTournamentAdapter.getInitialState({
+    numberOfGameTournaments: 0,
+    gameTournamentIds: []
+})
+
+export const gameTournamentReducer = createReducer(
+    initialGameTournamentState,
+    on(Actions.loadNumberOfGameTournamentsSuccess, (state, { num }) =>
+    ({
+        ...state,
+        numberOfGameTournaments: num
+    })
+    ),
+    on(Actions.loadTournamentGamePaginationSuccess, (state, { tournamentGameIds }) =>
+    ({
+        ...state,
+        gameTournamentIds: tournamentGameIds
+    })
+    )
+)
 
 export interface TournamentState extends EntityState<Tournament> {
     numberOfTournaments: number

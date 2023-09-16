@@ -1,36 +1,36 @@
 <form (ngSubmit)="onSubmit()" ngNativeValidate>
     <div class="mb-4">
-        <label for="tournamentName" class="block text-sm font-medium text-gray-700">Tournament Name</label>
+        <label for="tournamentName" class="block text-sm font-medium text-gray-200">Tournament Name</label>
         <input [(ngModel)]="tournament.tournamentName" name="tournamentName" type="text" required id="tournamentName"
             placeholder="Tournament Name"
             class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500">
     </div>
     <div class="mb-4">
-        <label for="startingDate" class="block text-sm font-medium text-gray-700">Starting Date</label>
+        <label for="startingDate" class="block text-sm font-medium text-gray-200">Starting Date</label>
         <input [(ngModel)]="tournament.startingDate" name="startingDate" type="date" required id="startingDate"
             placeholder="Starting Date"
             class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500">
     </div>
     <div class="mb-4">
-        <label for="endingDate" class="block text-sm font-medium text-gray-700">Ending Date</label>
+        <label for="endingDate" class="block text-sm font-medium text-gray-200">Ending Date</label>
         <input [(ngModel)]="tournament.endingDate" name="endingDate" type="date" id="endingDate"
             placeholder="Ending Date"
             class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500">
     </div>
     <div class="mb-4">
-        <label for="gamesType" class="block text-sm font-medium text-gray-700">Games Type</label>
+        <label for="gamesType" class="block text-sm font-medium text-gray-200">Games Type</label>
         <input [(ngModel)]="gamesType" name="gamesType" type="text" required id="gamesType" placeholder="Games Type"
             class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500">
     </div>
     <div class="mb-4">
-        <label for="minElo" class="block text-sm font-medium text-gray-700">Minimum Elo</label>
+        <label for="minElo" class="block text-sm font-medium text-gray-200">Minimum Elo</label>
         <input [(ngModel)]="tournament.minElo" name="minElo" type="number" required id="minElo" placeholder="Min Elo"
             class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500">
     </div>
 
-    <div class="mb-4">
+    <div class="mb-4 w-2/3 mx-auto">
         <button type="submit"
-            class="w-full px-4 py-2 font-bold text-white bg-blue-500 rounded-lg hover:bg-blue-600 focus:outline-none focus:bg-blue-600">
+            class="w-full px-4 py-2 font-bold text-white  bg-[#c2185b] rounded-lg hover:bg-[#e1377a] focus:outline-none focus:bg-[#e1377a]">
             Add Tournament
         </button>
     </div>
