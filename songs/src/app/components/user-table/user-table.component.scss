@@ -1,9 +1,4 @@
-tr.mat-mdc-row:hover {
-    background-color: #525252;
-    cursor: pointer;
-}
-
 tr.mat-mdc-row.clicked {
-    background-color: #525252;
+    background-color: theme('colors.secondary-focus');
     color: white;
 }

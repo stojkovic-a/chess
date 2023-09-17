@@ -4,6 +4,7 @@ import { User } from '../models/user';
 import { AppState } from '../app.state';
 import { Store } from '@ngrx/store';
 import { selectFirstName } from '../store/auth/auth.selector';
+import { signOut } from '../store/auth/auth.action';
 
 @Component({
   selector: 'app-navbar',
@@ -20,6 +21,6 @@ export class NavbarComponent implements OnInit {
     this.name$.subscribe(x => console.log(x));
   }
   logOut() {
-
+    this.store.dispatch(signOut());
   }
 }

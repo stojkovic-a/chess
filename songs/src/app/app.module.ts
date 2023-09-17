@@ -59,6 +59,9 @@ import { AdministrationTournamentParticipationTableComponent } from './component
 import { AdministrationTournamentGameTableComponent } from './components/administration-tournament-game-table/administration-tournament-game-table.component';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatTabsModule } from '@angular/material/tabs';
+import { Role } from './enums';
+
 
 @NgModule({
   declarations: [
@@ -110,6 +113,7 @@ import { MatDividerModule } from '@angular/material/divider';
     MatSnackBarModule,
     MatMenuModule,
     MatDividerModule,
+    MatTabsModule,
     // HttpClientXsrfModule.withOptions({ cookieName: 'accessToken', headerName: 'Authorization', }),
     StoreModule.forRoot<AppState>({
       pages: pageReducer,
@@ -130,13 +134,27 @@ import { MatDividerModule } from '@angular/material/divider';
     RouterModule.forRoot([
       { path: 'log-in', component: LogInComponent },
       { path: 'sign-up', component: SignUpComponent },
-      { path: 'about', component: ChessGamesListComponent },
-      { path: 'contact', component: AdministrationPageComponent },
-      { path: 'gameView/:gameId', component: ChessGameComponent },
-      //TODO: Protected page example, use where needed
-      // { path: 'sign-up', component: SignUpComponent, canActivate: [AuthGuard] },
-      { path: '', component: LandingComponent },
-      { path: '**', redirectTo: '/' }
+      {
+        path: 'browse',
+        component: ChessGamesListComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'manage',
+        component: AdministrationPageComponent,
+        canActivate: [AuthGuard],
+        data: {
+          role: Role.Admin
+        }
+
+      },
+      {
+        path: 'gameView/:gameId',
+        component: ChessGameComponent,
+        canActivate: [AuthGuard]
+      },
+      { path: 'home', component: LandingComponent },
+      { path: '**', redirectTo: '/home' }
     ]),
     BrowserAnimationsModule
   ],

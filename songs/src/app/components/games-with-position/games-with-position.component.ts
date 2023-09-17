@@ -21,6 +21,7 @@ import { Router } from '@angular/router';
 })
 export class GamesWithPositionComponent implements OnInit {
 
+  @Input() id;
 
   @Input() currentFen: string;
 
@@ -41,6 +42,8 @@ export class GamesWithPositionComponent implements OnInit {
     'blackPlayer',
   ];
   pageSizes = [5];
+
+  selectedId: number | null = null;
 
   constructor(
     private store: Store<AppState>,
@@ -148,7 +151,13 @@ export class GamesWithPositionComponent implements OnInit {
       ChessActions.setCurrentGameMove(
         { moveNum: row.moveNums - 1 }
       ));
+    this.selectedId = row.games.id;
+    this.id = row.games.id;
     this.router.navigateByUrl(`/gameView/${row.games.id}`);
 
+  }
+
+  isSelectedGame(row) {
+    return (row.games.id === this.selectedId || row.games.id === parseInt(this.id));
   }
 }

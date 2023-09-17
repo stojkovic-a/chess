@@ -57,8 +57,16 @@ export class AuthEffects {
         this.actions$.pipe(
             ofType(fromAuth.signOut),
             tap(() => {
-                this.router.navigateByUrl('/log-in')
-            })
+                this.router.navigateByUrl('/')
+            }),
+            switchMap(() =>
+                this.authService.signout().pipe(
+                    map(() => {
+                        return fromAuth.signOutSuccess()
+                    }),
+                    catchError((error) => of({ type: 'signout error' }))
+                )
+            )
         )
     )
 

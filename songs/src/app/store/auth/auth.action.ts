@@ -54,3 +54,7 @@ export const refreshTokensSuccess = createAction(
 export const signOut=createAction(
     '[Auth] SignOut'
 )
+
+export const signOutSuccess=createAction(
+    '[Auth] SignOut Success'
+)

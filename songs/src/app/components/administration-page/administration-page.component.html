@@ -1,44 +1,50 @@
-<div class="flex-col bg-[#424242]">
-    <div class="w-4/5 mx-auto">
-        <app-administration-game-add></app-administration-game-add>
-    </div>
-    <mat-divider></mat-divider>
-    <div>
-        <app-user-table></app-user-table>
-    </div>
-    <mat-divider></mat-divider>
-    <div class="w-4/5 mx-auto">
-        <app-administration-user-delete></app-administration-user-delete>
-    </div>
-    <mat-divider></mat-divider>
-    <div class="w-4/5 mx-auto">
-        <app-administration-user-update></app-administration-user-update>
-    </div>
-    <mat-divider></mat-divider>
-    <div class="w-4/5 mx-auto">
-        <app-administration-tournament-add></app-administration-tournament-add>
-    </div>
-    <mat-divider></mat-divider>
-    <div>
-        <app-tournament-table></app-tournament-table>
-    </div>
-    <mat-divider></mat-divider>
-    <div class="flex flex-wrap">
-        <div class="grow mx-auto">
-            <app-administration-tournament-participation-table></app-administration-tournament-participation-table>
-        </div>
-        <mat-divider [vertical]="true"></mat-divider>
-        <div class="grow mx-auto">
-            <app-administration-tournament-game-table></app-administration-tournament-game-table>
-        </div>
-    </div>
-    <mat-divider></mat-divider>
-    <div class="w-4/5 mx-auto">
-        <app-administration-tournament-delete></app-administration-tournament-delete>
-    </div>
-    <mat-divider></mat-divider>
-    <div class="w-4/5 mx-auto">
-        <app-administration-tournament-update></app-administration-tournament-update>
-    </div>
+<div class="flex-col bg-secondary gap-5">
+    <mat-tab-group>
+        <mat-tab label="Game">
+            <div class="input-container pt-5">
+                <app-administration-game-add></app-administration-game-add>
+            </div>
+        </mat-tab>
+        <mat-tab label="User">
+            <div class="pt-5">
+                <app-user-table></app-user-table>
+            </div>
+            <mat-divider></mat-divider>
+            <div class="input-container pt-5">
+                <app-administration-user-delete></app-administration-user-delete>
+            </div>
+            <mat-divider></mat-divider>
+            <div class="input-container pt-5">
+                <app-administration-user-update></app-administration-user-update>
+            </div>
+        </mat-tab>
+        <mat-tab label="Tournament">
+            <div class="input-container pt-5 mb-5">
+                <app-administration-tournament-add></app-administration-tournament-add>
+            </div>
+            <mat-divider></mat-divider>
+            <div class="">
+                <app-tournament-table></app-tournament-table>
+            </div>
+            <mat-divider></mat-divider>
+            <div class="flex flex-wrap">
+                <div class="grow mx-auto">
+                    <app-administration-tournament-participation-table></app-administration-tournament-participation-table>
+                </div>
+                <mat-divider [vertical]="true"></mat-divider>
+                <div class="grow mx-auto">
+                    <app-administration-tournament-game-table></app-administration-tournament-game-table>
+                </div>
+            </div>
+            <mat-divider></mat-divider>
+            <div class="input-container pt-5">
+                <app-administration-tournament-delete></app-administration-tournament-delete>
+            </div>
+            <mat-divider></mat-divider>
+            <div >
+                <app-administration-tournament-update></app-administration-tournament-update>
+            </div>
+        </mat-tab>
+    </mat-tab-group>
     <mat-divider></mat-divider>
 </div>

@@ -31,7 +31,8 @@
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true "></tr>
 
-        <tr mat-row (click)="clickedRow(row)" *matRowDef="let row; columns: displayedColumns;"></tr>
+        <tr mat-row (click)="clickedRow(row)" *matRowDef="let row; columns: displayedColumns;"
+            class="hover:bg-secondary-hover cursor-pointer" [class.clicked]="isSelectedGame(row)"></tr>
     </table>
 
     <!-- <div>

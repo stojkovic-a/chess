@@ -30,7 +30,7 @@ export class CookieService {
   }
 
   removeTokens(): void {
-    this.ngxCookieService.delete('accessToken', '/', "localhost:4200", true);
-    this.ngxCookieService.delete('refreshToken', '/', "localhost:4200", true);
+    this.ngxCookieService.delete('accessToken');
+    this.ngxCookieService.delete('refreshToken');
   }
 }

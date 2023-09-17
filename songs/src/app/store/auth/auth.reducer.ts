@@ -52,10 +52,10 @@ const authReducer = createReducer(
     tokens: tokens
   })
   ),
-  on(fromAuth.signOut, (state) =>
+  on(fromAuth.signOutSuccess, (state) =>
   ({
     ...state,
-    initialState
+    ...initialState
   })
   )
 );

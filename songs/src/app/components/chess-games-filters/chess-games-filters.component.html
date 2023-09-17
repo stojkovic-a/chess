@@ -45,7 +45,6 @@
       <input #end matEndDate [formControl]="endFormControl" placeholder="End date"
         (dateChange)="dateChangeEnd(end.value)">
     </mat-date-range-input>
-    <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
     <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-date-range-picker #picker></mat-date-range-picker>
 

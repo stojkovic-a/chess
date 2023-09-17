@@ -14,7 +14,7 @@ import { Role } from '../enums';
 import { AppState } from '../app.state';
 import { Store } from '@ngrx/store';
 import { loadUserFromCookie, refreshTokens } from '../store/auth/auth.action';
-import { selectToken } from '../store/auth/auth.selector';
+import { selectRoles, selectToken } from '../store/auth/auth.selector';
 
 @Injectable({
   providedIn: 'root',
@@ -75,10 +75,26 @@ export class AuthService {
 
   refreshTokens(refreshToken: string) {
     let headers = new HttpHeaders();
-    headers = headers.set('Authorization',`Bearer ${refreshToken}`);
+    headers = headers.set('Authorization', `Bearer ${refreshToken}`);
 
     return this.http.post<Tokens>(environment.api + `auth/refresh`, null, {
       headers: headers
     });
   }
+
+  signout() {
+    this.cookieService.removeTokens();
+    return this.http.post(environment.api + `auth/logout`, null);
+  }
+
+  getRoles(): Role[] {
+    let roles: Role[] = [];
+    this.store.select(selectRoles)
+      .subscribe(roles => {
+        roles = roles;
+      })
+
+    return roles;
+  }
+
 }
