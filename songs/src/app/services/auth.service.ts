@@ -88,13 +88,12 @@ export class AuthService {
   }
 
   getRoles(): Role[] {
-    let roles: Role[] = [];
+    let rolesVar: Role[] = [];
     this.store.select(selectRoles)
       .subscribe(roles => {
-        roles = roles;
+        rolesVar = roles;
       })
-
-    return roles;
+    return rolesVar;
   }
 
 }

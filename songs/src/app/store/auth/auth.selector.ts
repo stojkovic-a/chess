@@ -20,6 +20,11 @@ export const selectRoles = createSelector(
     (state) => state.roles
 )
 
+export const selectError = createSelector(
+    authFeature,
+    (state) => state.error
+)
+
 
 // export const selectIsAuth = createSelector(
 //     authFeature,

@@ -53,7 +53,7 @@ export class AuthInterceptor implements HttpInterceptor {
             request.url.includes(route)
         );
         if (isExceptionRooute) {
-            return next.handle(request).pipe(catchError(x => this.handleAuthError(x)));
+            return next.handle(request);
         }
 
 

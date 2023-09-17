@@ -6,10 +6,12 @@
     <div class="flex justify-between w-full items-center">
         <div class="flex justify-center items-center w-full h-full">
             <a mat-button routerLink="/home" class="text-lg" routerLinkActive="active">Home</a>
-            <a mat-button routerLink="/browse" class="text-lg" routerLinkActive="active">Browse</a>
-            <a mat-button routerLink="/manage" class="text-lg" routerLinkActive="active">Manage</a>
+            <a mat-button routerLink="/browse" class="text-lg" routerLinkActive="active"
+                *ngIf="(name$ | async)">Browse</a>
+            <a mat-button routerLink="/manage" class="text-lg" routerLinkActive="active"
+                *ngIf="(name$ | async)&& isAdmin">Manage</a>
         </div>
-        <ng-container *ngIf="(name$ | async); else loginButton">
+        <ng-container *ngIf=" (name$ | async); else loginButton">
             <span class="text-white">Welcome, <button class="text-lg" mat-button
                     [matMenuTriggerFor]="menu">{{name$|async}}</button>
                 <mat-menu #menu="matMenu">

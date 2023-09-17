@@ -8,14 +8,12 @@
         <div class="mb-4">
             <label for="tournamentName" class="block text-sm font-medium text-gray-200">Tournament Name</label>
             <input [(ngModel)]="tournament.tournamentName" name="tournamentName" type="text" required
-                id="tournamentName" placeholder="Tournament Name"
-                class="input-primary">
+                id="tournamentName" placeholder="Tournament Name" class="input-primary">
         </div>
         <div class="mb-4">
             <label for="startingDate" class="block text-sm font-medium text-gray-200">Starting Date</label>
             <input [(ngModel)]="startDateFormat" name="startingDate" type="date" required id="startingDate"
-                placeholder="Starting Date"
-                class="input-primary">
+                placeholder="Starting Date" class="input-primary">
         </div>
         <div class="mb-4">
             <label for="endingDate" class="block text-sm font-medium text-gray-200">Ending Date</label>
@@ -35,7 +33,7 @@
 
         <div class="mb-4 w-2/3 mx-auto">
             <button type="submit"
-                class="w-full px-4 py-2 font-bold text-white   bg-primary rounded-lg hover:bg-primary-hover focus:outline-none focus:bg-primary-focus">
+                class="button-primary">
                 Update Tournament
             </button>
         </div>
@@ -47,8 +45,7 @@
         <div class="mb-4">
             <label for="tournamentAddPlayerId" class="block text-sm font-medium text-gray-200">Tournament ID</label>
             <input [(ngModel)]="tournament.id" name="tournamentAddPlayerId" type="number" required
-                id="tournamentAddPlayerId" placeholder="ID"
-                class="input-primary">
+                id="tournamentAddPlayerId" placeholder="ID" class="input-primary">
         </div>
 
         <div class="mb-4">
@@ -59,7 +56,7 @@
 
         <div class="mb-4 w-2/3 mx-auto">
             <button type="submit"
-                class="w-full px-4 py-2 font-bold text-white  bg-primary rounded-lg hover:bg-primary-hover focus:outline-none focus:bg-primary-focus">
+                class="button-primary">
                 Add Player To Tournament
             </button>
         </div>
@@ -69,8 +66,7 @@
         <div class="mb-4">
             <label for="tournamentRemovePlayerId" class="block text-sm font-medium text-gray-200">Tournament ID</label>
             <input [(ngModel)]="tournament.id" name="tournamentRemovePlayerId" type="number" required
-                id="tournamentRemovePlayerId" placeholder="ID"
-                class="input-primary">
+                id="tournamentRemovePlayerId" placeholder="ID" class="input-primary">
         </div>
 
         <div class="mb-4">
@@ -81,7 +77,7 @@
 
         <div class="mb-4 w-2/3 mx-auto">
             <button type="submit"
-                class="w-full px-4 py-2 font-bold text-white   bg-primary rounded-lg hover:bg-primary-hover focus:outline-none focus:bg-primary-focus">
+                class="button-primary">
                 Remove Player From Tournament
             </button>
         </div>
@@ -91,8 +87,7 @@
         <div class="mb-4">
             <label for="tournamentAddGameId" class="block text-sm font-medium text-gray-200">Tournament ID</label>
             <input [(ngModel)]="tournament.id" name="tournamentAddGameId" type="number" required
-                id="tournamentAddGameId" placeholder="ID"
-                class="input-primary">
+                id="tournamentAddGameId" placeholder="ID" class="input-primary">
         </div>
 
         <div class="mb-4">
@@ -103,7 +98,7 @@
 
         <div class="mb-4 w-2/3 mx-auto">
             <button type="submit"
-                class="w-full px-4 py-2 font-bold text-white  bg-[#c2185b] rounded-lg hover:bg-primary-hover focus:outline-none focus:bg-primary-focus">
+                class="button-primary">
                 Add Game To Tournament
             </button>
         </div>
@@ -113,8 +108,7 @@
         <div class="mb-4">
             <label for="tournamentRemoveGameId" class="block text-sm font-medium text-gray-200">Tournament ID</label>
             <input [(ngModel)]="tournament.id" name="tournamentRemoveGameId" type="number" required
-                id="tournamentRemoveGameId" placeholder="ID"
-                class="input-primary">
+                id="tournamentRemoveGameId" placeholder="ID" class="input-primary">
         </div>
 
         <div class="mb-4">
@@ -124,8 +118,7 @@
         </div>
 
         <div class="mb-4 w-2/3 mx-auto">
-            <button type="submit"
-                class="w-full px-4 py-2 font-bold text-white  bg-primary rounded-lg hover:bg-primary-hover focus:outline-none focus:bg-primary-focus">
+            <button type="submit" class="button-primary">
                 Remove Game From Tournament
             </button>
         </div>

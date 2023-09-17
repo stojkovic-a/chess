@@ -16,6 +16,9 @@ module.exports = {
         'light-square': '#f0d9b5',
 
       },
+      backgroundImage: {
+        'chess': "url('./assets/img/landing.jpg')",
+      }
     },
   },
   plugins: [],
