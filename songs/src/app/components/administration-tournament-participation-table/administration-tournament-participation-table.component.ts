@@ -6,8 +6,8 @@ import { Store } from '@ngrx/store';
 import { catchError, map, of, startWith, switchMap, tap } from 'rxjs';
 import { AppState } from 'src/app/app.state';
 import { PlayerTournamentIds } from 'src/app/models';
-import { loadNumberOfParticipations, loadParticipationsPagination } from 'src/app/store/chess.action';
-import { selectNumberOfParticipation, selectParticipations } from 'src/app/store/chess.selector';
+import { loadNumberOfParticipations, loadParticipationsPagination } from 'src/app/store/tournament/tournament.action';
+import { selectNumberOfParticipation, selectParticipations } from 'src/app/store/tournament/tournament.selector';
 
 @Component({
   selector: 'app-administration-tournament-participation-table',

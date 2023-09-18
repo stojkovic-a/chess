@@ -5,8 +5,8 @@ import { switchMap } from 'rxjs';
 import { AppState } from 'src/app/app.state';
 import { userDto } from 'src/app/models';
 import { DateService } from 'src/app/services/date.service/date.service';
-import { updateUser } from 'src/app/store/chess.action';
-import { selectSelectedUser, selectSelectedUserdId, selectUserUpdateId } from 'src/app/store/chess.selector';
+import { updateUser } from 'src/app/store/user/user.action';
+import { selectSelectedUser, selectSelectedUserdId, selectUserUpdateId } from 'src/app/store/user/user.selector';
 
 @Component({
   selector: 'app-administration-user-update',

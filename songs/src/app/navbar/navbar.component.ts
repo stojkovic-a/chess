@@ -5,7 +5,7 @@ import { AppState } from '../app.state';
 import { Store } from '@ngrx/store';
 import { selectFirstName, selectRoles } from '../store/auth/auth.selector';
 import { signOut } from '../store/auth/auth.action';
-import { AuthService } from '../services/auth.service';
+import { AuthService } from '../services/auth.service/auth.service';
 import { Role } from '../enums';
 
 @Component({

@@ -32,96 +32,98 @@
         </div>
 
         <div class="mb-4 w-2/3 mx-auto">
-            <button type="submit"
-                class="button-primary">
+            <button type="submit" class="button-primary">
                 Update Tournament
             </button>
         </div>
 
     </form>
     <mat-divider></mat-divider>
-    <form (ngSubmit)="addPlayer()" ngNativeValidate class="mt-5 input-container pt-5">
+    <div class="flex flex-row">
+        <form (ngSubmit)="addPlayer()" ngNativeValidate class="mt-5 input-container-narrow pt-5">
 
-        <div class="mb-4">
-            <label for="tournamentAddPlayerId" class="block text-sm font-medium text-gray-200">Tournament ID</label>
-            <input [(ngModel)]="tournament.id" name="tournamentAddPlayerId" type="number" required
-                id="tournamentAddPlayerId" placeholder="ID" class="input-primary">
-        </div>
+            <div class="mb-4">
+                <label for="tournamentAddPlayerId" class="block text-sm font-medium text-gray-200">Tournament ID</label>
+                <input [(ngModel)]="tournament.id" name="tournamentAddPlayerId" type="number" required
+                    id="tournamentAddPlayerId" placeholder="ID" class="input-primary">
+            </div>
 
-        <div class="mb-4">
-            <label for="playerAddId" class="block text-sm font-medium text-gray-200">Player ID</label>
-            <input [(ngModel)]="playerAddId" name="playerAddId" type="number" required id="playerAddId" placeholder="ID"
-                class="input-primary">
-        </div>
+            <div class="mb-4">
+                <label for="playerAddId" class="block text-sm font-medium text-gray-200">Player ID</label>
+                <input [(ngModel)]="playerAddId" name="playerAddId" type="number" required id="playerAddId"
+                    placeholder="ID" class="input-primary">
+            </div>
 
-        <div class="mb-4 w-2/3 mx-auto">
-            <button type="submit"
-                class="button-primary">
-                Add Player To Tournament
-            </button>
-        </div>
-    </form>
+            <div class="mb-4 w-2/3 mx-auto">
+                <button type="submit" class="button-primary">
+                    Add Player To Tournament
+                </button>
+            </div>
+        </form>
+        <!-- <mat-divider></mat-divider> -->
+        <form (ngSubmit)="removePlayer()" ngNativeValidate class="mt-5 input-container-narrow pt-5">
+            <div class="mb-4">
+                <label for="tournamentRemovePlayerId" class="block text-sm font-medium text-gray-200">Tournament
+                    ID</label>
+                <input [(ngModel)]="tournament.id" name="tournamentRemovePlayerId" type="number" required
+                    id="tournamentRemovePlayerId" placeholder="ID" class="input-primary">
+            </div>
+
+            <div class="mb-4">
+                <label for="playerRemoveId" class="block text-sm font-medium text-gray-200">Player ID</label>
+                <input [(ngModel)]="playerRemoveId" name="playerRemoveId" type="number" required id="playerRemoveId"
+                    placeholder="ID" class="input-primary">
+            </div>
+
+            <div class="mb-4 w-2/3 mx-auto">
+                <button type="submit" class="button-primary">
+                    Remove Player From Tournament
+                </button>
+            </div>
+        </form>
+    </div>
     <mat-divider></mat-divider>
-    <form (ngSubmit)="removePlayer()" ngNativeValidate class="mt-5 input-container pt-5">
-        <div class="mb-4">
-            <label for="tournamentRemovePlayerId" class="block text-sm font-medium text-gray-200">Tournament ID</label>
-            <input [(ngModel)]="tournament.id" name="tournamentRemovePlayerId" type="number" required
-                id="tournamentRemovePlayerId" placeholder="ID" class="input-primary">
-        </div>
+    <div class="flex flex-row">
+        <form (ngSubmit)="addGame()" ngNativeValidate class="mt-5 input-container-narrow pt-5">
+            <div class="mb-4">
+                <label for="tournamentAddGameId" class="block text-sm font-medium text-gray-200">Tournament ID</label>
+                <input [(ngModel)]="tournament.id" name="tournamentAddGameId" type="number" required
+                    id="tournamentAddGameId" placeholder="ID" class="input-primary">
+            </div>
 
-        <div class="mb-4">
-            <label for="playerRemoveId" class="block text-sm font-medium text-gray-200">Player ID</label>
-            <input [(ngModel)]="playerRemoveId" name="playerRemoveId" type="number" required id="playerRemoveId"
-                placeholder="ID" class="input-primary">
-        </div>
+            <div class="mb-4">
+                <label for="gameAddId" class="block text-sm font-medium text-gray-200">Game ID</label>
+                <input [(ngModel)]="gameAddId" name="gameAddId" type="number" required id="gameAddId" placeholder="ID"
+                    class="input-primary">
+            </div>
 
-        <div class="mb-4 w-2/3 mx-auto">
-            <button type="submit"
-                class="button-primary">
-                Remove Player From Tournament
-            </button>
-        </div>
-    </form>
-    <mat-divider></mat-divider>
-    <form (ngSubmit)="addGame()" ngNativeValidate class="mt-5 input-container pt-5">
-        <div class="mb-4">
-            <label for="tournamentAddGameId" class="block text-sm font-medium text-gray-200">Tournament ID</label>
-            <input [(ngModel)]="tournament.id" name="tournamentAddGameId" type="number" required
-                id="tournamentAddGameId" placeholder="ID" class="input-primary">
-        </div>
+            <div class="mb-4 w-2/3 mx-auto">
+                <button type="submit" class="button-primary">
+                    Add Game To Tournament
+                </button>
+            </div>
+        </form>
+        <!-- <mat-divider></mat-divider> -->
+        <form (ngSubmit)="removeGame()" ngNativeValidate class="mt-5 input-container-narrow pt-5">
+            <div class="mb-4">
+                <label for="tournamentRemoveGameId" class="block text-sm font-medium text-gray-200">Tournament
+                    ID</label>
+                <input [(ngModel)]="tournament.id" name="tournamentRemoveGameId" type="number" required
+                    id="tournamentRemoveGameId" placeholder="ID" class="input-primary">
+            </div>
 
-        <div class="mb-4">
-            <label for="gameAddId" class="block text-sm font-medium text-gray-200">Game ID</label>
-            <input [(ngModel)]="gameAddId" name="gameAddId" type="number" required id="gameAddId" placeholder="ID"
-                class="input-primary">
-        </div>
+            <div class="mb-4">
+                <label for="gameRemoveId" class="block text-sm font-medium text-gray-200">Game ID</label>
+                <input [(ngModel)]="gameRemoveId" name="gameRemoveId" type="number" required id="gameRemoveId"
+                    placeholder="ID" class="input-primary">
+            </div>
 
-        <div class="mb-4 w-2/3 mx-auto">
-            <button type="submit"
-                class="button-primary">
-                Add Game To Tournament
-            </button>
-        </div>
-    </form>
-    <mat-divider></mat-divider>
-    <form (ngSubmit)="removeGame()" ngNativeValidate class="mt-5 input-container pt-5">
-        <div class="mb-4">
-            <label for="tournamentRemoveGameId" class="block text-sm font-medium text-gray-200">Tournament ID</label>
-            <input [(ngModel)]="tournament.id" name="tournamentRemoveGameId" type="number" required
-                id="tournamentRemoveGameId" placeholder="ID" class="input-primary">
-        </div>
-
-        <div class="mb-4">
-            <label for="gameRemoveId" class="block text-sm font-medium text-gray-200">Game ID</label>
-            <input [(ngModel)]="gameRemoveId" name="gameRemoveId" type="number" required id="gameRemoveId"
-                placeholder="ID" class="input-primary">
-        </div>
-
-        <div class="mb-4 w-2/3 mx-auto">
-            <button type="submit" class="button-primary">
-                Remove Game From Tournament
-            </button>
-        </div>
-    </form>
+            <div class="mb-4 w-2/3 mx-auto">
+                <button type="submit" class="button-primary">
+                    Remove Game From Tournament
+                </button>
+            </div>
+        </form>
+    </div>
     <mat-divider></mat-divider>
 </div>

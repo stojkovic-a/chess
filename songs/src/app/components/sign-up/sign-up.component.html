@@ -50,21 +50,21 @@
             <div class="mb-4">
                 <label for="classicalElo" class="block text-sm font-medium text-gray-200">Classical Elo</label>
                 <input [(ngModel)]="user.classicalElo" name="classicalElo" type="number" id="classicalElo"
-                    placeholder="Classical Elo" class="input-primary">
+                    placeholder="Classical Elo" class="input-primary" [disabled]="!user.isPlayer">
             </div>
 
             <!-- Rapid Elo -->
             <div class="mb-4">
                 <label for="rapidElo" class="block text-sm font-medium text-gray-200">Rapid Elo</label>
                 <input [(ngModel)]="user.rapidElo" name="rapidElo" type="number" id="rapidElo" placeholder="Rapid Elo"
-                    class="input-primary">
+                    class="input-primary" [disabled]="!user.isPlayer">
             </div>
 
             <!-- Blitz Elo -->
             <div class="mb-4">
                 <label for="blitzElo" class="block text-sm font-medium text-gray-200">Blitz Elo</label>
                 <input [(ngModel)]="user.blitzElo" name="blitzElo" type="number" id="blitzElo" placeholder="Blitz Elo"
-                    class="input-primary">
+                    class="input-primary" [disabled]="!user.isPlayer">
             </div>
 
             <!-- Is Player -->

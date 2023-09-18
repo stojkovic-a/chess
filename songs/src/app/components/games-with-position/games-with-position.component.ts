@@ -2,9 +2,8 @@ import { Component, Input, OnInit, SimpleChange, SimpleChanges, ViewChild } from
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
 import { Game } from 'src/app/models';
-import { loadGamesByPosition } from 'src/app/store/chess.action';
-import { selectGamesByPosition, selectNumberOfGamesWithPos } from 'src/app/store/chess.selector';
-import * as ChessActions from '../../store/chess.action';
+import { loadGamesByPosition, loadNumberOfGamesWithPos, selectGame, setCurrentGameMove } from 'src/app/store/game/game.action';
+import { selectGamesByPosition, selectNumberOfGamesWithPos } from 'src/app/store/game/game.selector';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { catchError, map, of, startWith, switchMap, tap } from 'rxjs';
@@ -107,7 +106,7 @@ export class GamesWithPositionComponent implements OnInit {
 
   getAndSetNumberOfGames() {
     console.log("neko stalno poziva ovu fju");
-    this.store.dispatch(ChessActions.loadNumberOfGamesWithPos({ position: this.currentFen }));
+    this.store.dispatch(loadNumberOfGamesWithPos({ position: this.currentFen }));
   }
   ngOnChanges(changes: SimpleChanges) {
     console.log("PROBLEM IS HERE");
@@ -146,9 +145,9 @@ export class GamesWithPositionComponent implements OnInit {
 
   clickedRow(row) {
     console.log(row);
-    this.store.dispatch(ChessActions.selectGame({ game: row.games }));
+    this.store.dispatch(selectGame({ game: row.games }));
     this.store.dispatch(
-      ChessActions.setCurrentGameMove(
+      setCurrentGameMove(
         { moveNum: row.moveNums - 1 }
       ));
     this.selectedId = row.games.id;

@@ -14,23 +14,24 @@
     </div>
 </div> -->
 
-<div class="row h-full w-full overflow-clip">
-    <div class="col-md-4 relative bg-chess bg-cover h-full w-full">
-        <!-- Semi-transparent white rectangle -->
-        <div class="absolute inset-0 bg-white opacity-40 h2/3"></div>
+<div class=" h-full w-full ">
+    <div class=" relative bg-chess bg-cover h-full w-full">
+        <div class="absolute inset-0 bg-white opacity-40"></div>
 
-        <!-- Centered content -->
         <div class="absolute inset-0 flex flex-col justify-center items-center">
             <div class="text-gray-800 font-fancy text-7xl mb-6">Welcome to ChessApp</div>
-            <a [routerLink]="['/log-in']" class="text-white bg-gradient-to-r
+            <a *ngIf="!isLoggedIn" [routerLink]="['/log-in']" class="text-white bg-gradient-to-r
              from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br
               focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 
               font-medium rounded-lg text-sm px-5 py-2.5 text-center mb-2">Log in</a>
 
-            <a [routerLink]="['/sign-up']" class="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600
+            <a *ngIf="!isLoggedIn" [routerLink]="['/sign-up']" class="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600
                  hover:bg-gradient-to-br focus:ring-4 focus:outline-none
                   focus:ring-green-300 dark:focus:ring-green-800 font-medium 
                   rounded-lg text-sm px-5 py-2.5 text-center mb-2">Sign up</a>
+
+            <a *ngIf="isLoggedIn" [routerLink]="['/browse']" class="button-primary w-fit p-3">Browse</a>
+
         </div>
     </div>
 </div>

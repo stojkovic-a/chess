@@ -3,10 +3,8 @@ import { Game, Player } from '../../models';
 import { Observable, catchError, from, map, merge, of, startWith, switchMap, tap } from 'rxjs';
 import { AppState } from 'src/app/app.state';
 import { Store } from '@ngrx/store';
-import { selectBlackPlayerFilter, selectEndDateFilter, selectGamesList, selectNumberOfGames, selectPlayerFeature, selectResultFilter, selectStartDateFilter, selectTournamentFilter, selectWhitePlayerFilter } from '../../store/chess.selector';
-import { loadGames } from '../../store/chess.action';
 import { MatTableDataSource } from '@angular/material/table';
-import * as ChessActions from '../../store/chess.action';
+import * as GameActions from '../../store/game/game.action'
 import { MatDialog } from '@angular/material/dialog';
 import { PlayerInfoComponent } from '../player-info/player-info.component';
 import { DateService } from 'src/app/services/date.service/date.service';
@@ -16,6 +14,10 @@ import { MatSort, Sort } from '@angular/material/sort';
 import { Role } from 'src/app/enums';
 import { selectRoles } from 'src/app/store/auth/auth.selector';
 import { Router } from '@angular/router';
+import { selectGamesList } from 'src/app/store/game/game.selector';
+import { selectBlackPlayerFilter, selectEndDateFilter, selectResultFilter, selectStartDateFilter, selectTournamentFilter, selectWhitePlayerFilter } from 'src/app/store/filter/filter.selector';
+import { changePage } from 'src/app/store/page/page.action';
+import { selectNumberOfGames } from 'src/app/store/page/page.selector';
 
 @Component({
   selector: 'app-chess-games-list',
@@ -66,7 +68,7 @@ export class ChessGamesListComponent implements OnInit {
   pageSizes = [1, 5, 10, 20];
 
   getTableData$(pageNumber: number, pageSize: number) {
-    this.store.dispatch(ChessActions.loadGames({ pageSize: pageSize }))
+    this.store.dispatch(GameActions.loadGames({ pageSize: pageSize }))
     return this.store.select(selectGamesList);
   }
 
@@ -101,7 +103,7 @@ export class ChessGamesListComponent implements OnInit {
         tap(() => {
           this.isLoading = true;
           this.cd.detectChanges();
-          this.store.dispatch(ChessActions.changePage({ newPage: this.paginator.pageIndex + 1 }))
+          this.store.dispatch(changePage({ newPage: this.paginator.pageIndex + 1 }))
 
         }),
         switchMap(() => {
@@ -132,7 +134,7 @@ export class ChessGamesListComponent implements OnInit {
         this.isAdmin = roles.includes(Role.Admin);
         console.log(this.isAdmin);
       })
-    this.store.dispatch(ChessActions.loadNumberOfGames());
+    this.store.dispatch(GameActions.loadNumberOfGames());
     this.store.select(selectNumberOfGames)
       .subscribe((num) => {
         this.totalData = num;
@@ -201,13 +203,13 @@ export class ChessGamesListComponent implements OnInit {
   }
 
   gameSelected(game: Game) {
-    this.store.dispatch(ChessActions.selectGame({ game }));
-    this.store.dispatch(ChessActions.setCurrentGameMove({ moveNum: -1 }));
+    this.store.dispatch(GameActions.selectGame({ game }));
+    this.store.dispatch(GameActions.setCurrentGameMove({ moveNum: -1 }));
     this.router.navigateByUrl(`/gameView/${game.id}`);
   }
 
   deleteGame(game: Game) {
-    this.store.dispatch(ChessActions.deleteGame({ id: game.id }));
+    this.store.dispatch(GameActions.deleteGame({ id: game.id }));
     this.ngAfterViewInit();
     this.totalData--;
   }

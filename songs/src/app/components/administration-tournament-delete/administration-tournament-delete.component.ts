@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
-import { deleteSelectedTournament } from 'src/app/store/chess.action';
-import { selectDeletedTournament, selectSelectedTournamentId } from 'src/app/store/chess.selector';
+import { deleteSelectedTournament } from 'src/app/store/tournament/tournament.action';
+import { selectDeletedTournament, selectSelectedTournamentId } from 'src/app/store/tournament/tournament.selector';
 
 @Component({
   selector: 'app-administration-tournament-delete',

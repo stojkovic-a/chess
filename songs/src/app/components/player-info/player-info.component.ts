@@ -3,7 +3,7 @@ import { Player } from '../../models';
 import { Observable, map, of } from 'rxjs';
 import { AppState } from 'src/app/app.state';
 import { Store } from '@ngrx/store';
-import { selectPlayerInfo } from 'src/app/store/chess.selector';
+import { selectPlayerInfo } from 'src/app/store/user/user.selector';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';

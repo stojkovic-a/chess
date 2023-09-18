@@ -15,6 +15,7 @@ export interface AuthState {
   roles: Role[];
   loading: boolean;
   error: string | null;
+  registered: string
 }
 
 export const initialState: AuthState = {
@@ -23,6 +24,7 @@ export const initialState: AuthState = {
   roles: [],
   loading: false,
   error: null,
+  registered: ""
 };
 
 const authReducer = createReducer(
@@ -56,6 +58,12 @@ const authReducer = createReducer(
   ({
     ...state,
     ...initialState
+  })
+  ),
+  on(fromAuth.signUpSuccess, (state, { user }) =>
+  ({
+    ...state,
+    registered: user.email
   })
   )
 );

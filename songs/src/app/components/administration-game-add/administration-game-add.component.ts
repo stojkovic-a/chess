@@ -4,8 +4,8 @@ import { Store } from '@ngrx/store';
 import { takeLast } from 'rxjs';
 import { AppState } from 'src/app/app.state';
 import { GameCreationDto } from 'src/app/models';
-import { createGame } from 'src/app/store/chess.action';
-import { selectCreatedGameId } from 'src/app/store/chess.selector';
+import { createGame } from 'src/app/store/game/game.action';
+import { selectCreatedGameId } from 'src/app/store/game/game.selector';
 
 @Component({
   selector: 'app-administration-game-add',

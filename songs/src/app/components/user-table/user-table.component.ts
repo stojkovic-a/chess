@@ -6,8 +6,8 @@ import { Store } from '@ngrx/store';
 import { Observable, catchError, map, merge, of, startWith, switchMap, tap } from 'rxjs';
 import { AppState } from 'src/app/app.state';
 import { userDto } from 'src/app/models';
-import { loadNumberOfUsers, loadUsersPagination, selectUser } from 'src/app/store/chess.action';
-import { selectDeletedUser, selectNumberOfUsers, selectUsersPagination } from 'src/app/store/chess.selector';
+import { loadNumberOfUsers, loadUsersPagination, selectUser } from 'src/app/store/user/user.action';
+import { selectDeletedUser, selectNumberOfUsers, selectUsersPagination } from 'src/app/store/user/user.selector';
 
 @Component({
   selector: 'app-user-table',

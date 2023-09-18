@@ -2,7 +2,7 @@
 import { Injectable } from '@angular/core';
 import * as dayjs from 'dayjs';
 import { CookieService as NgxCookieService } from 'ngx-cookie-service';
-import { Tokens } from '../interfaces';
+import { Tokens } from '../../interfaces';
 
 @Injectable({
   providedIn: 'root',

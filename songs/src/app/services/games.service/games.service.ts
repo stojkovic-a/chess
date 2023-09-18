@@ -5,8 +5,9 @@ import { environment } from 'src/environments/environment.development';
 import { AppState } from 'src/app/app.state';
 import { Store } from '@ngrx/store';
 import { Observable, from, of, take } from 'rxjs';
-import { selectBlackPlayerFilter, selectEndDateFilter, selectPagesNumber, selectResultFilter, selectStartDateFilter, selectTournamentFilter, selectWhitePlayerFilter } from '../../store/chess.selector';
+import { selectBlackPlayerFilter, selectEndDateFilter, selectResultFilter, selectStartDateFilter, selectTournamentFilter, selectWhitePlayerFilter } from '../../store/filter/filter.selector';
 import { GamePosNum } from 'src/app/interfaces';
+import { selectPagesNumber } from 'src/app/store/page/page.selector';
 
 @Injectable({
   providedIn: 'root'

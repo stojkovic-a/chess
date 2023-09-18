@@ -13,11 +13,11 @@ import { LogInComponent } from './components/log-in/log-in.component';
 import { RouterModule } from '@angular/router';
 import { LandingComponent } from './components/landing/landing.component';
 import { FormsModule } from '@angular/forms';
-import { AuthService } from './services/auth.service';
+import { AuthService } from './services/auth.service/auth.service';
 import { AuthEffects } from './store/auth/auth.effects';
 import { reducer } from './store/auth/auth.reducer';
 import { AuthInterceptor } from './auth.interceptor';
-import { AuthGuard } from './services/auth.guard';
+import { AuthGuard } from './services/auth.guard/auth.guard';
 import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -28,8 +28,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { ChessGamePreviewComponent } from './components/chess-game-preview/chess-game-preview.component';
 import { ChessGamesListComponent } from './components/chess-games-list/chess-games-list.component';
 import { PlayerInfoComponent } from './components/player-info/player-info.component';
-import { ChessEffects } from './store/chess.effects';
-import { pageReducer, playerReducer, gameReducer, filterReducer, userReducer, tournamentReducer, participationReducer, gameTournamentReducer } from './store/chess.reducer';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatTableModule } from '@angular/material/table';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -61,6 +59,15 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatTabsModule } from '@angular/material/tabs';
 import { Role } from './enums';
+import { pageReducer } from './store/page/page.reducer';
+import { playerReducer, userReducer } from './store/user/user.reducer';
+import { gameReducer } from './store/game/game.reducer';
+import { filterReducer } from './store/filter/filter.reducer';
+import { gameTournamentReducer, participationReducer, tournamentReducer } from './store/tournament/tournament.reducer';
+import { UserEffects } from './store/user/user.effects';
+import { TournamentEffects } from './store/tournament/tournament.effects';
+import { GameEffects } from './store/game/game.effects';
+import { FilterEffects } from './store/filter/filter.effects';
 
 
 @NgModule({
@@ -130,7 +137,7 @@ import { Role } from './enums';
       maxAge: 25, // Retains last 25 states
       autoPause: true, // Pauses recording actions and state changes when the extension window is not open
     }),
-    EffectsModule.forRoot([ChessEffects, AuthEffects]),
+    EffectsModule.forRoot([UserEffects,TournamentEffects,GameEffects,FilterEffects, AuthEffects]),
     RouterModule.forRoot([
       { path: 'log-in', component: LogInComponent },
       { path: 'sign-up', component: SignUpComponent },

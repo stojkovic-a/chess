@@ -6,8 +6,8 @@ import { Store } from '@ngrx/store';
 import { Observable, catchError, map, of, startWith, switchMap, tap } from 'rxjs';
 import { AppState } from 'src/app/app.state';
 import { userDto } from 'src/app/models';
-import { deleteSelectedUser, loadNumberOfUsers, loadUsersPagination, selectUser } from 'src/app/store/chess.action';
-import { selectDeletedUser, selectNumberOfUsers, selectSelectedUserdId, selectUsersPagination } from 'src/app/store/chess.selector';
+import { deleteSelectedUser, loadNumberOfUsers, loadUsersPagination, selectUser } from 'src/app/store/user/user.action';
+import { selectDeletedUser, selectNumberOfUsers, selectSelectedUserdId, selectUsersPagination } from 'src/app/store/user/user.selector';
 
 @Component({
   selector: 'app-administration-user-delete',

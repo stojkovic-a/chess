@@ -4,7 +4,7 @@ import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { Store } from '@ngrx/store';
 import { Observable, map, startWith } from 'rxjs';
 import { AppState } from 'src/app/app.state';
-import { loadFilters, selectBlackPlayerFilter, selectEndDateFilter, selectTournamentFilter, selectResultFilter, selectStartDateFilter, selectWhitePlayerFilter } from 'src/app/store/chess.action';
+import { loadFilters, selectBlackPlayerFilter, selectEndDateFilter, selectTournamentFilter, selectResultFilter, selectStartDateFilter, selectWhitePlayerFilter } from 'src/app/store/filter/filter.action';
 import {
   selectWhitePlayerFilter as SelectWhite,
   selectBlackPlayerFilter as SelectBlack,
@@ -14,7 +14,7 @@ import {
   selectResultFilter as SelectResult,
   selectPlayerFilters,
   selectTournamentFilters
-} from 'src/app/store/chess.selector';
+} from 'src/app/store/filter/filter.selector';
 
 @Component({
   selector: 'app-chess-games-filters',
@@ -141,5 +141,7 @@ export class ChessGamesFiltersComponent {
     return options.filter(option => option.toLowerCase().includes(filterValue));
   }
 
-
+ test(){
+  console.log('ima nade');
+ }
 }

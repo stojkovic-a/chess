@@ -2,19 +2,19 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
-import { User } from '../models/user';
+import { User } from '../../models/user';
 import { environment } from 'src/environments/environment.development';
-import { SignUpDto } from '../models/signUpDto';
-import { CookieService } from './cookie-service.service';
-import { Tokens } from '../interfaces';
+import { SignUpDto } from '../../models/signUpDto';
+import { CookieService } from '../cookie.service/cookie-service.service';
+import { Tokens } from '../../interfaces';
 import { Token } from '@angular/compiler';
 import { Router } from '@angular/router';
 import jwtDecode from 'jwt-decode';
-import { Role } from '../enums';
-import { AppState } from '../app.state';
+import { Role } from '../../enums';
+import { AppState } from '../../app.state';
 import { Store } from '@ngrx/store';
-import { loadUserFromCookie, refreshTokens } from '../store/auth/auth.action';
-import { selectRoles, selectToken } from '../store/auth/auth.selector';
+import { loadUserFromCookie, refreshTokens } from '../../store/auth/auth.action';
+import { selectRoles, selectToken } from '../../store/auth/auth.selector';
 
 @Injectable({
   providedIn: 'root',

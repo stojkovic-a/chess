@@ -6,8 +6,8 @@ import { AppState } from 'src/app/app.state';
 import { GameType } from 'src/app/enums';
 import { Tournament } from 'src/app/models';
 import { DateService } from 'src/app/services/date.service/date.service';
-import { addGameToTournament, addPlayerToTournament, removeGameFromTournament, removePlayerFromTournament, updateTournament } from 'src/app/store/chess.action';
-import { selectAddedGame, selectAddedPlayer, selectRemovedGame, selectRemovedPlayer, selectSelectedTournament, selectTournamentUpdateId } from 'src/app/store/chess.selector';
+import { addGameToTournament, addPlayerToTournament, removeGameFromTournament, removePlayerFromTournament, updateTournament } from 'src/app/store/tournament/tournament.action';
+import { selectAddedGame, selectAddedPlayer, selectRemovedGame, selectRemovedPlayer, selectSelectedTournament, selectTournamentUpdateId } from 'src/app/store/tournament/tournament.selector';
 
 @Component({
   selector: 'app-administration-tournament-update',

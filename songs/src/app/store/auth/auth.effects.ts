@@ -4,7 +4,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, switchMap, tap } from 'rxjs/operators';
 import { of } from 'rxjs';
 import * as fromAuth from './auth.action';
-import { AuthService } from '../../services/auth.service';
+import { AuthService } from '../../services/auth.service/auth.service';
 import { Router } from '@angular/router';
 
 @Injectable()
@@ -29,11 +29,11 @@ export class AuthEffects {
 
     signUp$ = createEffect(() =>
         this.actions$.pipe(
-            ofType(fromAuth.signUp), // Listen for the signUp action
+            ofType(fromAuth.signUp),
             switchMap(({ userDto }) =>
-                this.authService.signUp(userDto).pipe( // Call the signUp method from your AuthService
-                    map((user) => fromAuth.signUpSuccess({ user })), // Dispatch signUpSuccess on success
-                    catchError((error) => of(fromAuth.signUpFailure({ error }))) // Dispatch signUpFailure on error
+                this.authService.signUp(userDto).pipe(
+                    map((user) => fromAuth.signUpSuccess({ user })),
+                    catchError((error) => of(fromAuth.signUpFailure({ error })))
                 )
             )
         )

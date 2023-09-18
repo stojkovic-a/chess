@@ -3,8 +3,8 @@ import { Store } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
 import { AppState } from 'src/app/app.state';
 import { Game, Position, PositionToGame } from 'src/app/models';
-import { loadGameWithPositions } from 'src/app/store/chess.action';
-import { selectGameWithPositions, selectMoveNumber, selectSelectedGame } from 'src/app/store/chess.selector';
+import { loadGameWithPositions } from 'src/app/store/game/game.action';
+import { selectGameWithPositions, selectMoveNumber, selectSelectedGame } from 'src/app/store/game/game.selector';
 @Component({
   selector: 'app-chess-game-view',
   templateUrl: './chess-game-view.component.html',

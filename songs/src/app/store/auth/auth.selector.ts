@@ -25,6 +25,10 @@ export const selectError = createSelector(
     (state) => state.error
 )
 
+export const selectRegistered = createSelector(
+    authFeature,
+    (state) => state.registered
+)
 
 // export const selectIsAuth = createSelector(
 //     authFeature,

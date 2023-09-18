@@ -8,7 +8,7 @@ import {
     HttpErrorResponse,
 } from '@angular/common/http';
 import { EMPTY, Observable, catchError, of, throwError } from 'rxjs';
-import { CookieService } from './services/cookie-service.service';
+import { CookieService } from './services/cookie.service/cookie-service.service';
 import { AppState } from './app.state';
 import { Store } from '@ngrx/store';
 import { selectToken } from './store/auth/auth.selector';

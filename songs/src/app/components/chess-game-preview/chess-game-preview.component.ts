@@ -2,9 +2,9 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Game, Player, Tournament } from '../../models';
 import { AppState } from 'src/app/app.state';
 import { Store, select } from '@ngrx/store';
-import { loadPlayer } from '../../store/chess.action';
+import { loadPlayer } from '../../store/user/user.action';
 import { Observable, of, take } from 'rxjs';
-import { selectPlayerName } from '../../store/chess.selector';
+import { selectPlayerName } from '../../store/user/user.selector';
 
 @Component({
   selector: 'app-chess-game-preview',
@@ -32,8 +32,8 @@ export class ChessGamePreviewComponent implements OnInit {
   ngOnInit(): void {
     if (this.game) {
       console.log(this.game.gameDate instanceof Date);
-      const intermidiateDate=new Date(this.game.gameDate);
-      this.gameDate=intermidiateDate.toLocaleDateString(undefined, {
+      const intermidiateDate = new Date(this.game.gameDate);
+      this.gameDate = intermidiateDate.toLocaleDateString(undefined, {
         year: 'numeric',
         month: '2-digit',
         day: '2-digit',
