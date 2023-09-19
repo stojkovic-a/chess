@@ -1,10 +1,7 @@
-import { createAction, createReducer, on } from "@ngrx/store";
+import { createReducer, on } from "@ngrx/store";
 import * as GameActions from './game.action'
 import { EntityState, createEntityAdapter } from "@ngrx/entity";
-import { state } from "@angular/animations";
-import { Filter, GameTournamentIds, Player, PlayerTournamentIds, Tournament, userDto, Game } from "../../models";
-import { Platform } from "@angular/cdk/platform";
-import { act } from "@ngrx/effects";
+import { Game } from "../../models";
 import { GamePosNum } from "../../interfaces";
 
 export interface GameState extends EntityState<Game> {

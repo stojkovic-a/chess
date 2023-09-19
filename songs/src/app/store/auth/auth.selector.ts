@@ -1,7 +1,5 @@
 import { createFeatureSelector, createSelector } from "@ngrx/store";
 import { AuthState } from "./auth.reducer";
-import jwt_decode from "jwt-decode";
-import { state } from "@angular/animations";
 
 export const authFeature = createFeatureSelector<AuthState>("auth");
 

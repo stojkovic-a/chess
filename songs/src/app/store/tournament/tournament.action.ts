@@ -1,6 +1,5 @@
 import { createAction, props } from "@ngrx/store";
-import { Filter, Game, GameCreationDto, GameTournamentIds, Player, PlayerTournamentIds, Tournament, userDto } from "../../models";
-import { GamePosNum } from "../../interfaces";
+import { GameTournamentIds, PlayerTournamentIds, Tournament } from "../../models";
 
 export const loadTournaments = createAction("Load Tournaments");
 

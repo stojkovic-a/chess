@@ -1,10 +1,7 @@
-// src/app/auth/store/auth.reducer.ts
 import { createReducer, on } from '@ngrx/store';
 import * as fromAuth from './auth.action';
-import { User } from 'src/app/models/user';
 import { Tokens } from 'src/app/interfaces';
 import { Role } from 'src/app/enums';
-import jwt_decode from "jwt-decode";
 import jwtDecode from 'jwt-decode';
 
 

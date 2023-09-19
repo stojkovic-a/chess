@@ -1,10 +1,9 @@
 import { createAction, props } from '@ngrx/store';
-import { User } from '../../models/user'; // Define your User model
+import { User } from '../../models/user'; 
 import { SignUpDto } from 'src/app/models/signUpDto';
 import { Tokens } from 'src/app/interfaces';
 import { Role } from 'src/app/enums';
 
-// Action for signing in
 export const signIn = createAction(
     '[Auth] Sign In',
     props<{ username: string; password: string }>()
@@ -20,7 +19,6 @@ export const signInFailure = createAction(
     props<{ error: string }>()
 );
 
-// Action for signing up
 export const signUp = createAction(
     '[Auth] Sign Up',
     props<{ userDto: SignUpDto }>()

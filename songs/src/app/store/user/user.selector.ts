@@ -1,9 +1,6 @@
 import { createSelector } from "@ngrx/store";
 import { AppState } from "../../app.state";
-import { Song } from "../../models/song";
-import { Filter, Game, GameTournamentIds, Player, PlayerTournamentIds, Tournament, userDto } from "../../models";
-import { filter } from "rxjs";
-import { BlockParameter } from "@angular/compiler";
+import { Player, userDto } from "../../models";
 
 
 export const selectPlayerFeature = createSelector(

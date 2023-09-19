@@ -1,4 +1,3 @@
-// auth.interceptor.ts
 import { Injectable } from '@angular/core';
 import {
     HttpInterceptor,
@@ -17,7 +16,6 @@ import { refreshTokens, signOut } from './store/auth/auth.action';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment.development';
 
-//TODO: Move file to appropriate place in project structure
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
     exceptionRoute: string[] = [
@@ -57,7 +55,6 @@ export class AuthInterceptor implements HttpInterceptor {
         }
 
 
-        // Get the authentication token from the cookie
         let accessToken = "";
         let refreshToken = "";
 
@@ -67,7 +64,6 @@ export class AuthInterceptor implements HttpInterceptor {
                 refreshToken = tokens.refresh_token;
             })
 
-        // Clone the request and add the Bearer token to the headers if the token is present
         const accesExp = jwtDecode<{ exp: number }>(accessToken).exp;
 
         if (accessToken.length != 0 && Date.now() < accesExp * 1000) {
@@ -80,7 +76,6 @@ export class AuthInterceptor implements HttpInterceptor {
             if (refreshToken.length != 0) {
                 const refreshExp = jwtDecode<{ exp: number }>(refreshToken).exp;
                 if (Date.now() < refreshExp * 1000) {
-                    // refresh token not expired, access token expired, send refresh 
                     this.store.dispatch(refreshTokens({ refreshToken: refreshToken }));
                     this.store.select(selectToken)
                         .subscribe(tokens => {
@@ -91,11 +86,9 @@ export class AuthInterceptor implements HttpInterceptor {
                                 },
                             });
 
-                            // return next.handle(request);
                         })
                 }
             } else {
-                // access token expired, refresh expired or not in store
                 this.store.dispatch(signOut());
                 return EMPTY
             }

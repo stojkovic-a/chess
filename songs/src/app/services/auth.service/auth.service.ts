@@ -1,4 +1,3 @@
-// src/app/auth/auth.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
@@ -7,7 +6,6 @@ import { environment } from 'src/environments/environment.development';
 import { SignUpDto } from '../../models/signUpDto';
 import { CookieService } from '../cookie.service/cookie-service.service';
 import { Tokens } from '../../interfaces';
-import { Token } from '@angular/compiler';
 import { Router } from '@angular/router';
 import jwtDecode from 'jwt-decode';
 import { Role } from '../../enums';
@@ -39,7 +37,6 @@ export class AuthService {
           this.router.navigateByUrl('/');
         }
         else {
-          //TODO: THROW EXCEP HERE SNACKBAR
         }
         return response;
       })
