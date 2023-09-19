@@ -3,7 +3,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
 import { GameType } from 'src/app/enums';
-import {  Tournament } from 'src/app/models';
+import { Tournament } from 'src/app/models';
 import { CreateTournament } from 'src/app/store/tournament/tournament.action';
 import { selectCreatedTournamentId } from 'src/app/store/tournament/tournament.selector';
 
@@ -21,6 +21,12 @@ export class AdministrationTournamentAddComponent implements OnInit {
     minElo: 0,
     gamesType: null
   };
+  id: number;
+  tournamentName: string;
+  startingDate: Date;
+  endingDate: Date | null;
+  minElo: number;
+
   gamesType: string;
   gamesTypeEnum: GameType = GameType.CLASSICAL;
 
@@ -42,7 +48,11 @@ export class AdministrationTournamentAddComponent implements OnInit {
     }
     this.tournament = {
       ...this.tournament,
-      gamesType: this.gamesTypeEnum
+      gamesType: this.gamesTypeEnum,
+      tournamentName: this.tournamentName,
+      startingDate: this.startingDate,
+      endingDate: this.endingDate,
+      minElo: this.minElo
     }
     this.store.dispatch(CreateTournament({ tournament: this.tournament }));
     this.store.select(selectCreatedTournamentId)
