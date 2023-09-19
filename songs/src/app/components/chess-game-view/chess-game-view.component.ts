@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, Input, ElementRef } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
 import { AppState } from 'src/app/app.state';
-import { Game, Position, PositionToGame } from 'src/app/models';
+import { Game, PositionToGame } from 'src/app/models';
 import { loadGameWithPositions } from 'src/app/store/game/game.action';
 import { selectGameWithPositions, selectMoveNumber, selectSelectedGame } from 'src/app/store/game/game.selector';
 @Component({
@@ -31,23 +31,6 @@ export class ChessGameViewComponent implements OnInit {
       return this.currentExpandedFen[(7 - row) * 8 + (7 - col)];
     }
     return this.currentExpandedFen[i];
-    // while (j <= i) {
-    //     if (this.currentFen[iter] === '/') {
-    //       iter++
-    //     }
-    //   if (j === i) {
-    //     return this.currentFen[iter];
-    //   }
-    //   if (this.currentFen[iter].match(/[a-z]/i)) {
-    //     j++;
-    //   } else if (/^[0-9]$/.test(this.currentFen[iter])) {
-    //     j += parseInt(this.currentFen[iter]);
-    //   }
-    //   iter++;
-    // }
-    // return "";
-
-
   }
   ngOnInit(): void {
     this.selectedGame$ = this.store.select(selectSelectedGame);
@@ -80,19 +63,15 @@ export class ChessGameViewComponent implements OnInit {
   }
 
   nextMove() {
-    console.log(this.currentMove);
     if (this.currentMove + 1 < this.positionsToGame.length) {
       this.currentMove++;
       this.currentFen = this.positionsToGame[this.currentMove].position.position;
       this.currentExpandedFen = this.expandFen(this.currentFen);
-      console.log('clicked napred');
-      console.log(this.currentFen);
     }
   }
 
   prevMove() {
 
-    console.log(this.currentMove);
     if (this.currentMove >= 0) {
       this.currentMove--;
       if (this.currentMove == -1) {
@@ -123,7 +102,6 @@ export class ChessGameViewComponent implements OnInit {
         continue;
       }
     }
-    console.log(expandedFen);
     return expandedFen;
   }
 

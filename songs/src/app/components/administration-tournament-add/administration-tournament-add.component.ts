@@ -3,8 +3,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
 import { GameType } from 'src/app/enums';
-import { Game, Tournament } from 'src/app/models';
-import { TournamentService } from 'src/app/services/tornament.service/tournament.service';
+import {  Tournament } from 'src/app/models';
 import { CreateTournament } from 'src/app/store/tournament/tournament.action';
 import { selectCreatedTournamentId } from 'src/app/store/tournament/tournament.selector';
 

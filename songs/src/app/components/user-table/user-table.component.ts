@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTableDataSource } from '@angular/material/table';
 import { Store } from '@ngrx/store';
 import { Observable, catchError, map, merge, of, startWith, switchMap, tap } from 'rxjs';

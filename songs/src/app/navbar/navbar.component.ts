@@ -25,7 +25,7 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
     this.name$ = this.store.select(selectFirstName);
-    this.name$.subscribe(x => console.log(x));
+    // this.name$.subscribe(x => console.log(x));
     this.store.select(selectRoles)
       .subscribe((roles) => {
         this.isAdmin = roles.includes(Role.Admin);

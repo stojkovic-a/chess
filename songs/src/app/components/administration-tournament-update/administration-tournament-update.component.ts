@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { DateSelectionModelChange } from '@angular/material/datepicker';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';

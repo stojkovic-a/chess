@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, SimpleChange, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
 import { Game } from 'src/app/models';
@@ -100,16 +100,13 @@ export class GamesWithPositionComponent implements OnInit {
       .subscribe((num) => {
         this.totalData = num;
         this.paginator.length = num;
-        console.log(num);
       });
   }
 
   getAndSetNumberOfGames() {
-    console.log("neko stalno poziva ovu fju");
     this.store.dispatch(loadNumberOfGamesWithPos({ position: this.currentFen }));
   }
   ngOnChanges(changes: SimpleChanges) {
-    console.log("PROBLEM IS HERE");
     if (changes['currentFen'] && changes['currentFen'].currentValue !== changes['currentFen'].previousValue) {
       this.currentPage = 0;
       this.paginator.pageIndex = 0;
@@ -140,11 +137,9 @@ export class GamesWithPositionComponent implements OnInit {
   //     ChessActions.setCurrentGameMove(
   //       { moveNum: this.moveNums[index] - 1 }
   //     ));
-  //   console.log('sve hoce');
   // }
 
   clickedRow(row) {
-    console.log(row);
     this.store.dispatch(selectGame({ game: row.games }));
     this.store.dispatch(
       setCurrentGameMove(

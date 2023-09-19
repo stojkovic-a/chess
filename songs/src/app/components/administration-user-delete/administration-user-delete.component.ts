@@ -1,13 +1,9 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
+import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { MatTableDataSource } from '@angular/material/table';
 import { Store } from '@ngrx/store';
-import { Observable, catchError, map, of, startWith, switchMap, tap } from 'rxjs';
 import { AppState } from 'src/app/app.state';
-import { userDto } from 'src/app/models';
-import { deleteSelectedUser, loadNumberOfUsers, loadUsersPagination, selectUser } from 'src/app/store/user/user.action';
-import { selectDeletedUser, selectNumberOfUsers, selectSelectedUserdId, selectUsersPagination } from 'src/app/store/user/user.selector';
+import { deleteSelectedUser } from 'src/app/store/user/user.action';
+import { selectDeletedUser, selectSelectedUserdId } from 'src/app/store/user/user.selector';
 
 @Component({
   selector: 'app-administration-user-delete',
@@ -27,7 +23,6 @@ export class AdministrationUserDeleteComponent implements OnInit {
     this.store.dispatch(deleteSelectedUser({ userId: this.selectedUserId }));
     this.store.select(selectDeletedUser)
       .subscribe(userId => {
-        console.log(userId);
         if (userId) {
           this.snackBar.open(`Successfully deleted a user: ${userId}`, `OK`, {
             horizontalPosition: 'right',

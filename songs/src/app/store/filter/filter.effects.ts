@@ -30,7 +30,6 @@ export class FilterEffects {
             mergeMap(() =>
                 this.filterService.getFilters().pipe(
                     map((filter) => {
-                        console.log('log fron effect', filter);
                         const filters: Filter = {
                             playerNames: filter.names,
                             tournamentNames: filter.tournaments

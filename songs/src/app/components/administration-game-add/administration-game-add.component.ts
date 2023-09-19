@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Store } from '@ngrx/store';
-import { takeLast } from 'rxjs';
 import { AppState } from 'src/app/app.state';
 import { GameCreationDto } from 'src/app/models';
 import { createGame } from 'src/app/store/game/game.action';
@@ -28,7 +27,6 @@ export class AdministrationGameAddComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.game.gameDate);
     this.game.addPgn(this.gamePgnAsString);
     this.store.dispatch(createGame({ gameCreationDto: this.game }));
     this.store.select(selectCreatedGameId)

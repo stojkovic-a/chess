@@ -70,7 +70,6 @@ export class AdministrationTournamentGameTableComponent {
         })
       )
       .subscribe((data) => {
-        console.log(data, 'test test');
         this.gameTournament = data;
         this.paginator.length = this.totalData;
         this.dataSource = new MatTableDataSource(this.gameTournament);

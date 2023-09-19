@@ -1,6 +1,6 @@
-import { Component, EventEmitter, OnInit, Output, ViewChild, AfterViewInit, Inject, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { Game, Player } from '../../models';
-import { Observable, catchError, from, map, merge, of, startWith, switchMap, tap } from 'rxjs';
+import { Observable, catchError, map, merge, of, startWith, switchMap, tap } from 'rxjs';
 import { AppState } from 'src/app/app.state';
 import { Store } from '@ngrx/store';
 import { MatTableDataSource } from '@angular/material/table';
@@ -9,7 +9,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { PlayerInfoComponent } from '../player-info/player-info.component';
 import { DateService } from 'src/app/services/date.service/date.service';
 import { MatPaginator } from '@angular/material/paginator';
-import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { MatSort, Sort } from '@angular/material/sort';
 import { Role } from 'src/app/enums';
 import { selectRoles } from 'src/app/store/auth/auth.selector';
@@ -132,7 +131,6 @@ export class ChessGamesListComponent implements OnInit {
     this.store.select(selectRoles)
       .subscribe((roles) => {
         this.isAdmin = roles.includes(Role.Admin);
-        console.log(this.isAdmin);
       })
     this.store.dispatch(GameActions.loadNumberOfGames());
     this.store.select(selectNumberOfGames)

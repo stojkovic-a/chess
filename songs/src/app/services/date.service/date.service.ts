@@ -25,7 +25,6 @@ export class DateService {
     let daysString = days < 10 ? `0${days}` : days.toString();
     let monthString = month < 10 ? `0${month}` : month.toString();
 
-    console.log(days, month, year);
     return `${year.toString()}-${monthString.toString()}-${daysString.toString()}`
   }
 }

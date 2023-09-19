@@ -1,10 +1,19 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { Store } from '@ngrx/store';
 import { Observable, map, startWith } from 'rxjs';
 import { AppState } from 'src/app/app.state';
-import { loadFilters, selectBlackPlayerFilter, selectEndDateFilter, selectTournamentFilter, selectResultFilter, selectStartDateFilter, selectWhitePlayerFilter } from 'src/app/store/filter/filter.action';
+import {
+  loadFilters,
+  selectBlackPlayerFilter,
+  selectEndDateFilter,
+  selectTournamentFilter,
+  selectResultFilter,
+  selectStartDateFilter,
+  selectWhitePlayerFilter
+} from 'src/app/store/filter/filter.action';
+
 import {
   selectWhitePlayerFilter as SelectWhite,
   selectBlackPlayerFilter as SelectBlack,
@@ -117,7 +126,6 @@ export class ChessGamesFiltersComponent {
     this.store.select(selectTournamentFilters)
       .subscribe((filters) => {
         this.tournamentOptions = filters;
-        console.log(this.tournamentOptions, 'aaaajcigadag');
 
         this.filteredOptions6 = this.tournamentControl.valueChanges.pipe(
           startWith(''),
@@ -141,7 +149,6 @@ export class ChessGamesFiltersComponent {
     return options.filter(option => option.toLowerCase().includes(filterValue));
   }
 
- test(){
-  console.log('ima nade');
- }
+  test() {
+  }
 }

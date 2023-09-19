@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { NumberValueAccessor } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Store } from '@ngrx/store';
@@ -71,7 +70,6 @@ export class AdministrationTournamentParticipationTableComponent implements OnIn
         })
       )
       .subscribe((data) => {
-        console.log(data);
         this.playerTournament = data;
         this.paginator.length = this.totalData;
         this.dataSource = new MatTableDataSource(this.playerTournament);

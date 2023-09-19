@@ -103,7 +103,6 @@ export class GameEffects {
         mergeMap((action) =>
             this.gamesService.deleteGame(action.id).pipe(
                 map((result) => {
-                    console.log(result);
                     return GameActions.deleteGameSuccess({ id: action.id })
                 }
                 ),

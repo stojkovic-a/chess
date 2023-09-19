@@ -1,16 +1,13 @@
-<!-- login.component.html -->
 <div class="flex justify-center items-center h-3/4">
     <div class="w-full max-w-md">
         <h1 class="text-3xl font-semibold mb-4 text-gray-200">Log in</h1>
         <form (ngSubmit)="onSubmit()" ngNativeValidate>
-            <!-- Email -->
             <div class="mb-4">
                 <label for="email" class="block text-sm font-medium text-gray-200">Email</label>
                 <input [(ngModel)]="user.email" name="email" type="email" required id="email" placeholder="Email"
                     class="input-primary">
             </div>
 
-            <!-- Password -->
             <div class="mb-4">
                 <label for="password" class="block text-sm font-medium text-gray-200">Password</label>
                 <input [(ngModel)]="user.password" name="password" type="password" required id="password"

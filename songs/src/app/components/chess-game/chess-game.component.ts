@@ -15,7 +15,6 @@ export class ChessGameComponent implements OnInit {
 
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('gameId');
-    console.log(this.id, 'id iz parent-a');
   }
 
 

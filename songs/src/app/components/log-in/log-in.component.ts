@@ -5,7 +5,7 @@ import { User } from 'src/app/models/user';
 import * as auth from '../../store/auth/auth.action';
 import { AuthService } from 'src/app/services/auth.service/auth.service';
 import { Router } from '@angular/router';
-import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { selectError } from 'src/app/store/auth/auth.selector';
 
 @Component({
@@ -34,7 +34,6 @@ export class LogInComponent implements OnInit {
           })
         } else {
           if (this.authService.isLoggedIn()) {
-            console.log('hmmmm?');
             this.router.navigateByUrl('/home');
           }
         }
@@ -47,7 +46,6 @@ export class LogInComponent implements OnInit {
       email: this.user.email,
       password: this.user.password
     };
-    //TODO: Sredi null check (izbaci cast as string)
     this.store.dispatch(auth.signIn({ username: payload.email as string, password: payload.password as string }));
   }
 }

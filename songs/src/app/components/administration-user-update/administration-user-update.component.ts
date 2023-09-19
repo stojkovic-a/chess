@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Store } from '@ngrx/store';
-import { switchMap } from 'rxjs';
 import { AppState } from 'src/app/app.state';
 import { userDto } from 'src/app/models';
 import { DateService } from 'src/app/services/date.service/date.service';
 import { updateUser } from 'src/app/store/user/user.action';
-import { selectSelectedUser, selectSelectedUserdId, selectUserUpdateId } from 'src/app/store/user/user.selector';
+import { selectSelectedUser, selectUserUpdateId } from 'src/app/store/user/user.selector';
 
 @Component({
   selector: 'app-administration-user-update',
@@ -43,7 +42,6 @@ export class AdministrationUserUpdateComponent implements OnInit {
   ngOnInit(): void {
     this.store.select(selectSelectedUser)
       .subscribe(user => {
-        console.log(user);
         if (user) {
           this.user = { ...user };
           this.dateFormat = this.dateService.formatDateDash(user.dateOfBirth)

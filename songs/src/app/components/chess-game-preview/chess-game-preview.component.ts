@@ -1,10 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Game, Player, Tournament } from '../../models';
+import { Game, Player } from '../../models';
 import { AppState } from 'src/app/app.state';
-import { Store, select } from '@ngrx/store';
-import { loadPlayer } from '../../store/user/user.action';
-import { Observable, of, take } from 'rxjs';
-import { selectPlayerName } from '../../store/user/user.selector';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-chess-game-preview',
@@ -31,7 +28,6 @@ export class ChessGamePreviewComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.game) {
-      console.log(this.game.gameDate instanceof Date);
       const intermidiateDate = new Date(this.game.gameDate);
       this.gameDate = intermidiateDate.toLocaleDateString(undefined, {
         year: 'numeric',
@@ -44,7 +40,6 @@ export class ChessGamePreviewComponent implements OnInit {
 
   whitePlayerClicked() {
     if (this.game?.whitePlayer) {
-      console.log("Clicked");
 
       this.onPlayerClick.emit(this.game.whitePlayer);
     }
@@ -52,7 +47,6 @@ export class ChessGamePreviewComponent implements OnInit {
 
   blackPlayerClicked() {
     if (this.game?.blackPlayer) {
-      console.log("Clicked");
       this.onPlayerClick.emit(this.game.blackPlayer);
     }
   }
